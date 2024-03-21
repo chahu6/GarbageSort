@@ -81,7 +81,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.58</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>imagerecog20190930</artifactId>
+            <version>1.0.11</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.velocity</groupId>

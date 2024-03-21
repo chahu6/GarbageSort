@@ -12,10 +12,10 @@ import java.util.Map;
 @Service
 public class AliyunServiceImpl implements AliyunService {
 
-    @Value("${aliyun.accessKeyId}")
+    @Value("${aliyun.image.accessKeyId}")
     String accessKeyId;
 
-    @Value("${aliyun.accessKeySecret}")
+    @Value("${aliyun.image.accessKeySecret}")
     String accessKeySecret;
 
     public static com.aliyun.imagerecog20190930.Client createClient(String accessKeyId, String accessKeySecret) throws Exception {

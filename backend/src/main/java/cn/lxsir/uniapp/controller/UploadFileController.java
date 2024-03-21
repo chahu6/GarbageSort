@@ -1,5 +1,6 @@
 package cn.lxsir.uniapp.controller;
 
+import cn.lxsir.uniapp.service.AliyunService;
 import cn.lxsir.uniapp.service.BaiduService;
 import cn.lxsir.uniapp.service.CommonService;
 import cn.lxsir.uniapp.service.QuestionBankService;
@@ -24,11 +25,13 @@ import java.util.Map;
 @RestController
 @RequestMapping("/upload")
 @Api(value = "上传 Controller",tags = {"上传文件处理接口"})
-
 public class UploadFileController {
 
     @Autowired
     BaiduService baiduService;
+
+    @Autowired
+    AliyunService aliyunService;
 
     @Autowired
     CommonService commonService;
@@ -59,20 +62,21 @@ public class UploadFileController {
             return R.failed("文件为空");
         }
         String path = commonService.handleUploadFile(file,imagePath);
-        Map<String, Object> map = baiduService.imageClassify(path);
+//        Map<String, Object> map = baiduService.imageClassify(path);
+        Map<String, Object> map = aliyunService.imageClassify(path);
         return R.ok(map);
     }
 
-    @PostMapping("/record")
-    @ApiOperation(value = " 通过上传音频进行语音识别其垃圾分类")
-    public R uploadRecord(@RequestParam("file") MultipartFile file) {
-        if (file.isEmpty()) {
-            return R.failed("文件为空");
-        }
-        String path = commonService.handleUploadFile(file,recordPath);
-        Map<String, Object> map = baiduService.apiSpecch(path);
-        return R.ok(map);
-    }
+//    @PostMapping("/record")
+//    @ApiOperation(value = " 通过上传音频进行语音识别其垃圾分类")
+//    public R uploadRecord(@RequestParam("file") MultipartFile file) {
+//        if (file.isEmpty()) {
+//            return R.failed("文件为空");
+//        }
+//        String path = commonService.handleUploadFile(file,recordPath);
+//        Map<String, Object> map = baiduService.apiSpecch(path);
+//        return R.ok(map);
+//    }
 
     @PostMapping("/excel")
     @ApiOperation(value = " 通过上传excel 文件进行 垃圾总库的完善")

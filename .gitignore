@@ -31,5 +31,4 @@ build/
 .vscode/
 
 ### 自定义
-*.yml
 .hbuilderx/

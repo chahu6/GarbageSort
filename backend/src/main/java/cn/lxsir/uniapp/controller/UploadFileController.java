@@ -84,7 +84,6 @@ public class UploadFileController {
         String filepath = commonService.handleUploadFile(file, excelPath);
         Map<String, Object> map = qbService.uploadExcel(filepath);
         return R.ok(map);
-
     }
 
 }

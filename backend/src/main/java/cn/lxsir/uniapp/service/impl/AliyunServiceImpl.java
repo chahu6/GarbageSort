@@ -1,12 +1,16 @@
 package cn.lxsir.uniapp.service.impl;
 
 import cn.lxsir.uniapp.service.AliyunService;
+import com.aliyun.com.viapi.FileUtils;
 import com.aliyun.imagerecog20190930.models.ClassifyingRubbishResponse;
 import com.aliyun.tea.TeaException;
 import com.aliyun.tea.TeaModel;
+import com.aliyuncs.exceptions.ClientException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -31,8 +35,37 @@ public class AliyunServiceImpl implements AliyunService {
         return new com.aliyun.imagerecog20190930.Client(config);
     }
 
+    private String LocalFileToOss(String filename) throws ClientException, IOException {
+        // 创建AccessKey ID和AccessKey Secret，请参考https://help.aliyun.com/document_detail/175144.html。
+        // 如果您使用的是RAM用户的AccessKey，还需要为RAM用户授予权限AliyunVIAPIFullAccess，请参考https://help.aliyun.com/document_detail/145025.html。
+        // 从环境变量读取配置的AccessKey ID和AccessKey Secret。运行代码示例前必须先配置环境变量。
+//        String accessKeyId = System.getenv("ALIBABA_CLOUD_ACCESS_KEY_ID");
+//        String accessKeySecret = System.getenv("ALIBABA_CLOUD_ACCESS_KEY_SECRET");
+        // 场景一，使用本地文件
+//        String file = "/tmp/bankCard.png";
+        // 场景二，使用任意可访问的url
+        // String file = "https://viapi-test-bj.oss-cn-beijing.aliyuncs.com/viapi-3.0domepic/ocr/RecognizeBankCard/yhk1.jpg";
+        FileUtils fileUtils = FileUtils.getInstance(accessKeyId, accessKeySecret);
+        String ossUrl = fileUtils.upload(filename);
+        // 生成的url，可用于调用视觉智能开放平台的能力
+        System.out.println(ossUrl);
+
+        return ossUrl;
+    }
+
+
     @Override
     public Map<String, Object> imageClassify(String fileName) {
+
+        String ossUrl = null;
+        try {
+            ossUrl = LocalFileToOss(fileName);
+        } catch (ClientException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         com.aliyun.imagerecog20190930.Client client = null;
         try {
             client = AliyunServiceImpl.createClient(accessKeyId, accessKeySecret);
@@ -40,14 +73,15 @@ public class AliyunServiceImpl implements AliyunService {
             throw new RuntimeException(e);
         }
         com.aliyun.imagerecog20190930.models.ClassifyingRubbishRequest classifyingRubbishRequest = new com.aliyun.imagerecog20190930.models.ClassifyingRubbishRequest()
-                .setImageURL(fileName);
+                .setImageURL(ossUrl);
         com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
+        Map<String, Object> result = new HashMap<>();
         try {
             ClassifyingRubbishResponse classifyingRubbishResponse = client.classifyingRubbishWithOptions(classifyingRubbishRequest, runtime);
             // 获取整体结果
-            System.out.println(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(classifyingRubbishResponse)));
-            // 获取单个字段
-            System.out.println(classifyingRubbishResponse.getBody());
+//            System.out.println(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(classifyingRubbishResponse)));
+//            System.out.println(classifyingRubbishResponse.getBody());
+            result = TeaModel.buildMap(classifyingRubbishResponse.getBody().getData());
         } catch (TeaException teaException) {
             // 获取整体报错信息
             System.out.println(com.aliyun.teautil.Common.toJSONString(teaException));
@@ -56,6 +90,6 @@ public class AliyunServiceImpl implements AliyunService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return result;
     }
 }

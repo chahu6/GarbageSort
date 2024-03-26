@@ -63,7 +63,13 @@ public class UploadFileController {
         }
         String path = commonService.handleUploadFile(file,imagePath);
 //        Map<String, Object> map = baiduService.imageClassify(path);
-        Map<String, Object> map = aliyunService.imageClassify(path);
+        Map<String, Object> map = null;
+        try {
+            map = aliyunService.imageClassify(path);
+        } catch (Exception e) {
+            return R.failed(e.getMessage());
+        }
+
         return R.ok(map);
     }
 

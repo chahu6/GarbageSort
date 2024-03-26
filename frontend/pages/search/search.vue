@@ -102,6 +102,8 @@
 		<view class="">
 			<my-popup :show="detailPopupShow" :detail="detailShowObject" @hideMypopup="hideMypopup"></my-popup>
 		</view>
+		
+		// @TODO 没有用了
 		<uni-popup :show="imagesResultShow" position="middle" mode="fixed" @hidePopup="hideUnipPpup">
 			<view class="imagePopup">
 				<view class="image-left">
@@ -126,7 +128,6 @@
 			<view class="">
 				<button class="image-button" type="primary" @tap="hideUnipPpup">返回</button>
 			</view>
-
 		</uni-popup>
 		<share />
 	</view>
@@ -294,6 +295,21 @@
 					}
 				})
 			},
+			showFailed(msg){
+				uni.showModal({
+					title: "错误！！！",
+					content: msg,
+					confirmText: "知道了",
+					showCancel: false,
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				})
+			},
 			//  自己写的方法 start
 			showDetail(row) {
 				this.detailShowObject = row;
@@ -401,30 +417,62 @@
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data)
 								let res = JSON.parse(uploadFileRes.data);
-								let data = res.data;
-								let response = JSON.parse(data.response);
-								console.log(response.result);
-								let uniOne = data.uni;
-								me.keyword = data.keyword;
-
-								me.keywordList = me.drawCorrelativeKeyword(data.results, me
-									.keyword);
-								if (uniOne) { // 查找到的唯一值不等于空
-									me.isShowKeywordList = true;
-									me.detailPopupShow = true;
-
-									me.detailShowObject = {
-										keyword: uniOne.garbageName,
-										garbageType: uniOne.garbageType,
-										remark: uniOne.remark,
+								if(res.code >= 0)
+								{
+									let data = res.data;
+									console.log(data);
+									me.keywordList =  me.parseRubbish(data.Elements)
+									console.log(me.keywordList);
+									
+									if(me.keywordList.length > 0 && me.keywordList[0].garbageType != ''){
+										me.isShowKeywordList = true;
+										me.detailPopupShow = true;
+										
+										if(me.keywordList[0].garbageType === '可回收垃圾'){
+											me.keywordList[0].garbageType = 3
+										}else if(me.keywordList[0].garbageType === '干垃圾'){
+											me.keywordList[0].garbageType = 1
+										}else if(me.keywordList[0].garbageType === '湿垃圾'){
+											me.keywordList[0].garbageType = 2
+										}else if(me.keywordList[0].garbageType === '有害垃圾'){
+											me.keywordList[0].garbageType = 4
+										}else{
+											
+										}
+										
+										me.detailShowObject = {
+											keyword: me.keywordList[0].keyword,
+											garbageType: me.keywordList[0].garbageType,
+											remark: me.keywordList[0].remark,
+										}
+									}else{
+										me.showFailed('未识别该图片');
 									}
-								} else if (me.keywordList.length > 0) {
-									me.isShowKeywordList = true;
-
-								} else {
-									me.imageResults = response.result;
-									me.imagesResultShow = true;
+								} else{
+									console.log(res.msg);
+									me.showFailed("仅支持的图像类型：JPEG、JPG、PNG。");
 								}
+								
+								// 没用了
+								// me.imagesResultShow = true;
+								
+								
+								// if (uniOne) { // 查找到的唯一值不等于空
+								// 	me.isShowKeywordList = true;
+								// 	me.detailPopupShow = true;
+
+								// 	me.detailShowObject = {
+								// 		keyword: uniOne.garbageName,
+								// 		garbageType: uniOne.garbageType,
+								// 		remark: uniOne.remark,
+								// 	}
+								// } else if (me.keywordList.length > 0) {
+								// 	me.isShowKeywordList = true;
+
+								// } else {
+								// 	me.imageResults = response.result;
+								// 	me.imagesResultShow = true;
+								// }
 							},
 							complete() {
 								uni.hideLoading();
@@ -519,6 +567,22 @@
 					keywordArr.push(tmpObj)
 				}
 				return keywordArr;
+			},
+			parseRubbish(rubbishs){
+				var len = rubbishs.length, rubbishArr = [];
+				for(var i = 0; i < len; i++){
+					var row = rubbishs[i];
+					var html = "<span style='color: #72c69c;'>" + row.Rubbish + "</span>"
+					html = '<div>' + html + '<div>'
+					var tmpObj = {
+						keyword: row.Rubbish,
+						htmlStr: html,
+						garbageType: row.Category,
+						remark: ''
+					};
+					rubbishArr.push(tmpObj)
+				}
+				return rubbishArr;
 			},
 			//顶置关键字
 			setkeyword(data) {

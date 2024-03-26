@@ -55,41 +55,30 @@ public class AliyunServiceImpl implements AliyunService {
 
 
     @Override
-    public Map<String, Object> imageClassify(String fileName) {
+    public Map<String, Object> imageClassify(String fileName) throws Exception {
 
         String ossUrl = null;
-        try {
-            ossUrl = LocalFileToOss(fileName);
-        } catch (ClientException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ossUrl = LocalFileToOss(fileName);
 
         com.aliyun.imagerecog20190930.Client client = null;
-        try {
-            client = AliyunServiceImpl.createClient(accessKeyId, accessKeySecret);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        client = AliyunServiceImpl.createClient(accessKeyId, accessKeySecret);
+
         com.aliyun.imagerecog20190930.models.ClassifyingRubbishRequest classifyingRubbishRequest = new com.aliyun.imagerecog20190930.models.ClassifyingRubbishRequest()
                 .setImageURL(ossUrl);
         com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
-        Map<String, Object> result = new HashMap<>();
-        try {
-            ClassifyingRubbishResponse classifyingRubbishResponse = client.classifyingRubbishWithOptions(classifyingRubbishRequest, runtime);
-            // 获取整体结果
+        Map<String, Object> result = null;
+//        try {
+        ClassifyingRubbishResponse classifyingRubbishResponse = client.classifyingRubbishWithOptions(classifyingRubbishRequest, runtime);
+        // 获取整体结果
 //            System.out.println(com.aliyun.teautil.Common.toJSONString(TeaModel.buildMap(classifyingRubbishResponse)));
-//            System.out.println(classifyingRubbishResponse.getBody());
-            result = TeaModel.buildMap(classifyingRubbishResponse.getBody().getData());
-        } catch (TeaException teaException) {
-            // 获取整体报错信息
-            System.out.println(com.aliyun.teautil.Common.toJSONString(teaException));
-            // 获取单个字段
-            System.out.println(teaException.getCode());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println(com.aliyun.teautil.Common.toJSONString(classifyingRubbishResponse.getBody().getData()));
+        result = TeaModel.buildMap(classifyingRubbishResponse.getBody().getData());
+//        } catch (TeaException teaException) {
+//            // 获取整体报错信息
+//            System.out.println(com.aliyun.teautil.Common.toJSONString(teaException));
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
         return result;
     }
 }

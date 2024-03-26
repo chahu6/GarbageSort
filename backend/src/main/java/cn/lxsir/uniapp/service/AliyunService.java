@@ -1,7 +1,9 @@
 package cn.lxsir.uniapp.service;
 
+import com.aliyun.tea.TeaException;
+
 import java.util.Map;
 
 public interface AliyunService {
-    Map<String, Object> imageClassify(String fileName);
+    Map<String, Object> imageClassify(String fileName) throws Exception;
 }

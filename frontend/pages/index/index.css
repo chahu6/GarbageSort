@@ -47,20 +47,20 @@
 .input-view-camera {}
 
 .input-view-item {
-	height: 80upx;
+	height: 90upx;
 	align-items: center;
 	padding: 10upx;
 }
 
 .input-search {
-	height: 80upx;
+	height: 75upx;
 	width: 320upx;
-	text-align:center;
+	text-align:left;
 }
 
 .search-img {
-	width: 80upx;
-	height: 80upx;
+	width: 70upx;
+	height: 70upx;
 }
 
 .font-search {

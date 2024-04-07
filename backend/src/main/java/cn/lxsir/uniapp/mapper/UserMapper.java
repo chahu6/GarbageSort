@@ -1,6 +1,6 @@
 package cn.lxsir.uniapp.mapper;
 
-import cn.lxsir.uniapp.entity.User;
+import cn.lxsir.uniapp.entity.UserLogin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author luoxiang
  * @since 2019-07-13
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<UserLogin> {
 
 }

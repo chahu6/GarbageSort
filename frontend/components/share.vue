@@ -2,7 +2,7 @@
 	<view>
 
 		<view class="share-popup">
-			
+
 			<view class="button-view">
 				<button class="text-img" open-type="share">
 					<view class="buttom-view">
@@ -33,12 +33,13 @@
 </script>
 
 <style scoped>
-	.button-view{
+	.button-view {
 		position: fixed;
 		z-index: 999;
-		bottom: 20upx;
+		bottom: 150upx; // 调整位置
 		right: 10upx;
 	}
+
 	.share-popup {
 		position: fixed;
 		z-index: 999;

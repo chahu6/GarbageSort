@@ -1,0 +1,8 @@
+{
+  "navigationBarBackgroundColor": "#00b362",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "授权登录",
+  "usingComponents": {
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

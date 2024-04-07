@@ -1,0 +1,27 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.welcome-text {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.info-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.enter-button {
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+

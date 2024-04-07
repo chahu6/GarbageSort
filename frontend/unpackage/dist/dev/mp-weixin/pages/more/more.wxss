@@ -1,0 +1,11 @@
+
+.center-box{
+	width: 500rpx;
+	height: 500rpx;
+}
+.center-box .image {
+	width: 100%;
+	height: 100%;
+}
+
+

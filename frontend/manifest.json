@@ -65,9 +65,10 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wxc3acc8a3498e3fb7",
+        "appid" : "wx4f6396abdd7129d4",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : false
         },
         // "plugins":{
         // 	"WechatSI":{

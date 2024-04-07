@@ -437,7 +437,7 @@
 										}else if(me.keywordList[0].garbageType === '有害垃圾'){
 											me.keywordList[0].garbageType = 4
 										}else{
-											
+											me.keywordList[0].garbageType = 5
 										}
 										
 										me.detailShowObject = {

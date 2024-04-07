@@ -10,6 +10,11 @@
 
 				</scroll-view>
 			</view>
+			
+			<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
+				:midButton="true" :midColor="true">
+			</u-tabbar>
+			
 			<view class="nav-right">
 				<!-- <view >
 					<ad unit-id="adunit-060249bea9401e5c"></ad>

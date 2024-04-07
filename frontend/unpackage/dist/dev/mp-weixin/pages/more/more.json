@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "level-popup": "/components/levelPopup",
+    "uni-popup": "/components/uni-popup/uni-popup"
+  }
+}

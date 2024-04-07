@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "收货地址",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-icon": "/uview-ui/components/u-icon/u-icon"
+  }
+}

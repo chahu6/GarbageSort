@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "我的",
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "u-image": "/uview-ui/components/u-image/u-image",
+    "u-cell-group": "/uview-ui/components/u-cell-group/u-cell-group",
+    "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
+    "u-badge": "/uview-ui/components/u-badge/u-badge",
+    "u-gap": "/uview-ui/components/u-gap/u-gap",
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
+    "list-cell": "/components/coolc_cell_list"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/challenge/challengeResult",
+    "pages/search/search",
+    "pages/challenge/test",
+    "pages/challenge/challenge",
+    "pages/more/more",
+    "pages/type/type",
+    "pages/webview/webview",
+    "pages/reclaim/reclaim",
+    "pages/user/index",
+    "pages/user/order",
+    "pages/user/order_show",
+    "pages/user/message",
+    "pages/user/address",
+    "pages/user/account",
+    "pages/user/promoter",
+    "pages/user/recycler",
+    "pages/user/feedback",
+    "pages/user/customer",
+    "pages/user/addSite",
+    "pages/user/postOrder",
+    "pages/simple/login",
+    "pages/simple/register"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "垃圾识别精灵",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#fff"
+  },
+  "tabBar": {
+    "color": "#8F8F94",
+    "selectedColor": "#000000",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index"
+      },
+      {
+        "pagePath": "pages/type/type"
+      },
+      {
+        "pagePath": "pages/reclaim/reclaim"
+      },
+      {
+        "pagePath": "pages/challenge/test"
+      },
+      {
+        "pagePath": "pages/user/index"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

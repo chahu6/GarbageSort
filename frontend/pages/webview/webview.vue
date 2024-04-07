@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<web-view :webview-styles="webviewStyles" :src="url"></web-view>
-
 	</view>
 </template>
 

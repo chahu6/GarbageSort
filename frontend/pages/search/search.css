@@ -234,19 +234,19 @@ view {
 .input-view-camera {}
 
 .input-view-item {
-	height: 80upx;
+	height: 105upx;  // 修改输入框大小
 	align-items: center;
-	padding: 10upx;
+	padding: 20upx;
 }
 
 .input-search {
-	height: 80upx;
+	height: 70upx;
 	width: 320upx;
 }
 
 .search-img {
-	width: 80upx;
-	height: 80upx;
+	width: 70upx;
+	height: 70upx;
 }
 
 .font-search {

@@ -1,6 +1,6 @@
 package cn.lxsir.uniapp.service;
 
-import cn.lxsir.uniapp.entity.User;
+import cn.lxsir.uniapp.entity.UserLogin;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author luoxiang
  * @since 2019-07-13
  */
-public interface UserService extends IService<User> {
+public interface UserService extends IService<UserLogin> {
 
 }

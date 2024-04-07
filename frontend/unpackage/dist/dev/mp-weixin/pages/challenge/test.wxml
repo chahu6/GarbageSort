@@ -1,0 +1,1 @@
+<view class="container"><view class="welcome-text">垃圾分类微信小程序竞赛</view><view class="info-text">{{"当前时间："+currentTime}}</view><view class="info-text">竞赛规则：上传垃圾分类照片并回答问题</view><button data-event-opts="{{[['tap',[['startCompetition',['$event']]]]]}}" class="enter-button" bindtap="__e">进入比赛</button></view>

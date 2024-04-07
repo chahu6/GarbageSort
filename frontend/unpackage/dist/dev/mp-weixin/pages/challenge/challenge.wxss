@@ -1,0 +1,68 @@
+.content{
+	/* left: 750upx; */
+	/* position: absolute; */
+	/* width: 700upx; */
+	/* height: 600upx; */
+	/* background-color: #007AFF; */
+}
+.top-text {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 20rpx;
+}
+.gary {
+	color: #999999;
+	margin-left: 8rpx;
+}
+
+/* 图像显示区  start */
+.main-classify {
+	display: flex;
+	direction: center;
+	justify-content: center;
+}
+.main-img {
+	width: 240rpx;
+	height: 240rpx;
+	padding: 20rpx;
+}
+
+/* 图像显示区  end */
+.title {
+	text-align: center;
+	margin: 20rpx auto;
+	font-size: 40rpx;
+	/* color: #72c69c; */
+}
+.main-panel {
+	padding: 0 5%;
+}
+.quesion-panel {
+	display: flex;
+	flex-direction: column;
+	margin: 20rpx 0 0 0;
+	font-size: 40rpx;
+}
+.quesion-panel-item1 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20rpx;
+}
+.quesion-panel-item2,.quesion-panel-item3 {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.quesion-panel-item3 .gary{
+	font-size: 30rpx;
+	margin-top: 10rpx;
+}
+.quesion-panel-text {
+	color: #e96900;
+	font-size: 46rpx;
+	margin-right: 20rpx;
+}
+

@@ -1,0 +1,10 @@
+{
+  "navigationBarBackgroundColor": "#00b362",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "我的帐户",
+  "usingComponents": {
+    "u-count-to": "/uview-ui/components/u-count-to/u-count-to",
+    "u-empty": "/uview-ui/components/u-empty/u-empty",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

@@ -1,0 +1,1 @@
+<view><view style="background:red;height:100rpx;width:100rpx;" animation="{{animationData}}"></view><level-popup vue-id="c97058c0-1" show="{{popupShow}}" level="{{1}}" data-event-opts="{{[['^hidePopup',[['hidePopup']]]]}}" bind:hidePopup="__e" bind:__l="__l"></level-popup></view>

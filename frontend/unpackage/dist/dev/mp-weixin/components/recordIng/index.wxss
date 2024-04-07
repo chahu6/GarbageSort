@@ -1,0 +1,79 @@
+
+.time-box .start-taste-line ._hr.data-v-29d266ae {
+		background-color: #c8c8c8; /*声波颜色 */
+		width: 6rpx;
+		height: 12rpx;
+		border-radius: 1rpx;
+		/* margin: 0 0.03rem 10rpx; */
+		margin: 0 8rpx;
+		display: inline-block;
+		border: none;
+}
+._hr.data-v-29d266ae {
+		-webkit-animation: note-data-v-29d266ae 0.4s ease-in-out;
+		        animation: note-data-v-29d266ae 0.4s ease-in-out;
+		-webkit-animation-iteration-count: infinite;
+		        animation-iteration-count: infinite;
+		-webkit-animation-direction: alternate;
+		        animation-direction: alternate;
+}
+.hr1.data-v-29d266ae {
+		-webkit-animation-delay: -1s;
+		        animation-delay: -1s;
+}
+.hr2.data-v-29d266ae {
+		-webkit-animation-delay: -0.9s;
+		        animation-delay: -0.9s;
+}
+.hr3.data-v-29d266ae {
+		-webkit-animation-delay: -0.8s;
+		        animation-delay: -0.8s;
+}
+.hr4.data-v-29d266ae {
+		-webkit-animation-delay: -0.7s;
+		        animation-delay: -0.7s;
+}
+.hr5.data-v-29d266ae {
+		-webkit-animation-delay: -0.6s;
+		        animation-delay: -0.6s;
+}
+.hr6.data-v-29d266ae {
+		-webkit-animation-delay: -0.5s;
+		        animation-delay: -0.5s;
+}
+.hr7.data-v-29d266ae {
+		-webkit-animation-delay: -0.4s;
+		        animation-delay: -0.4s;
+}
+.hr8.data-v-29d266ae {
+		-webkit-animation-delay: -0.3s;
+		        animation-delay: -0.3s;
+}
+	/* 	.hr9 {
+		animation-delay: -0.2s;
+	}
+
+	.hr10 {
+		animation-delay: -0.1s;
+	} */
+@-webkit-keyframes note-data-v-29d266ae {
+from {
+			-webkit-transform: scaleY(1);
+			        transform: scaleY(1);
+}
+to {
+			-webkit-transform: scaleY(4);
+			        transform: scaleY(4);
+}
+}
+@keyframes note-data-v-29d266ae {
+from {
+			-webkit-transform: scaleY(1);
+			        transform: scaleY(1);
+}
+to {
+			-webkit-transform: scaleY(4);
+			        transform: scaleY(4);
+}
+}
+

@@ -1,4 +1,7 @@
 {
+	"easycom": {
+		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
@@ -13,9 +16,15 @@
 			"style": {}
 		},
 		{
+			"path": "pages/challenge/test",
+			"style": {
+				// "navigationBarTitleText": "环保守卫者挑战赛"
+			}
+		},
+		{
 			"path": "pages/challenge/challenge",
 			"style": {
-				"navigationBarTitleText":"环保守卫者挑战赛"
+				"navigationBarTitleText": "环保守卫者挑战赛"
 			}
 		},
 		{
@@ -30,6 +39,113 @@
 		{
 			"path": "pages/webview/webview",
 			"style": {}
+		},
+		{
+			"path": "pages/reclaim/reclaim",
+			"style": {}
+		},
+		{
+			"path": "pages/user/index",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"navigationStyle": "custom",
+				"navigationBarTextStyle": "black"
+			}
+		},
+		{
+			"path": "pages/user/order",
+			"style": {
+				"navigationBarTitleText": "我的订单",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#00b362"
+			}
+		},
+		{
+			"path": "pages/user/order_show",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+
+		},
+		{
+			"path": "pages/user/message",
+			"style": {
+				"navigationBarTitleText": "消息"
+			}
+		},
+		{
+			"path": "pages/user/address",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		{
+			"path": "pages/user/account",
+			"style": {
+				"navigationBarBackgroundColor": "#00b362",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "我的帐户"
+			}
+
+		},
+		{
+			"path": "pages/user/promoter",
+			"style": {
+				"navigationBarTitleText": "推广员招募"
+			}
+
+		},
+		{
+			"path": "pages/user/recycler",
+			"style": {
+				"navigationBarTitleText": "回收员招募"
+			}
+
+		},
+		{
+			"path": "pages/user/feedback",
+			"style": {
+				"navigationBarTitleText": "意见反馈"
+			}
+
+		},
+		{
+			"path": "pages/user/customer",
+			"style": {
+				"navigationBarTitleText": "联系客服"
+			}
+
+		},
+		{
+			"path": "pages/user/addSite",
+			"style": {
+				"navigationBarTitleText": "地址添加"
+			}
+
+		},
+		{
+			"path": "pages/user/postOrder",
+			"style": {
+				"navigationBarBackgroundColor": "#00b362",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "上门回收"
+			}
+
+		},
+		{
+			"path": "pages/simple/login",
+			"style": {
+				"navigationBarBackgroundColor": "#00b362",
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "授权登录"
+			}
+
+		},
+		{
+			"path": "pages/simple/register"
 		}
 	],
 	"globalStyle": {
@@ -51,22 +167,34 @@
 		"selectedColor": "#000000",
 		"borderStyle": "black",
 		"list": [{
-				"pagePath": "pages/index/index",
-				"text": "主页",
-				"iconPath": "static/tabBar/home.png",
-				"selectedIconPath": "static/tabBar/homeSelected.png"
+				"pagePath": "pages/index/index"
+				// "text": "主页",
+				// "iconPath": "static/tabBar/home.png",
+				// "selectedIconPath": "static/tabBar/homeSelected.png"
 			},
 			{
-				"pagePath": "pages/type/type",
-				"text": "分类",
-				"iconPath": "static/tabBar/type.png",
-				"selectedIconPath": "static/tabBar/typeSelected.png"
+				"pagePath": "pages/type/type"
+				// "text": "分类",
+				// "iconPath": "static/tabBar/type.png",
+				// "selectedIconPath": "static/tabBar/typeSelected.png"
 			},
 			{
-				"pagePath": "pages/challenge/challenge",
-				"text": "挑战赛",
-				"iconPath": "static/tabBar/challenge.png",
-				"selectedIconPath": "static/tabBar/challengeSelected.png"
+				"pagePath": "pages/reclaim/reclaim"
+				// "text": "回收",
+				// "iconPath": "static/tabBar/reclaim.png",
+				// "selectedIconPath": "static/tabBar/reclaimSelected.png"
+			},
+			{
+				"pagePath": "pages/challenge/test"
+				// "text": "挑战赛",
+				// "iconPath": "static/tabBar/challenge.png",
+				// "selectedIconPath": "static/tabBar/challengeSelected.png"
+			},
+			{
+				"pagePath": "pages/user/index"
+				// "text": "我的",
+				// "iconPath": "/static/coolc/icon/user.png",
+				// "selectedIconPath": "/static/coolc/icon/user_select.png"
 			}
 		]
 	}

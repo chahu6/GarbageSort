@@ -23,12 +23,17 @@
 		<view >
 			<swiper :indicator-dots="true" :autoplay="true" :circular="true">
 				<swiper-item class="swiper-flex" v-for="(item,index) in swiper" :key="index">
-					<view @click="navigateTo(item.skipUrl)" class="swiper-item" style="background-color: antiquewhite;">
-						<image class="swiper-img" :src="item.imageUrl"></image>
+					<view class="swiper-item" style="background-color: antiquewhite;">
+						<image class="swiper-img" :src="item"></image>
 					</view>
 				</swiper-item>
 			</swiper>
 		</view>
+		
+		<!-- tabbar -->
+		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
+			:midButton="true" :midColor="true">
+		</u-tabbar>
 
 		<!-- <view class="search-box"> -->
 		<view class="form-view">
@@ -134,7 +139,10 @@
 				maxTime: 5000,
 				frame: 50,
 
-				swiper: [], // 幻灯片 swiper 数据
+				swiper: [
+					'../../static/picture/recycle.jpg',
+					'../../static/picture/type.jpg',
+				], // 幻灯片 swiper 数据
 				isShowKeywordList: false,
 				keywordList: [],
 				randOneObj: {
@@ -181,13 +189,13 @@
 			let me = this;
 			console.log("typeid:" + getApp().globalData.typeid) // 'test'
 			//  获取幻灯片 swiper start
-			uni.request({
-				url: me.serverUrl + '/slideShow', //仅为示例，并非真实接口地址。
-				success: (res) => {
-					console.log(res.data.data);
-					me.swiper = res.data.data;
-				}
-			});
+			// uni.request({
+			// 	url: me.serverUrl + '/slideShow', //仅为示例，并非真实接口地址。
+			// 	success: (res) => {
+			// 		console.log(res.data.data);
+			// 		me.swiper = res.data.data;
+			// 	}
+			// });
 			//  获取幻灯片 swiper end
 
 			// 录音过程圆圈动画

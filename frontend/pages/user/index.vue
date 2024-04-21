@@ -64,8 +64,8 @@
 					:iconStyle="{'color':'#40cfff'}" title="地址管理"></u-cell-item>
 				<u-cell-item icon="file-text-fill" iconSize="40" @click="tourl('/pages/user/account')"
 					:iconStyle="{'color':'#ff4a9c'}" title="我的帐户"></u-cell-item>
-				<u-cell-item icon="plus-people-fill" iconSize="40" @click="tourl('/pages/user/promoter')"
-					:iconStyle="{'color':'#44a7df'}" title="推广员招募"></u-cell-item>
+<!-- 				<u-cell-item icon="plus-people-fill" iconSize="40" @click="tourl('/pages/user/promoter')"
+					:iconStyle="{'color':'#44a7df'}" title="推广员招募"></u-cell-item> -->
 				<u-cell-item icon="car-fill" iconSize="40" @click="tourl('/pages/user/recycler')"
 					:iconStyle="{'color':'#4e82d4'}" title="回收员招募"></u-cell-item>
 				<u-cell-item icon="chat-fill" iconSize="40" @click="tourl('/pages/user/feedback')"

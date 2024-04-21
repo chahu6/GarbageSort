@@ -34,7 +34,7 @@
 		<view class="">
 			<my-popup :show="detailPopupShow" :detail="detailShowObject" @hideMypopup="hideMypopup"></my-popup>
 		</view>
-		<share />
+		<!-- <share /> -->
 	</view>
 </template>
 

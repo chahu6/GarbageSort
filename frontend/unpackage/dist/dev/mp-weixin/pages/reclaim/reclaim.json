@@ -4,6 +4,7 @@
     "u-notice-bar": "/uview-ui/components/u-notice-bar/u-notice-bar",
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
     "u-section": "/uview-ui/components/u-section/u-section",
+    "u-image": "/uview-ui/components/u-image/u-image",
     "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
     "u-popup": "/uview-ui/components/u-popup/u-popup"
   }

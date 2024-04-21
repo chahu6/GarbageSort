@@ -73,11 +73,29 @@
 					<view class="r_icon"></view>
 				</view>
 			</view>
-			<u-section title="附近回收员" lineColor="#6fd98e" subTitle="查看更多"></u-section>
+			<!-- <u-section title="附近回收员" lineColor="#6fd98e" subTitle="查看更多"></u-section> -->
+			<view class="bg-white margin-tb-sm padding-lr-sm radius">
+				<view class="cu-bar justify-start solid-bottom">
+					<view class="action sub-title">
+						<text class="text-xl text-bold text-green">环保动态</text>
+						<text class="bg-green" style="width:2rem"></text>
+					</view>
+				</view>
+				<view class="flex padding-sm padding-tb-lg" v-for="(item,index) in 5" :key="index">
+					<view class="flex-treble padding-right-sm">
+						<view class="text-lg text-bold text-cut">45城19万人减碳12020.4吨，还有..</view>
+						<view class="margin-top-sm text-cut2">减碳战报新鲜出炉，全国第一究竟花落谁家？</view>
+					</view>
+					<view class="flex-sub">
+						<u-image src="https://img0.baidu.com/it/u=345519681,90399173&fm=253&fmt=auto&app=120&f=JPEG?w=650&h=475"
+						         width="100%" height="100%" :border-radius="10"></u-image>
+					</view>
+				</view>
+			</view>
 		</view>
-		<view class="mapBox">
+<!-- 		<view class="mapBox">
 
-		</view>
+		</view> -->
 		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
 			:midButton="true" :midColor="true">
 		</u-tabbar>

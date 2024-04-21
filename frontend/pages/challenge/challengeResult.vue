@@ -4,7 +4,7 @@
 		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
 			:midButton="true" :midColor="true">
 		</u-tabbar>
-		<!-- <view class="title">挑战赛-结果</view> -->
+		<view class="title">挑战赛-结果</view>
 		<view class="" style="margin-bottom: 20upx;">
 			<view class="">
 				<uni-steps :mydata="[
@@ -109,6 +109,8 @@
 				level: null,
 				score: null,
 				list: [],
+				
+				tabbar: '',
 
 				multiTips: [
 					"让垃圾找到自己的归属,请给垃圾找个合适的家",
@@ -136,6 +138,9 @@
 			console.log(option.list); //打印出上个页面传递的参数。
 			// this.insertAd();
 			this.score = option.score
+			
+			// let me = this;
+			this.tabbar = getApp().globalData.tabbar
 			this.list = JSON.parse(option.list);
 			if (this.score <= 1) {
 				this.level = 1

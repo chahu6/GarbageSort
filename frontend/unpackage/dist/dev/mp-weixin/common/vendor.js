@@ -1747,7 +1747,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8790,7 +8790,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8811,14 +8811,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8914,7 +8914,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9334,9 +9334,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 26:
-/*!**********************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/pages.json ***!
-  \**********************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/pages.json ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -9376,9 +9376,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 30:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/util/interceptor.js ***!
-  \*******************************************************************************/
+/*!******************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/util/interceptor.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9560,9 +9560,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 34:
-/*!*****************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/index.js ***!
-  \*****************************************************************************/
+/*!****************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/index.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9699,9 +9699,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 35:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/mixin/mixin.js ***!
-  \****************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/mixin/mixin.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9775,9 +9775,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 36:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/request/index.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/request/index.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9987,9 +9987,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 37:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/deepMerge.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/deepMerge.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10037,9 +10037,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 38:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/deepClone.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/deepClone.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10079,9 +10079,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 39:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/test.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/test.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10344,9 +10344,9 @@ module.exports = _interopRequireDefault, module.exports.__esModule = true, modul
 /***/ }),
 
 /***/ 40:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/queryParams.js ***!
-  \*************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/queryParams.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10426,9 +10426,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 41:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/route.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/route.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10985,9 +10985,9 @@ module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exp
 /***/ }),
 
 /***/ 45:
-/*!************************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/timeFormat.js ***!
-  \************************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/timeFormat.js ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11062,9 +11062,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 46:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/timeFrom.js ***!
-  \**********************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/timeFrom.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11127,9 +11127,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 47:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/colorGradient.js ***!
-  \***************************************************************************************************/
+/*!**************************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/colorGradient.js ***!
+  \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11281,9 +11281,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 48:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/guid.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/guid.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11342,9 +11342,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 481:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/util/emitter.js ***!
-  \*****************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/util/emitter.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11411,9 +11411,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 482:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/util/async-validator.js ***!
-  \*************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/util/async-validator.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11445,7 +11445,7 @@ function _extends() {
 var formatRegExp = /%[sdj%]/g;
 var warning = function warning() {}; // don't print warning message when in production env or node runtime
 
-if (typeof process !== 'undefined' && Object({"NODE_ENV":"development","VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}) && "development" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
+if (typeof process !== 'undefined' && Object({"VUE_APP_DARK_MODE":"false","VUE_APP_NAME":"garbageSort","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}) && "development" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
   warning = function warning(type, errors) {
     if (typeof console !== 'undefined' && console.warn) {
       if (errors.every(function (e) {
@@ -12952,9 +12952,9 @@ var substr = 'ab'.substr(-1) === 'b'
 /***/ }),
 
 /***/ 49:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/color.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/color.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13001,9 +13001,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 499:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/util/province.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/util/province.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13141,9 +13141,9 @@ module.exports = _slicedToArray, module.exports.__esModule = true, module.export
 /***/ }),
 
 /***/ 50:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/type2icon.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/type2icon.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13195,9 +13195,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 500:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/util/city.js ***!
-  \**************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/util/city.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -14316,9 +14316,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 501:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/util/area.js ***!
-  \**************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/util/area.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23435,9 +23435,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 51:
-/*!*************************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/randomArray.js ***!
-  \*************************************************************************************************/
+/*!************************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/randomArray.js ***!
+  \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23462,9 +23462,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 52:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/addUnit.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/addUnit.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23489,9 +23489,9 @@ function addUnit() {
 /***/ }),
 
 /***/ 53:
-/*!********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/random.js ***!
-  \********************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/random.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23516,9 +23516,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 54:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/trim.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/trim.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23549,9 +23549,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 55:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/numFilter.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/numFilter.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23572,9 +23572,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 56:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/urlskip.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/urlskip.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23621,9 +23621,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 57:
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/toast.js ***!
-  \*******************************************************************************************/
+/*!******************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/toast.js ***!
+  \******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23649,9 +23649,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 58:
-/*!***********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/getParent.js ***!
-  \***********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/getParent.js ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23719,9 +23719,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 59:
-/*!*********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/$parent.js ***!
-  \*********************************************************************************************/
+/*!********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/$parent.js ***!
+  \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23769,9 +23769,9 @@ module.exports = _arrayWithHoles, module.exports.__esModule = true, module.expor
 /***/ }),
 
 /***/ 60:
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/sys.js ***!
-  \*****************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/sys.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23795,9 +23795,9 @@ function sys() {
 /***/ }),
 
 /***/ 61:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/debounce.js ***!
-  \**********************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/debounce.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23843,9 +23843,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 62:
-/*!**********************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/function/throttle.js ***!
-  \**********************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/function/throttle.js ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23895,9 +23895,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 63:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/config/config.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/config/config.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23921,9 +23921,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 64:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/uview-ui/libs/config/zIndex.js ***!
-  \******************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/uview-ui/libs/config/zIndex.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -23958,9 +23958,9 @@ exports.default = _default;
 /***/ }),
 
 /***/ 65:
-/*!************************************************************************************!*\
-  !*** C:/Users/Lenovo/Desktop/GarbageSort-master/frontend/util/http.interceptor.js ***!
-  \************************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/Lenovo/Desktop/Tools/GarbageSort/frontend/util/http.interceptor.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

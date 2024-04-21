@@ -20,15 +20,19 @@
 	* 
 	*  -->
 	<view>
-		<view>
-			<swiper :indicator-dots="true" :autoplay="true" :circular="true">
+		<!-- <view> -->
+		<!-- <swiper :indicator-dots="true" :autoplay="true" :circular="true">
 				<swiper-item class="swiper-flex" v-for="(item,index) in swiper" :key="index">
 					<view class="swiper-item" style="background-color: antiquewhite;">
-						<image class="swiper-img" :src="item"></image>
+					<image class="swiper-img" :src="item"></image>
 					</view>
 				</swiper-item>
-			</swiper>
+			</swiper> -->
+		<view style="background-color: antiquewhite;">
+			<u-swiper :list="swiper"></u-swiper>
 		</view>
+
+		<!-- </view> -->
 
 		<!-- <view class="search-box"> -->
 		<view class="form-view">
@@ -107,7 +111,7 @@
 		<!-- <view >
 			<ad unit-id="adunit-060249bea9401e5c"></ad>
 		</view> -->
-		<share />
+		<!-- <share /> -->
 
 		<!-- tabbar -->
 		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"

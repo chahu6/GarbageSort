@@ -13,9 +13,9 @@
 						v-for="(res, index) in orderServiceList" :key="res.id">
 						<view class="title">
 							<text class="type">{{res.type}}</text>
-							<text class="state">
+							<!-- <text class="state"> -->
 								<u-tag :text="getTagText(res.status)" mode="dark" shape="circle" type="success" />
-							</text>
+							<!-- </text> -->
 						</view>
 						<view class="adds_box">
 							<view class="adds">
@@ -47,9 +47,9 @@
 					<view class="order_list" v-for="(res, index) in orderCompletedList" :key="res.id">
 						<view class="title">
 							<text class="type">{{res.type}}</text>
-							<text class="state">
+							<!-- <text class="state"> -->
 								<u-tag text="已完成" mode="dark" shape="circle" type="default" />
-							</text>
+							<!-- </text> -->
 						</view>
 						<view class="adds_box">
 							<view class="adds">
@@ -80,9 +80,9 @@
 					<view class="order_list" v-for="(res, index) in orderCancelList" :key="res.id">
 						<view class="title">
 							<text class="type">{{res.type}}</text>
-							<text class="state">
+							<!-- <text class="state"> -->
 								<u-tag text="已取消" mode="dark" shape="circle" type="default" />
-							</text>
+							<!-- </text> -->
 						</view>
 						<view class="adds_box">
 							<view class="adds">

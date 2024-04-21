@@ -17,7 +17,7 @@
 			<view v-show="tabIndex==0">
 				<view class="row-input">
 					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/ca9b79b9-844e-4d88-8738-19a1b6fdf83a.png"></image> -->
-					<input placeholder="输入账号/手机号" maxlength="11" v-model="loginForm.phone" />
+					<input placeholder="输入账号/手机号" v-model="loginForm.phone" />
 				</view>
 				<view class="row-input">
 					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/6b93574b-73ce-4d3e-8353-a65095e9ba87.png"></image> -->
@@ -107,21 +107,13 @@
 						}
 					});
 				} else {
+					const phone = me.loginForm.phone
 					uni.request({
 						url: me.serverUrl + "/user/sendMsg",
-						dataType: "json",
-						responseType: "json",
 						method: "POST",
 						data: {
-							phone: me.loginForm.phone
+							phone: phone
 						},
-						// header: {
-						// 	"Content-Type": "application/json",
-						// },
-						timeout: 6000,
-						sslVerify: false,
-						withCredentials: false,
-						firstIpv4: false,
 						success(res) {
 							console.log("success :", res.data);
 

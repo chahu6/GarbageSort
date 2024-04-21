@@ -24,9 +24,10 @@ wx.__webpack_require_UNI_MP_PLUGIN__ = __webpack_require__;
 _vue.default.config.productionTip = false;
 
 // prod 
-//Vue.prototype.serverUrl="https://felix.picp.vip/wx"
+//Vue.prototype.serverUrl="https://felix.picp.vip/wx"19976365904
 // dev
 _vue.default.prototype.serverUrl = "http://47.120.77.171:8899/wx"; // 配置ip
+// Vue.prototype.serverUrl="http://localhost:8899/wx" // 配置ip
 
 _vue.default.use(_uviewUi.default);
 

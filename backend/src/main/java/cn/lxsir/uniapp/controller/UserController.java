@@ -67,7 +67,7 @@ public class UserController {
 
     @PostMapping("/register")
     @Transactional(rollbackFor = Exception.class)
-    public R register(@RequestBody Map map, HttpSession session) {
+    public R register(@RequestBody Map map) {
         String phone = map.get("phone").toString();
 
         Object code = redisTemplate.opsForValue().get(phone);
@@ -94,7 +94,6 @@ public class UserController {
             }else{
                 return R.failed("已经注册");
             }
-            session.setAttribute("user", user.getUserId());
 
             redisTemplate.delete(phone);
 

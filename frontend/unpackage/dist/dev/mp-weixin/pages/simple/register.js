@@ -254,21 +254,13 @@ var _default = {
           }
         });
       } else {
+        var phone = me.loginForm.phone;
         uni.request({
           url: me.serverUrl + "/user/sendMsg",
-          dataType: "json",
-          responseType: "json",
           method: "POST",
           data: {
-            phone: me.loginForm.phone
+            phone: phone
           },
-          // header: {
-          // 	"Content-Type": "application/json",
-          // },
-          timeout: 6000,
-          sslVerify: false,
-          withCredentials: false,
-          firstIpv4: false,
           success: function success(res) {
             console.log("success :", res.data);
             uni.showToast({

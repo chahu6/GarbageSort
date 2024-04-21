@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uniPopup: function () {
-      return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 301))
+      return __webpack_require__.e(/*! import() | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then(__webpack_require__.bind(null, /*! @/components/uni-popup/uni-popup.vue */ 308))
     },
   }
 } catch (e) {
@@ -186,22 +186,22 @@ exports.default = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
 var uniPopup = function uniPopup() {
   __webpack_require__.e(/*! require.ensure | components/uni-popup/uni-popup */ "components/uni-popup/uni-popup").then((function () {
-    return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 301));
+    return resolve(__webpack_require__(/*! @/components/uni-popup/uni-popup.vue */ 308));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var myPopup = function myPopup() {
   __webpack_require__.e(/*! require.ensure | components/myPopup */ "components/myPopup").then((function () {
-    return resolve(__webpack_require__(/*! @/components/myPopup.vue */ 343));
+    return resolve(__webpack_require__(/*! @/components/myPopup.vue */ 350));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var share = function share() {
   __webpack_require__.e(/*! require.ensure | components/share */ "components/share").then((function () {
-    return resolve(__webpack_require__(/*! @/components/share.vue */ 322));
+    return resolve(__webpack_require__(/*! @/components/share.vue */ 329));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var recordIng = function recordIng() {
   __webpack_require__.e(/*! require.ensure | components/recordIng/index */ "components/recordIng/index").then((function () {
-    return resolve(__webpack_require__(/*! @/components/recordIng/index.vue */ 350));
+    return resolve(__webpack_require__(/*! @/components/recordIng/index.vue */ 357));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 // 录音

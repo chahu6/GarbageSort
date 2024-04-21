@@ -101,7 +101,7 @@ var components
 try {
   components = {
     uTabbar: function () {
-      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 308))
+      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 315))
     },
   }
 } catch (e) {
@@ -175,7 +175,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 var share = function share() {
   __webpack_require__.e(/*! require.ensure | components/share */ "components/share").then((function () {
-    return resolve(__webpack_require__(/*! @/components/share.vue */ 322));
+    return resolve(__webpack_require__(/*! @/components/share.vue */ 329));
   }).bind(null, __webpack_require__)).catch(__webpack_require__.oe);
 };
 var _default = {

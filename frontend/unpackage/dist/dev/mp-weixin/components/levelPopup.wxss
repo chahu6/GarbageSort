@@ -36,7 +36,7 @@
 	width: 360rpx;
 	height: 360rpx;
 }
-.level-image{
+.level-image {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -56,8 +56,8 @@
 	flex-direction: row;
 	justify-content: space-between;
 }
-.bottom button{
-	width:200rpx;
+.bottom button {
+	width: 200rpx;
 }
 .i-know {
 	margin-left: 20rpx;

@@ -1,20 +1,20 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : test
+ Source Server         : 垃圾回收
  Source Server Type    : MySQL
- Source Server Version : 50744 (5.7.44-log)
- Source Host           : localhost:3306
+ Source Server Version : 80036
+ Source Host           : 47.120.77.171:3306
  Source Schema         : garbagesort
 
  Target Server Type    : MySQL
- Target Server Version : 50744 (5.7.44-log)
+ Target Server Version : 80036
  File Encoding         : 65001
 
- Date: 03/04/2024 16:25:45
+ Date: 21/04/2024 10:47:10
 */
 
-create database garbagesort;
+create database garbagesort default character set utf8mb4 collate utf8mb4_unicode_ci;
 use garbagesort;
 
 SET NAMES utf8mb4;
@@ -25,15 +25,15 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `challenge_detail`;
 CREATE TABLE `challenge_detail`  (
-                                     `id` int(11) NOT NULL AUTO_INCREMENT,
-                                     `whether` tinyint(4) NULL DEFAULT 0 COMMENT '是否正确；1:正确；0:错误',
-                                     `question_id` int(11) NULL DEFAULT NULL COMMENT '问题id\n',
-                                     `garbage_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                                     `garbage_type` tinyint(4) NULL DEFAULT NULL,
-                                     `selected_type` tinyint(4) NULL DEFAULT NULL,
-                                     PRIMARY KEY (`id`) USING BTREE,
-                                     UNIQUE INDEX `challenge_detail_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2651 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '挑战明细记录' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `whether` tinyint NULL DEFAULT 0 COMMENT '是否正确；1:正确；0:错误',
+  `question_id` int NULL DEFAULT NULL COMMENT '问题id\n',
+  `garbage_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `garbage_type` tinyint NULL DEFAULT NULL,
+  `selected_type` tinyint NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `challenge_detail_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2651 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '挑战明细记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of challenge_detail
@@ -44,14 +44,14 @@ CREATE TABLE `challenge_detail`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `challenge_result`;
 CREATE TABLE `challenge_result`  (
-                                     `id` int(11) NOT NULL AUTO_INCREMENT,
-                                     `score` int(11) NULL DEFAULT NULL COMMENT '得分',
-                                     `result` json NULL COMMENT '结果集',
-                                     `times` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
-                                     `user_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                                     PRIMARY KEY (`id`) USING BTREE,
-                                     UNIQUE INDEX `challenge_result_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 267 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '挑战结果+详情记录表' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `score` int NULL DEFAULT NULL COMMENT '得分',
+  `result` json NULL COMMENT '结果集',
+  `times` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '时间',
+  `user_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `challenge_result_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 267 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '挑战结果+详情记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of challenge_result
@@ -62,27 +62,27 @@ CREATE TABLE `challenge_result`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table`;
 CREATE TABLE `gen_table`  (
-                              `table_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-                              `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '表名称',
-                              `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '表描述',
-                              `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '关联子表的表名',
-                              `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '子表关联的外键名',
-                              `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '实体类名称',
-                              `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作 sub主子表操作）',
-                              `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成包路径',
-                              `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成模块名',
-                              `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成业务名',
-                              `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成功能名',
-                              `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成功能作者',
-                              `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
-                              `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
-                              `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '其它生成选项',
-                              `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                              `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                              `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                              `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                              `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                              PRIMARY KEY (`table_id`) USING BTREE
+  `table_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `table_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '表名称',
+  `table_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '表描述',
+  `sub_table_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '关联子表的表名',
+  `sub_table_fk_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '子表关联的外键名',
+  `class_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '实体类名称',
+  `tpl_category` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作 sub主子表操作）',
+  `package_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成包路径',
+  `module_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成模块名',
+  `business_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成业务名',
+  `function_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成功能名',
+  `function_author` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '生成功能作者',
+  `gen_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '生成代码方式（0zip压缩包 1自定义路径）',
+  `gen_path` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '/' COMMENT '生成路径（不填默认项目路径）',
+  `options` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '其它生成选项',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`table_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -96,35 +96,40 @@ INSERT INTO `gen_table` VALUES (5, 'keyword_search_num', '搜索关键词+次数
 INSERT INTO `gen_table` VALUES (6, 'question_bank', '题库表', '', NULL, 'QuestionBank', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'questionBank', '题库', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2000\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"垃圾分类\",\"treeCode\":\"\"}', 'admin', '2021-06-08 10:11:05', '', '2021-06-08 12:26:47', '');
 INSERT INTO `gen_table` VALUES (7, 'slide_show', '幻灯片播放表', '', NULL, 'SlideShow', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'slideShow', '幻灯片播放', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2000\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"垃圾分类\",\"treeCode\":\"\"}', 'admin', '2021-06-08 10:11:05', '', '2021-06-08 10:34:06', '');
 INSERT INTO `gen_table` VALUES (8, 'speech_classify', '语音识别记录', '', NULL, 'SpeechClassify', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'speechClassify', '语音识别记录', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2000\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"垃圾分类\",\"treeCode\":\"\"}', 'admin', '2021-06-08 10:11:05', '', '2021-06-08 10:34:25', '');
+INSERT INTO `gen_table` VALUES (18, 'goods_detail', '', NULL, NULL, 'GoodsDetail', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'detail', NULL, 'luoxiang', '0', '/', NULL, 'admin', '2024-04-20 17:58:00', '', NULL, NULL);
+INSERT INTO `gen_table` VALUES (19, 'orders', '订单表', '', NULL, 'Orders', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'orders', '订单查询', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2086\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"订单管理\",\"treeCode\":\"\"}', 'admin', '2024-04-20 17:58:00', '', '2024-04-20 18:09:17', '');
+INSERT INTO `gen_table` VALUES (21, 'user_addr', '用户地址表', '', NULL, 'UserAddr', 'crud', 'com.ruoyi.project.garbagesort', 'garbagesort', 'addr', '用户地址查询', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2085\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"用户管理\",\"treeCode\":\"\"}', 'admin', '2024-04-20 17:58:02', '', '2024-04-20 18:22:33', '');
+INSERT INTO `gen_table` VALUES (24, 'user_inf', '用户信息表', 'users', 'user_id', 'UserInf', 'sub', 'com.ruoyi.project.garbagesort', 'garbagesort', 'userInfo', '用户信息查询', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2085\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"用户管理\",\"treeCode\":\"\"}', 'admin', '2024-04-20 18:24:17', '', '2024-04-20 20:30:59', '');
+INSERT INTO `gen_table` VALUES (25, 'users', '用户表', 'user_inf', 'user_id', 'Users', 'sub', 'com.ruoyi.project.garbagesort', 'garbagesort', 'users', '用户查询', 'luoxiang', '0', '/', '{\"parentMenuId\":\"2085\",\"treeName\":\"\",\"treeParentCode\":\"\",\"parentMenuName\":\"用户管理\",\"treeCode\":\"\"}', 'admin', '2024-04-20 18:57:54', '', '2024-04-20 20:06:14', '');
 
 -- ----------------------------
 -- Table structure for gen_table_column
 -- ----------------------------
 DROP TABLE IF EXISTS `gen_table_column`;
 CREATE TABLE `gen_table_column`  (
-                                     `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-                                     `table_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '归属表编号',
-                                     `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列名称',
-                                     `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列描述',
-                                     `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列类型',
-                                     `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT 'JAVA类型',
-                                     `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT 'JAVA字段名',
-                                     `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否主键（1是）',
-                                     `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否自增（1是）',
-                                     `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否必填（1是）',
-                                     `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否为插入字段（1是）',
-                                     `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否编辑字段（1是）',
-                                     `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否列表字段（1是）',
-                                     `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否查询字段（1是）',
-                                     `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
-                                     `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
-                                     `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
-                                     `sort` int(11) NULL DEFAULT NULL COMMENT '排序',
-                                     `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                                     `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                     `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                                     `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                     PRIMARY KEY (`column_id`) USING BTREE
+  `column_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `table_id` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '归属表编号',
+  `column_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列名称',
+  `column_comment` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列描述',
+  `column_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '列类型',
+  `java_type` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT 'JAVA类型',
+  `java_field` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT 'JAVA字段名',
+  `is_pk` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否主键（1是）',
+  `is_increment` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否自增（1是）',
+  `is_required` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否必填（1是）',
+  `is_insert` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否为插入字段（1是）',
+  `is_edit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否编辑字段（1是）',
+  `is_list` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否列表字段（1是）',
+  `is_query` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '是否查询字段（1是）',
+  `query_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'EQ' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
+  `html_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+  `dict_type` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
+  `sort` int NULL DEFAULT NULL COMMENT '排序',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`column_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '代码生成业务表字段' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -175,23 +180,94 @@ INSERT INTO `gen_table_column` VALUES (42, '8', 'all_keyword', '', 'varchar(500)
 INSERT INTO `gen_table_column` VALUES (43, '8', 'all_result', '', 'json', 'String', 'allResult', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2021-06-08 10:11:05', NULL, '2021-06-08 10:34:25');
 INSERT INTO `gen_table_column` VALUES (44, '8', 'user_name', '', 'varchar(100)', 'String', 'userName', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 7, 'admin', '2021-06-08 10:11:05', NULL, '2021-06-08 10:34:25');
 INSERT INTO `gen_table_column` VALUES (45, '8', 'times', '', 'timestamp', 'Date', 'times', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 8, 'admin', '2021-06-08 10:11:05', NULL, '2021-06-08 10:34:25');
+INSERT INTO `gen_table_column` VALUES (128, '18', 'id', '物品id', 'int', 'Long', 'id', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (129, '18', 'order_id', '订单号', 'int', 'Long', 'orderId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (130, '18', 'goods_name', '物品名称', 'varchar(255)', 'String', 'goodsName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (131, '18', 'weight', '物品重量', 'double', 'Long', 'weight', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (132, '18', 'amount', '物品单价', 'double', 'Long', 'amount', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (133, '18', 'image', '图片路径', 'varchar(255)', 'String', 'image', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2024-04-20 17:58:00', '', NULL);
+INSERT INTO `gen_table_column` VALUES (134, '19', 'id', '订单号', 'int', 'Long', 'id', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-04-20 17:58:00', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (135, '19', 'user_id', '用户', 'int', 'Long', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (136, '19', 'recycler_id', '回收员id', 'int', 'Long', 'recyclerId', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (137, '19', 'estimate_weight', '预估重量', 'varchar(255)', 'String', 'estimateWeight', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (138, '19', 'address', '订单回收地址', 'varchar(255)', 'String', 'address', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (139, '19', 'phone', '电话号码', 'varchar(255)', 'String', 'phone', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (140, '19', 'type', '垃圾类型', 'varchar(255)', 'String', 'type', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'radio', 'recycle_type', 7, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (141, '19', 'status', '订单状态 1:待接单，2:已完成，3:已取消，4:已接单', 'tinyint', 'Long', 'status', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'radio', 'order_status', 8, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (142, '19', 'appointment_time', '预约时间', 'varchar(255)', 'String', 'appointmentTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 9, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (143, '19', 'amount', '总价', 'double(8,2)', 'BigDecimal', 'amount', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 10, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (144, '19', 'order_time', '下单时间', 'datetime', 'Date', 'orderTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 11, 'admin', '2024-04-20 17:58:01', NULL, '2024-04-20 18:09:17');
+INSERT INTO `gen_table_column` VALUES (151, '21', 'addr_id', '地址id', 'int', 'Long', 'addrId', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:33');
+INSERT INTO `gen_table_column` VALUES (152, '21', 'user_id', '用户id', 'int', 'Long', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:33');
+INSERT INTO `gen_table_column` VALUES (153, '21', 'contact_name', '姓名', 'varchar(255)', 'String', 'contactName', '0', '0', '1', '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:33');
+INSERT INTO `gen_table_column` VALUES (154, '21', 'contact_phone', '电话号码', 'varchar(255)', 'String', 'contactPhone', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 4, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (155, '21', 'province', '省', 'varchar(255)', 'String', 'province', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (156, '21', 'city', '市', 'varchar(255)', 'String', 'city', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 6, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (157, '21', 'district', '区', 'varchar(255)', 'String', 'district', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (158, '21', 'address', '详细地址', 'varchar(255)', 'String', 'address', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (159, '21', 'is_default', '是否默认', 'tinyint', 'Long', 'isDefault', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'radio', 'defalt_addr', 9, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (160, '21', 'modified_time', '最后修改时间', 'timestamp', 'Date', 'modifiedTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 10, 'admin', '2024-04-20 17:58:02', NULL, '2024-04-20 18:22:34');
+INSERT INTO `gen_table_column` VALUES (176, '24', 'inf_id', '用户信息ID', 'int', 'Long', 'infId', '1', '1', NULL, '1', NULL, NULL, NULL, 'EQ', 'input', '', 1, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (177, '24', 'user_id', '用户ID', 'int', 'Long', 'userId', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (178, '24', 'nickname', '用户昵称', 'varchar(255)', 'String', 'nickname', '0', '0', NULL, '1', '1', '1', '1', 'LIKE', 'input', '', 3, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (179, '24', 'avatar', '头像', 'varchar(255)', 'String', 'avatar', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'upload', '', 4, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (180, '24', 'phone', '电话号码', 'varchar(255)', 'String', 'phone', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 5, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (181, '24', 'gender', '性别', 'enum(\'男\',\'女\',\'保密\')', 'String', 'gender', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'radio', 'user_sex', 6, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (182, '24', 'user_money', '用户余额', 'decimal(8,2)', 'BigDecimal', 'userMoney', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 7, 'admin', '2024-04-20 18:24:17', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (183, '24', 'order_num', '订单数量', 'int', 'Long', 'orderNum', '0', '0', NULL, '1', '1', '1', '1', 'EQ', 'input', '', 8, 'admin', '2024-04-20 18:24:18', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (184, '24', 'register_time', '注册时间', 'timestamp', 'Date', 'registerTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 9, 'admin', '2024-04-20 18:24:18', NULL, '2024-04-20 20:31:00');
+INSERT INTO `gen_table_column` VALUES (185, '25', 'user_id', '用户ID', 'int', 'Long', 'userId', '1', '1', NULL, '1', NULL, NULL, '1', 'EQ', 'input', '', 1, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:14');
+INSERT INTO `gen_table_column` VALUES (186, '25', 'phone', '手机号', 'varchar(255)', 'String', 'phone', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 2, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:14');
+INSERT INTO `gen_table_column` VALUES (187, '25', 'password', 'md5加密的密码', 'char(32)', 'String', 'password', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'input', '', 3, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:14');
+INSERT INTO `gen_table_column` VALUES (188, '25', 'user_state', '用户类型：0：用户，1：回收员', 'tinyint', 'Long', 'userState', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'radio', 'user_type', 4, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:15');
+INSERT INTO `gen_table_column` VALUES (189, '25', 'create_time', '创建日期', 'timestamp', 'Date', 'createTime', '0', '0', '1', '1', NULL, NULL, NULL, 'EQ', 'datetime', '', 5, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:15');
+INSERT INTO `gen_table_column` VALUES (190, '25', 'modified_time', '修改日期', 'timestamp', 'Date', 'modifiedTime', '0', '0', '1', '1', '1', '1', '1', 'EQ', 'datetime', '', 6, 'admin', '2024-04-20 18:57:54', NULL, '2024-04-20 20:06:15');
+
+-- ----------------------------
+-- Table structure for goods_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `goods_detail`;
+CREATE TABLE `goods_detail`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '物品id',
+  `order_id` int NOT NULL COMMENT '订单号',
+  `goods_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '物品名称',
+  `weight` double(8, 2) NOT NULL COMMENT '物品重量',
+  `amount` double(8, 2) NOT NULL COMMENT '物品单价',
+  `unit_price` double(8, 2) NULL DEFAULT NULL,
+  `image` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '图片路径',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of goods_detail
+-- ----------------------------
+INSERT INTO `goods_detail` VALUES (1, 9, '方法', 124.00, 5728.80, 46.20, NULL);
+INSERT INTO `goods_detail` VALUES (2, 11, 'dfs', 1.40, 5.60, 4.00, NULL);
+INSERT INTO `goods_detail` VALUES (3, 14, 'sf', 1.40, 33.60, 24.00, NULL);
+INSERT INTO `goods_detail` VALUES (4, 15, '废值', 12.00, 50.40, 4.20, NULL);
+INSERT INTO `goods_detail` VALUES (5, 16, 'dsf', 55.00, 4326.30, 78.66, NULL);
+INSERT INTO `goods_detail` VALUES (6, 17, 'fdgfd', 1414.00, 33936.00, 24.00, NULL);
+INSERT INTO `goods_detail` VALUES (7, 18, 'sfdsf', 14.00, 336.00, 24.00, NULL);
+INSERT INTO `goods_detail` VALUES (8, 19, '废纸', 1.40, 77.00, 55.00, NULL);
+INSERT INTO `goods_detail` VALUES (9, 20, '的说法是', 45.00, 1125.00, 25.00, NULL);
+INSERT INTO `goods_detail` VALUES (10, 21, '撒旦', 2.40, 187.20, 78.00, NULL);
 
 -- ----------------------------
 -- Table structure for image_classify
 -- ----------------------------
 DROP TABLE IF EXISTS `image_classify`;
 CREATE TABLE `image_classify`  (
-                                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                                   `filepath` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
-                                   `one_keyword` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '一个关键字',
-                                   `one_result` json NULL COMMENT '一个结果',
-                                   `all_keyword` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '总关键字',
-                                   `all_result` json NULL COMMENT '总结果',
-                                   `user_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-                                   `times` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
-                                   PRIMARY KEY (`id`) USING BTREE,
-                                   UNIQUE INDEX `image_classify_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 331 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '图像识别记录' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `filepath` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
+  `one_keyword` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '一个关键字',
+  `one_result` json NULL COMMENT '一个结果',
+  `all_keyword` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '总关键字',
+  `all_result` json NULL COMMENT '总结果',
+  `user_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户名',
+  `times` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `image_classify_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 331 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '图像识别记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of image_classify
@@ -202,13 +278,13 @@ CREATE TABLE `image_classify`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `keyword_result`;
 CREATE TABLE `keyword_result`  (
-                                   `id` int(11) NOT NULL AUTO_INCREMENT,
-                                   `keyword` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-                                   `result` json NULL,
-                                   `times` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-                                   PRIMARY KEY (`id`) USING BTREE,
-                                   UNIQUE INDEX `keyword_result_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2260 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '关键词+结果记录表' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `keyword` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `result` json NULL,
+  `times` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `keyword_result_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2269 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '关键词+结果记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of keyword_result
@@ -1561,19 +1637,39 @@ INSERT INTO `keyword_result` VALUES (2256, '干电池', '[{\"remark\": \"有害�
 INSERT INTO `keyword_result` VALUES (2257, '铅笔', '[{\"questionId\": 49, \"garbageName\": \"铅笔\", \"garbageType\": 1}, {\"questionId\": 735, \"garbageName\": \"金属铅笔盒\", \"garbageType\": 3}]', '2024-04-02 14:43:12');
 INSERT INTO `keyword_result` VALUES (2258, '胶水', '[{\"questionId\": 33, \"garbageName\": \"胶水\", \"garbageType\": 1}]', '2024-04-03 14:58:38');
 INSERT INTO `keyword_result` VALUES (2259, '玩具', '[{\"questionId\": 269, \"garbageName\": \"塑料玩具\", \"garbageType\": 3}, {\"questionId\": 313, \"garbageName\": \"毛绒玩具\", \"garbageType\": 3}, {\"questionId\": 349, \"garbageName\": \"旧玩具\", \"garbageType\": 3}]', '2024-04-03 15:26:48');
+INSERT INTO `keyword_result` VALUES (2260, '干电池', '[{\"remark\": \"有害垃圾哟\", \"questionId\": 4, \"garbageName\": \"干电池\", \"garbageType\": 4}]', '2024-04-10 14:22:33');
+INSERT INTO `keyword_result` VALUES (2261, '玩具', '[{\"questionId\": 269, \"garbageName\": \"塑料玩具\", \"garbageType\": 3}, {\"questionId\": 313, \"garbageName\": \"毛绒玩具\", \"garbageType\": 3}, {\"questionId\": 349, \"garbageName\": \"旧玩具\", \"garbageType\": 3}]', '2024-04-10 15:24:30');
+INSERT INTO `keyword_result` VALUES (2262, '塑料玩具', '[{\"questionId\": 269, \"garbageName\": \"塑料玩具\", \"garbageType\": 3}]', '2024-04-10 15:24:31');
+INSERT INTO `keyword_result` VALUES (2263, '咸鸭蛋', '[{\"questionId\": 72, \"garbageName\": \"咸鸭蛋\", \"garbageType\": 2}]', '2024-04-19 22:26:47');
+INSERT INTO `keyword_result` VALUES (2264, '竹筷', '[{\"questionId\": 42, \"garbageName\": \"竹筷\", \"garbageType\": 1}]', '2024-04-19 22:26:52');
+INSERT INTO `keyword_result` VALUES (2265, '一次性杯子', '[{\"questionId\": 38, \"garbageName\": \"一次性杯子\", \"garbageType\": 1}]', '2024-04-19 23:37:00');
+INSERT INTO `keyword_result` VALUES (2266, '一次性杯子', '[{\"questionId\": 38, \"garbageName\": \"一次性杯子\", \"garbageType\": 1}]', '2024-04-19 23:37:01');
+INSERT INTO `keyword_result` VALUES (2267, '干电池', '[{\"remark\": \"有害垃圾哟\", \"questionId\": 4, \"garbageName\": \"干电池\", \"garbageType\": 4}]', '2024-04-19 23:37:11');
+INSERT INTO `keyword_result` VALUES (2268, '污损纸张', '[{\"questionId\": 10, \"garbageName\": \"污损纸张\", \"garbageType\": 1}]', '2024-04-19 23:41:37');
+INSERT INTO `keyword_result` VALUES (2269, '尿不湿', '[{\"questionId\": 7, \"garbageName\": \"尿不湿\", \"garbageType\": 1}]', '2024-04-21 01:48:30');
+INSERT INTO `keyword_result` VALUES (2270, '一次性餐具', '[{\"questionId\": 37, \"garbageName\": \"一次性餐具\", \"garbageType\": 1}]', '2024-04-21 01:49:03');
+INSERT INTO `keyword_result` VALUES (2271, '一次性餐具', '[{\"questionId\": 37, \"garbageName\": \"一次性餐具\", \"garbageType\": 1}]', '2024-04-21 01:50:06');
+INSERT INTO `keyword_result` VALUES (2272, '一次性餐具', '[{\"questionId\": 37, \"garbageName\": \"一次性餐具\", \"garbageType\": 1}]', '2024-04-21 01:50:06');
+INSERT INTO `keyword_result` VALUES (2273, '一次性餐具', '[{\"questionId\": 37, \"garbageName\": \"一次性餐具\", \"garbageType\": 1}]', '2024-04-21 01:50:08');
+INSERT INTO `keyword_result` VALUES (2274, '灰土', '[{\"questionId\": 29, \"garbageName\": \"灰土\", \"garbageType\": 1}]', '2024-04-21 02:20:53');
+INSERT INTO `keyword_result` VALUES (2275, '一次性杯子', '[{\"questionId\": 38, \"garbageName\": \"一次性杯子\", \"garbageType\": 1}]', '2024-04-21 09:05:33');
+INSERT INTO `keyword_result` VALUES (2276, '一次性杯子', '[{\"questionId\": 38, \"garbageName\": \"一次性杯子\", \"garbageType\": 1}]', '2024-04-21 09:05:36');
+INSERT INTO `keyword_result` VALUES (2277, '果蔬', '[]', '2024-04-21 10:34:56');
+INSERT INTO `keyword_result` VALUES (2278, '羊肉', '[{\"questionId\": 69, \"garbageName\": \"羊肉\", \"garbageType\": 2}, {\"questionId\": 104, \"garbageName\": \"羊肉干\", \"garbageType\": 2}]', '2024-04-21 10:34:59');
+INSERT INTO `keyword_result` VALUES (2279, '镜子', '[{\"questionId\": 39, \"garbageName\": \"镜子\", \"garbageType\": 1}, {\"questionId\": 339, \"garbageName\": \"旧镜子\", \"garbageType\": 3}]', '2024-04-21 10:39:51');
 
 -- ----------------------------
 -- Table structure for keyword_search_num
 -- ----------------------------
 DROP TABLE IF EXISTS `keyword_search_num`;
 CREATE TABLE `keyword_search_num`  (
-                                       `id` int(11) NOT NULL AUTO_INCREMENT,
-                                       `keyword` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-                                       `num` int(11) NULL DEFAULT NULL,
-                                       `times` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                       PRIMARY KEY (`id`) USING BTREE,
-                                       UNIQUE INDEX `keyword_search_num_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 562 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '搜索关键词+次数记录表' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `keyword` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `num` int NULL DEFAULT NULL,
+  `times` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `keyword_search_num_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 562 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '搜索关键词+次数记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of keyword_search_num
@@ -1584,7 +1680,7 @@ INSERT INTO `keyword_search_num` VALUES (3, '餐巾纸', 11, '2019-07-16 16:37:3
 INSERT INTO `keyword_search_num` VALUES (4, '尼龙制品', 47, '2019-07-16 16:38:05');
 INSERT INTO `keyword_search_num` VALUES (5, '椰子壳', 21, '2019-07-16 16:56:42');
 INSERT INTO `keyword_search_num` VALUES (6, '狗尿垫', 8, '2019-07-16 16:56:46');
-INSERT INTO `keyword_search_num` VALUES (7, '污损纸张', 47, '2019-07-16 17:19:21');
+INSERT INTO `keyword_search_num` VALUES (7, '污损纸张', 48, '2019-07-16 17:19:21');
 INSERT INTO `keyword_search_num` VALUES (8, '卫生间用纸', 11, '2019-07-16 17:46:06');
 INSERT INTO `keyword_search_num` VALUES (9, '苹果', 99, '2019-07-16 17:46:25');
 INSERT INTO `keyword_search_num` VALUES (10, '防碎气泡膜', 12, '2019-07-16 18:02:17');
@@ -1598,7 +1694,7 @@ INSERT INTO `keyword_search_num` VALUES (17, '核桃', 2, '2019-07-21 11:16:11')
 INSERT INTO `keyword_search_num` VALUES (18, '榴莲核', 24, '2019-07-21 11:28:57');
 INSERT INTO `keyword_search_num` VALUES (19, '干燥剂1', 1, '2019-07-21 12:07:43');
 INSERT INTO `keyword_search_num` VALUES (20, '猫砂', 13, '2019-07-21 14:15:46');
-INSERT INTO `keyword_search_num` VALUES (21, '干电池', 58, '2019-07-21 15:34:00');
+INSERT INTO `keyword_search_num` VALUES (21, '干电池', 60, '2019-07-21 15:34:00');
 INSERT INTO `keyword_search_num` VALUES (22, '编织袋', 18, '2019-07-21 16:53:04');
 INSERT INTO `keyword_search_num` VALUES (23, '剩饭残渣', 13, '2019-07-21 16:53:24');
 INSERT INTO `keyword_search_num` VALUES (24, '大骨头', 15, '2019-07-21 16:53:50');
@@ -1614,7 +1710,7 @@ INSERT INTO `keyword_search_num` VALUES (33, '电池', 5, '2019-07-21 17:57:35')
 INSERT INTO `keyword_search_num` VALUES (34, '鼠标', 14, '2019-07-21 19:12:24');
 INSERT INTO `keyword_search_num` VALUES (35, '菠萝蜜核', 21, '2019-07-21 21:06:22');
 INSERT INTO `keyword_search_num` VALUES (36, '你好', 4, '2019-07-21 21:10:56');
-INSERT INTO `keyword_search_num` VALUES (37, '一次性餐具', 15, '2019-07-21 21:13:16');
+INSERT INTO `keyword_search_num` VALUES (37, '一次性餐具', 19, '2019-07-21 21:13:16');
 INSERT INTO `keyword_search_num` VALUES (38, '键盘', 40, '2019-07-21 21:13:38');
 INSERT INTO `keyword_search_num` VALUES (39, '甘蔗', 4, '2019-07-21 22:12:56');
 INSERT INTO `keyword_search_num` VALUES (40, '陶瓷制品', 16, '2019-07-21 22:13:09');
@@ -1622,14 +1718,14 @@ INSERT INTO `keyword_search_num` VALUES (41, '地板砖', 1, '2019-07-21 22:13:4
 INSERT INTO `keyword_search_num` VALUES (42, '花卉', 1, '2019-07-21 22:13:48');
 INSERT INTO `keyword_search_num` VALUES (43, '男孩', 9, '2019-07-21 22:14:25');
 INSERT INTO `keyword_search_num` VALUES (44, '杯子', 12, '2019-07-21 22:15:49');
-INSERT INTO `keyword_search_num` VALUES (45, '灰土', 13, '2019-07-22 12:12:44');
+INSERT INTO `keyword_search_num` VALUES (45, '灰土', 14, '2019-07-22 12:12:44');
 INSERT INTO `keyword_search_num` VALUES (46, '工作餐', 4, '2019-07-22 12:13:12');
 INSERT INTO `keyword_search_num` VALUES (47, '水杯', 6, '2019-07-22 12:14:08');
 INSERT INTO `keyword_search_num` VALUES (48, '锅包肉', 1, '2019-07-22 12:29:13');
 INSERT INTO `keyword_search_num` VALUES (49, '杨枝甘露', 1, '2019-07-22 22:04:51');
 INSERT INTO `keyword_search_num` VALUES (50, '胶水', 16, '2019-07-22 22:05:04');
 INSERT INTO `keyword_search_num` VALUES (51, '我不知道', 2, '2019-07-22 22:19:32');
-INSERT INTO `keyword_search_num` VALUES (53, '一次性杯子', 13, '2019-07-22 22:24:33');
+INSERT INTO `keyword_search_num` VALUES (53, '一次性杯子', 17, '2019-07-22 22:24:33');
 INSERT INTO `keyword_search_num` VALUES (54, '这是什么西瓜？', 1, '2019-07-22 22:24:54');
 INSERT INTO `keyword_search_num` VALUES (55, '你是一个瓜皮', 1, '2019-07-22 22:25:02');
 INSERT INTO `keyword_search_num` VALUES (56, '那个就是', 3, '2019-07-22 22:33:36');
@@ -1641,7 +1737,7 @@ INSERT INTO `keyword_search_num` VALUES (61, '刘敏是个大傻子', 1, '2019-0
 INSERT INTO `keyword_search_num` VALUES (62, '你是一个垃圾人', 1, '2019-07-23 00:39:26');
 INSERT INTO `keyword_search_num` VALUES (63, '手提袋', 50, '2019-07-23 22:06:50');
 INSERT INTO `keyword_search_num` VALUES (64, '魔方', 1, '2019-07-23 22:11:36');
-INSERT INTO `keyword_search_num` VALUES (65, '玩具', 113, '2019-07-23 22:12:06');
+INSERT INTO `keyword_search_num` VALUES (65, '玩具', 114, '2019-07-23 22:12:06');
 INSERT INTO `keyword_search_num` VALUES (66, '图像素材', 2, '2019-07-23 22:12:47');
 INSERT INTO `keyword_search_num` VALUES (67, '苹', 2, '2019-07-23 22:46:22');
 INSERT INTO `keyword_search_num` VALUES (68, '厨房', 9, '2019-07-24 00:14:04');
@@ -1657,7 +1753,7 @@ INSERT INTO `keyword_search_num` VALUES (77, '奶盖', 1, '2019-07-24 10:27:37')
 INSERT INTO `keyword_search_num` VALUES (78, '奶茶杯', 5, '2019-07-24 10:27:46');
 INSERT INTO `keyword_search_num` VALUES (79, '奶茶', 11, '2019-07-24 10:27:57');
 INSERT INTO `keyword_search_num` VALUES (80, '塑料杯', 1, '2019-07-24 10:28:05');
-INSERT INTO `keyword_search_num` VALUES (81, '尿不湿', 13, '2019-07-24 10:28:57');
+INSERT INTO `keyword_search_num` VALUES (81, '尿不湿', 14, '2019-07-24 10:28:57');
 INSERT INTO `keyword_search_num` VALUES (82, '手写板', 2, '2019-07-24 10:29:55');
 INSERT INTO `keyword_search_num` VALUES (83, '甘蔗皮', 15, '2019-07-24 10:30:39');
 INSERT INTO `keyword_search_num` VALUES (84, '洗手液', 1, '2019-07-24 10:31:36');
@@ -1759,7 +1855,7 @@ INSERT INTO `keyword_search_num` VALUES (179, '屎', 2, '2019-07-24 12:32:00');
 INSERT INTO `keyword_search_num` VALUES (180, '猪肉', 7, '2019-07-24 12:32:38');
 INSERT INTO `keyword_search_num` VALUES (181, '戒指', 2, '2019-07-24 12:32:43');
 INSERT INTO `keyword_search_num` VALUES (182, '塑料', 2, '2019-07-24 12:32:59');
-INSERT INTO `keyword_search_num` VALUES (183, '塑料玩具', 2, '2019-07-24 12:33:14');
+INSERT INTO `keyword_search_num` VALUES (183, '塑料玩具', 3, '2019-07-24 12:33:14');
 INSERT INTO `keyword_search_num` VALUES (184, '建筑', 2, '2019-07-24 12:35:08');
 INSERT INTO `keyword_search_num` VALUES (185, '打火机', 9, '2019-07-24 12:36:17');
 INSERT INTO `keyword_search_num` VALUES (186, '猪骨头', 1, '2019-07-24 12:38:20');
@@ -1831,8 +1927,8 @@ INSERT INTO `keyword_search_num` VALUES (251, '牙签盒', 3, '2019-07-24 14:51:
 INSERT INTO `keyword_search_num` VALUES (252, '一次性用品', 3, '2019-07-24 14:51:33');
 INSERT INTO `keyword_search_num` VALUES (253, '草稿纸', 1, '2019-07-24 14:52:30');
 INSERT INTO `keyword_search_num` VALUES (254, '纸巾，纸巾', 1, '2019-07-24 14:52:54');
-INSERT INTO `keyword_search_num` VALUES (255, '咸鸭蛋', 2, '2019-07-24 14:52:58');
-INSERT INTO `keyword_search_num` VALUES (256, '镜子', 8, '2019-07-24 14:53:07');
+INSERT INTO `keyword_search_num` VALUES (255, '咸鸭蛋', 3, '2019-07-24 14:52:58');
+INSERT INTO `keyword_search_num` VALUES (256, '镜子', 9, '2019-07-24 14:53:07');
 INSERT INTO `keyword_search_num` VALUES (257, '书', 2, '2019-07-24 14:53:11');
 INSERT INTO `keyword_search_num` VALUES (258, '被子', 1, '2019-07-24 14:53:19');
 INSERT INTO `keyword_search_num` VALUES (259, '笔记本电脑', 5, '2019-07-24 14:53:28');
@@ -1895,7 +1991,7 @@ INSERT INTO `keyword_search_num` VALUES (315, '鲸鱼', 2, '2019-07-24 18:57:39'
 INSERT INTO `keyword_search_num` VALUES (316, '沙发', 3, '2019-07-24 18:57:53');
 INSERT INTO `keyword_search_num` VALUES (317, '粘上猫尿的猫砂', 1, '2019-07-24 18:58:59');
 INSERT INTO `keyword_search_num` VALUES (318, '那啥意思？', 1, '2019-07-24 19:16:20');
-INSERT INTO `keyword_search_num` VALUES (319, '羊肉', 4, '2019-07-24 19:23:52');
+INSERT INTO `keyword_search_num` VALUES (319, '羊肉', 5, '2019-07-24 19:23:52');
 INSERT INTO `keyword_search_num` VALUES (320, '防碎气泡', 1, '2019-07-24 19:58:01');
 INSERT INTO `keyword_search_num` VALUES (321, '香蕉皮', 2, '2019-07-24 19:59:50');
 INSERT INTO `keyword_search_num` VALUES (322, '咖啡渣', 1, '2019-07-24 20:16:32');
@@ -1904,7 +2000,7 @@ INSERT INTO `keyword_search_num` VALUES (324, '陶瓷', 1, '2019-07-24 20:16:43'
 INSERT INTO `keyword_search_num` VALUES (325, '牛奶', 1, '2019-07-24 20:17:08');
 INSERT INTO `keyword_search_num` VALUES (326, '外卖饭盒', 1, '2019-07-24 20:40:41');
 INSERT INTO `keyword_search_num` VALUES (327, '剩饭', 1, '2019-07-24 20:41:02');
-INSERT INTO `keyword_search_num` VALUES (328, '竹筷', 8, '2019-07-24 20:46:58');
+INSERT INTO `keyword_search_num` VALUES (328, '竹筷', 9, '2019-07-24 20:46:58');
 INSERT INTO `keyword_search_num` VALUES (329, '尿', 2, '2019-07-24 21:41:53');
 INSERT INTO `keyword_search_num` VALUES (330, '鸡屎', 1, '2019-07-24 21:42:13');
 INSERT INTO `keyword_search_num` VALUES (331, '桥梁', 3, '2019-07-24 21:46:08');
@@ -2138,21 +2234,60 @@ INSERT INTO `keyword_search_num` VALUES (558, '桌菜', 1, '2019-09-05 15:04:19'
 INSERT INTO `keyword_search_num` VALUES (559, '妈妈', 1, '2019-09-05 15:07:02');
 INSERT INTO `keyword_search_num` VALUES (560, '泰山香烟', 1, '2019-09-06 15:31:44');
 INSERT INTO `keyword_search_num` VALUES (561, '黄金叶香烟', 2, '2019-09-08 19:12:47');
+INSERT INTO `keyword_search_num` VALUES (562, '果蔬', 1, '2024-04-21 10:34:56');
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+DROP TABLE IF EXISTS `orders`;
+CREATE TABLE `orders`  (
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '订单号',
+  `user_id` int NOT NULL COMMENT '用户',
+  `recycler_id` int NULL DEFAULT NULL COMMENT '回收员id',
+  `estimate_weight` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '预估重量',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '订单回收地址',
+  `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '电话号码',
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '垃圾类型',
+  `status` tinyint NOT NULL DEFAULT 1 COMMENT '订单状态 1:待接单，2:已完成，3:已取消，4:已接单，5:回收员确认，6:用户确认',
+  `appointment_time` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '预约时间',
+  `amount` double(8, 2) NOT NULL DEFAULT 0.00 COMMENT '总价',
+  `order_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '下单时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of orders
+-- ----------------------------
+INSERT INTO `orders` VALUES (9, 11, 11, '10-50公斤', '前门东大街9号', '12345678901', '金属类', 2, '2024-04-21 5:10', 0.00, '2024-04-20 00:00:00');
+INSERT INTO `orders` VALUES (10, 11, 11, '10-50公斤', '前门东大街9号', '12345678901', '塑料类', 2, '2024-04-21 5:10', 0.00, '2024-04-20 16:38:45');
+INSERT INTO `orders` VALUES (11, 11, 11, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '纸皮类', 2, '2024-04-20 5:10', 0.00, '2024-04-20 20:38:04');
+INSERT INTO `orders` VALUES (12, 11, NULL, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '纸皮类', 2, '2024-04-20 5:10', 0.00, '2024-04-20 21:59:56');
+INSERT INTO `orders` VALUES (13, 11, NULL, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '纸皮类', 3, '2024-04-21 5:10', 0.00, '2024-04-20 22:01:56');
+INSERT INTO `orders` VALUES (14, 11, 11, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '衣物&其它', 2, '2024-04-20 5:10', 0.00, '2024-04-20 22:06:04');
+INSERT INTO `orders` VALUES (15, 11, 11, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '纸皮类', 2, '2024-04-20 5:10', 0.00, '2024-04-20 22:35:09');
+INSERT INTO `orders` VALUES (16, 11, 11, '10-50公斤', '雁山区雁山镇一号', '0178783861992', '纸皮类', 2, '2024-04-21 5:10', 0.00, '2024-04-21 00:29:10');
+INSERT INTO `orders` VALUES (17, 11, 11, '10-50公斤', '雁山区雁山镇一号', '17878386199', '金属类', 2, '2024-04-23 5:10', 0.00, '2024-04-21 01:47:13');
+INSERT INTO `orders` VALUES (18, 20, 11, '10-50公斤', '前门东大街辅路与正义路交叉口西北方向60米', '14875745745', '纸皮类', 2, '2024-04-22 5:10', 0.00, '2024-04-21 09:39:09');
+INSERT INTO `orders` VALUES (19, 20, 11, '10-50公斤', '电视广告', '15555555555', '纸皮类', 2, '2024-04-22 6:10', 0.00, '2024-04-21 10:14:12');
+INSERT INTO `orders` VALUES (20, 11, 11, '10-50公斤', '广西', '17878386199', '金属类', 2, '2024-04-21 7:10', 0.00, '2024-04-21 10:20:58');
+INSERT INTO `orders` VALUES (21, 11, 11, '10-50公斤', '雁山区雁山镇一号', '17878386199', '纸皮类', 2, '2024-04-21 8:10', 0.00, '2024-04-21 10:29:56');
+INSERT INTO `orders` VALUES (22, 11, NULL, '10-50公斤', '前门东大街辅路与正义路交叉口西北方向60米', '19839456720', '衣物&其它', 3, '2024-04-23 5:10', 0.00, '2024-04-21 10:36:46');
+INSERT INTO `orders` VALUES (23, 11, NULL, '10-50公斤', '前门东大街辅路与正义路交叉口西北方向60米', '19839456720', '衣物&其它', 3, '2024-04-21 6:10', 0.00, '2024-04-21 10:38:35');
 
 -- ----------------------------
 -- Table structure for question_bank
 -- ----------------------------
 DROP TABLE IF EXISTS `question_bank`;
 CREATE TABLE `question_bank`  (
-                                  `question_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-                                  `garbage_type` tinyint(4) NULL DEFAULT 2 COMMENT '垃圾类型',
-                                  `garbage_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '垃圾名称',
-                                  `analysis` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '解析',
-                                  `remark` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`question_id`) USING BTREE,
-                                  UNIQUE INDEX `question_bank_question_id_uindex`(`question_id`) USING BTREE,
-                                  UNIQUE INDEX `question_bank_garbage_name_uindex`(`garbage_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 824 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '题库表' ROW_FORMAT = DYNAMIC;
+  `question_id` int NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `garbage_type` tinyint NULL DEFAULT 2 COMMENT '垃圾类型',
+  `garbage_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '垃圾名称',
+  `analysis` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '解析',
+  `remark` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`question_id`) USING BTREE,
+  UNIQUE INDEX `question_bank_question_id_uindex`(`question_id`) USING BTREE,
+  UNIQUE INDEX `question_bank_garbage_name_uindex`(`garbage_name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 824 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '题库表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of question_bank
@@ -2763,18 +2898,36 @@ INSERT INTO `question_bank` VALUES (822, 1, '手机膜', NULL, NULL);
 INSERT INTO `question_bank` VALUES (823, 1, '酱油瓶', NULL, NULL);
 
 -- ----------------------------
+-- Table structure for recyle_info
+-- ----------------------------
+DROP TABLE IF EXISTS `recyle_info`;
+CREATE TABLE `recyle_info`  (
+  `recyle_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `phone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `order_time` datetime(0) NOT NULL,
+  `user_id` int NOT NULL,
+  PRIMARY KEY (`recyle_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of recyle_info
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for slide_show
 -- ----------------------------
 DROP TABLE IF EXISTS `slide_show`;
 CREATE TABLE `slide_show`  (
-                               `slide` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-                               `user_id` tinyint(1) NULL DEFAULT NULL COMMENT '是否启用',
-                               `sort_id` int(11) NULL DEFAULT NULL COMMENT '排序id',
-                               `image_url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '图片地址',
-                               `skip_url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '跳转的链接地址',
-                               PRIMARY KEY (`slide`) USING BTREE,
-                               UNIQUE INDEX `slide_show_slide_uindex`(`slide`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '幻灯片播放表' ROW_FORMAT = DYNAMIC;
+  `slide` int NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `user_id` tinyint(1) NULL DEFAULT NULL COMMENT '是否启用',
+  `sort_id` int NULL DEFAULT NULL COMMENT '排序id',
+  `image_url` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '图片地址',
+  `skip_url` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '跳转的链接地址',
+  PRIMARY KEY (`slide`) USING BTREE,
+  UNIQUE INDEX `slide_show_slide_uindex`(`slide`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '幻灯片播放表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of slide_show
@@ -2788,17 +2941,17 @@ INSERT INTO `slide_show` VALUES (3, 0, 3, 'https://desk-fd.zol-img.com.cn/t_s960
 -- ----------------------------
 DROP TABLE IF EXISTS `speech_classify`;
 CREATE TABLE `speech_classify`  (
-                                    `id` int(11) NOT NULL AUTO_INCREMENT,
-                                    `filepath` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
-                                    `one_keyword` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '一个关键字',
-                                    `one_result` json NULL COMMENT '一个结果',
-                                    `all_keyword` varchar(500) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '总关键字',
-                                    `all_result` json NULL COMMENT '总结果',
-                                    `user_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '用户名',
-                                    `times` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '时间',
-                                    PRIMARY KEY (`id`) USING BTREE,
-                                    UNIQUE INDEX `image_classify_id_uindex`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '语音识别记录' ROW_FORMAT = DYNAMIC;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `filepath` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '文件存储路径',
+  `one_keyword` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '一个关键字',
+  `one_result` json NULL COMMENT '一个结果',
+  `all_keyword` varchar(500) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '总关键字',
+  `all_result` json NULL COMMENT '总结果',
+  `user_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '用户名',
+  `times` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `image_classify_id_uindex`(`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 144 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '语音识别记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of speech_classify
@@ -2809,17 +2962,17 @@ CREATE TABLE `speech_classify`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_config`;
 CREATE TABLE `sys_config`  (
-                               `config_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
-                               `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数名称',
-                               `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数键名',
-                               `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数键值',
-                               `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
-                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                               `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                               PRIMARY KEY (`config_id`) USING BTREE
+  `config_id` int NOT NULL AUTO_INCREMENT COMMENT '参数主键',
+  `config_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数名称',
+  `config_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数键名',
+  `config_value` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '参数键值',
+  `config_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'N' COMMENT '系统内置（Y是 N否）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`config_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '参数配置表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -2840,21 +2993,21 @@ INSERT INTO `sys_config` VALUES (9, '主框架页-是否开启页脚', 'sys.inde
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dept`;
 CREATE TABLE `sys_dept`  (
-                             `dept_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
-                             `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父部门id',
-                             `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '祖级列表',
-                             `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
-                             `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
-                             `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '负责人',
-                             `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '联系电话',
-                             `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '邮箱',
-                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
-                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             PRIMARY KEY (`dept_id`) USING BTREE
+  `dept_id` bigint NOT NULL AUTO_INCREMENT COMMENT '部门id',
+  `parent_id` bigint NULL DEFAULT 0 COMMENT '父部门id',
+  `ancestors` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '祖级列表',
+  `dept_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
+  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `leader` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '负责人',
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '联系电话',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '邮箱',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '部门状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`dept_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 200 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '部门表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -2876,21 +3029,21 @@ INSERT INTO `sys_dept` VALUES (109, 102, '0,100,102', '财务部门', 2, '若依
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_data`;
 CREATE TABLE `sys_dict_data`  (
-                                  `dict_code` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典编码',
-                                  `dict_sort` int(11) NULL DEFAULT 0 COMMENT '字典排序',
-                                  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典标签',
-                                  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典键值',
-                                  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
-                                  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
-                                  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '表格回显样式',
-                                  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
-                                  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-                                  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                                  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                                  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`dict_code`) USING BTREE
+  `dict_code` bigint NOT NULL AUTO_INCREMENT COMMENT '字典编码',
+  `dict_sort` int NULL DEFAULT 0 COMMENT '字典排序',
+  `dict_label` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典标签',
+  `dict_value` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典键值',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
+  `css_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '样式属性（其他样式扩展）',
+  `list_class` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '表格回显样式',
+  `is_default` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT 'N' COMMENT '是否默认（Y是 N否）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`dict_code`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 106 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典数据表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -2931,23 +3084,38 @@ INSERT INTO `sys_dict_data` VALUES (102, 3, '可回收垃圾', '3', 'garbage_typ
 INSERT INTO `sys_dict_data` VALUES (103, 4, '有害垃圾', '4', 'garbage_type', NULL, NULL, 'Y', '0', 'admin', '2021-06-08 12:16:29', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES (104, 1, '正确', '1', 'challenge_result', NULL, NULL, 'Y', '0', 'admin', '2021-06-08 12:19:56', '', NULL, NULL);
 INSERT INTO `sys_dict_data` VALUES (105, 0, '错误', '0', 'challenge_result', NULL, NULL, 'Y', '0', 'admin', '2021-06-08 12:20:06', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (106, 1, '待接单', '1', 'order_status', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 17:52:35', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (107, 2, '已完成', '2', 'order_status', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 17:53:41', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (108, 3, '已取消', '3', 'order_status', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 17:53:56', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (109, 4, '已接单', '4', 'order_status', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 17:54:08', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (110, 1, '纸皮类', '纸皮类', 'recycle_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:07:33', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (111, 2, '衣物＆其他', '衣物＆其他', 'recycle_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:08:03', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (112, 3, '金属类', '金属类', 'recycle_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:08:21', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (113, 4, '塑料类', '塑料类', 'recycle_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:08:37', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (114, 1, '默认', '1', 'defalt_addr', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:20:39', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (115, 2, '不默认', '0', 'defalt_addr', '', '', 'Y', '0', 'admin', '2024-04-20 18:20:54', 'admin', '2024-04-20 18:20:59', '');
+INSERT INTO `sys_dict_data` VALUES (116, 1, '男', '男', 'user_sex', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:38:20', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (117, 2, '女', '女', 'user_sex', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:38:32', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (118, 3, '保密', '保密', 'user_sex', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:38:43', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (119, 1, '用户', '0', 'user_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:59:23', '', NULL, NULL);
+INSERT INTO `sys_dict_data` VALUES (120, 2, '回收员', '1', 'user_type', NULL, NULL, 'Y', '0', 'admin', '2024-04-20 18:59:36', '', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for sys_dict_type
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_dict_type`;
 CREATE TABLE `sys_dict_type`  (
-                                  `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键',
-                                  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典名称',
-                                  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
-                                  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
-                                  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                                  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                                  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                                  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                                  PRIMARY KEY (`dict_id`) USING BTREE,
-                                  UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
+  `dict_id` bigint NOT NULL AUTO_INCREMENT COMMENT '字典主键',
+  `dict_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典名称',
+  `dict_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '字典类型',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`dict_id`) USING BTREE,
+  UNIQUE INDEX `dict_type`(`dict_type`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 102 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '字典类型表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -2965,26 +3133,31 @@ INSERT INTO `sys_dict_type` VALUES (9, '操作类型', 'sys_oper_type', '0', 'ad
 INSERT INTO `sys_dict_type` VALUES (10, '系统状态', 'sys_common_status', '0', 'admin', '2021-06-08 09:13:56', '', NULL, '登录状态列表');
 INSERT INTO `sys_dict_type` VALUES (100, '垃圾类型', 'garbage_type', '0', 'admin', '2021-06-08 12:14:11', '', NULL, '垃圾类型；1：干垃圾；2：湿垃圾；3、可回收垃圾；4、有害垃圾。');
 INSERT INTO `sys_dict_type` VALUES (101, '挑战结果', 'challenge_result', '0', 'admin', '2021-06-08 12:19:40', '', NULL, NULL);
+INSERT INTO `sys_dict_type` VALUES (102, '订单状态', 'order_status', '0', 'admin', '2024-04-20 17:51:34', '', NULL, '订单状态选项');
+INSERT INTO `sys_dict_type` VALUES (103, '回收物品类型', 'recycle_type', '0', 'admin', '2024-04-20 18:06:20', '', NULL, '回收物品类型');
+INSERT INTO `sys_dict_type` VALUES (104, '默认地址', 'defalt_addr', '0', 'admin', '2024-04-20 18:19:46', '', NULL, NULL);
+INSERT INTO `sys_dict_type` VALUES (105, '性别', 'user_sex', '0', 'admin', '2024-04-20 18:38:01', '', NULL, NULL);
+INSERT INTO `sys_dict_type` VALUES (106, '用户类型', 'user_type', '0', 'admin', '2024-04-20 18:58:49', 'admin', '2024-04-20 18:59:05', '');
 
 -- ----------------------------
 -- Table structure for sys_job
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job`;
 CREATE TABLE `sys_job`  (
-                            `job_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务ID',
-                            `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '任务名称',
-                            `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
-                            `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '调用目标字符串',
-                            `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT 'cron执行表达式',
-                            `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
-                            `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
-                            `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
-                            `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                            `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                            `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                            `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                            `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注信息',
-                            PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
+  `job_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务ID',
+  `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '任务名称',
+  `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'DEFAULT' COMMENT '任务组名',
+  `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '调用目标字符串',
+  `cron_expression` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT 'cron执行表达式',
+  `misfire_policy` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '3' COMMENT '计划执行错误策略（1立即执行 2执行一次 3放弃执行）',
+  `concurrent` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '是否并发执行（0允许 1禁止）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '状态（0正常 1暂停）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注信息',
+  PRIMARY KEY (`job_id`, `job_name`, `job_group`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '定时任务调度表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -2999,15 +3172,15 @@ INSERT INTO `sys_job` VALUES (3, '系统默认（多参）', 'DEFAULT', 'ryTask.
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_job_log`;
 CREATE TABLE `sys_job_log`  (
-                                `job_log_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
-                                `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '任务名称',
-                                `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '任务组名',
-                                `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '调用目标字符串',
-                                `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '日志信息',
-                                `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
-                                `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '异常信息',
-                                `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                                PRIMARY KEY (`job_log_id`) USING BTREE
+  `job_log_id` bigint NOT NULL AUTO_INCREMENT COMMENT '任务日志ID',
+  `job_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '任务名称',
+  `job_group` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '任务组名',
+  `invoke_target` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '调用目标字符串',
+  `job_message` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '日志信息',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '执行状态（0正常 1失败）',
+  `exception_info` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '异常信息',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`job_log_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '定时任务调度日志表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3019,16 +3192,16 @@ CREATE TABLE `sys_job_log`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_logininfor`;
 CREATE TABLE `sys_logininfor`  (
-                                   `info_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
-                                   `login_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录账号',
-                                   `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录IP地址',
-                                   `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录地点',
-                                   `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '浏览器类型',
-                                   `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作系统',
-                                   `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
-                                   `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '提示消息',
-                                   `login_time` datetime NULL DEFAULT NULL COMMENT '访问时间',
-                                   PRIMARY KEY (`info_id`) USING BTREE
+  `info_id` bigint NOT NULL AUTO_INCREMENT COMMENT '访问ID',
+  `login_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录账号',
+  `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录IP地址',
+  `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录地点',
+  `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '浏览器类型',
+  `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作系统',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '登录状态（0成功 1失败）',
+  `msg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '提示消息',
+  `login_time` datetime(0) NULL DEFAULT NULL COMMENT '访问时间',
+  PRIMARY KEY (`info_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 115 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '系统访问记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3049,47 +3222,61 @@ INSERT INTO `sys_logininfor` VALUES (111, 'admin', '127.0.0.1', '内网IP', 'Chr
 INSERT INTO `sys_logininfor` VALUES (112, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-08 15:48:30');
 INSERT INTO `sys_logininfor` VALUES (113, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-08 15:51:47');
 INSERT INTO `sys_logininfor` VALUES (114, 'admin', '127.0.0.1', '内网IP', 'Chrome 9', 'Windows 10', '0', '登录成功', '2021-06-08 16:17:48');
+INSERT INTO `sys_logininfor` VALUES (115, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 15:21:35');
+INSERT INTO `sys_logininfor` VALUES (116, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 17:12:59');
+INSERT INTO `sys_logininfor` VALUES (117, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 17:22:27');
+INSERT INTO `sys_logininfor` VALUES (118, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 17:45:23');
+INSERT INTO `sys_logininfor` VALUES (119, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 18:02:46');
+INSERT INTO `sys_logininfor` VALUES (120, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 18:13:08');
+INSERT INTO `sys_logininfor` VALUES (121, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 18:34:25');
+INSERT INTO `sys_logininfor` VALUES (122, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 18:40:31');
+INSERT INTO `sys_logininfor` VALUES (123, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 18:57:08');
+INSERT INTO `sys_logininfor` VALUES (124, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 19:02:05');
+INSERT INTO `sys_logininfor` VALUES (125, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 19:46:32');
+INSERT INTO `sys_logininfor` VALUES (126, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 20:16:23');
+INSERT INTO `sys_logininfor` VALUES (127, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 20:29:04');
+INSERT INTO `sys_logininfor` VALUES (128, 'admin', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', '0', '登录成功', '2024-04-20 20:32:13');
 
 -- ----------------------------
 -- Table structure for sys_menu
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`  (
-                             `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
-                             `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '菜单名称',
-                             `parent_id` bigint(20) NULL DEFAULT 0 COMMENT '父菜单ID',
-                             `order_num` int(11) NULL DEFAULT 0 COMMENT '显示顺序',
-                             `url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '#' COMMENT '请求地址',
-                             `target` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '打开方式（menuItem页签 menuBlank新窗口）',
-                             `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
-                             `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
-                             `is_refresh` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '是否刷新（0刷新 1不刷新）',
-                             `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权限标识',
-                             `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '#' COMMENT '菜单图标',
-                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注',
-                             PRIMARY KEY (`menu_id`) USING BTREE
+  `menu_id` bigint NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+  `menu_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '菜单名称',
+  `parent_id` bigint NULL DEFAULT 0 COMMENT '父菜单ID',
+  `order_num` int NULL DEFAULT 0 COMMENT '显示顺序',
+  `url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '#' COMMENT '请求地址',
+  `target` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '打开方式（menuItem页签 menuBlank新窗口）',
+  `menu_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+  `visible` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+  `is_refresh` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '是否刷新（0刷新 1不刷新）',
+  `perms` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '权限标识',
+  `icon` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '#' COMMENT '菜单图标',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '备注',
+  PRIMARY KEY (`menu_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2085 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 2, '#', 'menuItem', 'M', '0', '1', '', 'fa fa-gear', 'admin', '2021-06-08 09:13:56', 'admin', '2021-06-08 15:45:18', '系统管理目录');
-INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, '#', '', 'M', '0', '1', '', 'fa fa-video-camera', 'admin', '2021-06-08 09:13:56', '', NULL, '系统监控目录');
-INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 3, '#', '', 'M', '0', '1', '', 'fa fa-bars', 'admin', '2021-06-08 09:13:56', '', NULL, '系统工具目录');
+INSERT INTO `sys_menu` VALUES (1, '系统管理', 0, 51, '#', 'menuItem', 'M', '0', '1', '', 'fa fa-gear', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 17:31:12', '系统管理目录');
+INSERT INTO `sys_menu` VALUES (2, '系统监控', 0, 2, '#', 'menuItem', 'M', '1', '1', '', 'fa fa-video-camera', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:21:57', '系统监控目录');
+INSERT INTO `sys_menu` VALUES (3, '系统工具', 0, 52, '#', 'menuItem', 'M', '0', '1', '', 'fa fa-bars', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 17:31:31', '系统工具目录');
 INSERT INTO `sys_menu` VALUES (4, '若依官网', 0, 4, 'http://ruoyi.vip', 'menuBlank', 'C', '1', '1', '', 'fa fa-location-arrow', 'admin', '2021-06-08 09:13:56', 'admin', '2021-06-08 10:05:56', '若依官网地址');
-INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, '/system/user', '', 'C', '0', '1', 'system:user:view', 'fa fa-user-o', 'admin', '2021-06-08 09:13:56', '', NULL, '用户管理菜单');
-INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, '/system/role', '', 'C', '0', '1', 'system:role:view', 'fa fa-user-secret', 'admin', '2021-06-08 09:13:56', '', NULL, '角色管理菜单');
+INSERT INTO `sys_menu` VALUES (100, '用户管理', 1, 1, '/system/user', 'menuItem', 'C', '0', '1', 'system:user:view', 'fa fa-user-o', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 19:47:45', '用户管理菜单');
+INSERT INTO `sys_menu` VALUES (101, '角色管理', 1, 2, '/system/role', 'menuItem', 'C', '1', '1', 'system:role:view', 'fa fa-user-secret', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:25:34', '角色管理菜单');
 INSERT INTO `sys_menu` VALUES (102, '菜单管理', 1, 3, '/system/menu', '', 'C', '0', '1', 'system:menu:view', 'fa fa-th-list', 'admin', '2021-06-08 09:13:56', '', NULL, '菜单管理菜单');
-INSERT INTO `sys_menu` VALUES (103, '部门管理', 1, 4, '/system/dept', '', 'C', '0', '1', 'system:dept:view', 'fa fa-outdent', 'admin', '2021-06-08 09:13:56', '', NULL, '部门管理菜单');
-INSERT INTO `sys_menu` VALUES (104, '岗位管理', 1, 5, '/system/post', '', 'C', '0', '1', 'system:post:view', 'fa fa-address-card-o', 'admin', '2021-06-08 09:13:56', '', NULL, '岗位管理菜单');
-INSERT INTO `sys_menu` VALUES (105, '字典管理', 1, 6, '/system/dict', '', 'C', '0', '1', 'system:dict:view', 'fa fa-bookmark-o', 'admin', '2021-06-08 09:13:56', '', NULL, '字典管理菜单');
-INSERT INTO `sys_menu` VALUES (106, '参数设置', 1, 7, '/system/config', '', 'C', '0', '1', 'system:config:view', 'fa fa-sun-o', 'admin', '2021-06-08 09:13:56', '', NULL, '参数设置菜单');
-INSERT INTO `sys_menu` VALUES (107, '通知公告', 1, 8, '/system/notice', '', 'C', '0', '1', 'system:notice:view', 'fa fa-bullhorn', 'admin', '2021-06-08 09:13:56', '', NULL, '通知公告菜单');
-INSERT INTO `sys_menu` VALUES (108, '日志管理', 1, 9, '#', '', 'M', '0', '1', '', 'fa fa-pencil-square-o', 'admin', '2021-06-08 09:13:56', '', NULL, '日志管理菜单');
+INSERT INTO `sys_menu` VALUES (103, '部门管理', 1, 4, '/system/dept', 'menuItem', 'C', '1', '1', 'system:dept:view', 'fa fa-outdent', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:22:10', '部门管理菜单');
+INSERT INTO `sys_menu` VALUES (104, '岗位管理', 1, 5, '/system/post', 'menuItem', 'C', '1', '1', 'system:post:view', 'fa fa-address-card-o', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:23:42', '岗位管理菜单');
+INSERT INTO `sys_menu` VALUES (105, '字典管理', 1, 6, '/system/dict', 'menuItem', 'C', '0', '1', 'system:dict:view', 'fa fa-bookmark-o', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 17:47:54', '字典管理菜单');
+INSERT INTO `sys_menu` VALUES (106, '参数设置', 1, 7, '/system/config', 'menuItem', 'C', '1', '1', 'system:config:view', 'fa fa-sun-o', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:24:36', '参数设置菜单');
+INSERT INTO `sys_menu` VALUES (107, '通知公告', 1, 8, '/system/notice', 'menuItem', 'C', '1', '1', 'system:notice:view', 'fa fa-bullhorn', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:24:44', '通知公告菜单');
+INSERT INTO `sys_menu` VALUES (108, '日志管理', 1, 9, '#', 'menuItem', 'M', '1', '1', '', 'fa fa-pencil-square-o', 'admin', '2021-06-08 09:13:56', 'admin', '2024-04-20 15:24:57', '日志管理菜单');
 INSERT INTO `sys_menu` VALUES (109, '在线用户', 2, 1, '/monitor/online', '', 'C', '0', '1', 'monitor:online:view', 'fa fa-user-circle', 'admin', '2021-06-08 09:13:56', '', NULL, '在线用户菜单');
 INSERT INTO `sys_menu` VALUES (110, '定时任务', 2, 2, '/monitor/job', 'menuItem', 'C', '1', '1', 'monitor:job:view', 'fa fa-tasks', 'admin', '2021-06-08 09:13:56', 'admin', '2021-06-08 10:04:32', '定时任务菜单');
 INSERT INTO `sys_menu` VALUES (111, '数据监控', 2, 3, '/monitor/data', '', 'C', '0', '1', 'monitor:data:view', 'fa fa-bug', 'admin', '2021-06-08 09:13:56', '', NULL, '数据监控菜单');
@@ -3211,23 +3398,49 @@ INSERT INTO `sys_menu` VALUES (2081, '语音识别记录新增', 2079, 2, '#', '
 INSERT INTO `sys_menu` VALUES (2082, '语音识别记录修改', 2079, 3, '#', '', 'F', '0', '1', 'garbagesort:speechClassify:edit', '#', 'admin', '2021-06-08 10:38:28', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2083, '语音识别记录删除', 2079, 4, '#', '', 'F', '0', '1', 'garbagesort:speechClassify:remove', '#', 'admin', '2021-06-08 10:38:28', '', NULL, '');
 INSERT INTO `sys_menu` VALUES (2084, '语音识别记录导出', 2079, 5, '#', '', 'F', '0', '1', 'garbagesort:speechClassify:export', '#', 'admin', '2021-06-08 10:38:28', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2085, '用户管理', 0, 2, '#', 'menuItem', 'M', '0', '1', NULL, 'fa fa-address-book', 'admin', '2024-04-20 15:32:14', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2086, '订单管理', 0, 3, '#', 'menuItem', 'M', '0', '1', NULL, 'fa fa-building', 'admin', '2024-04-20 17:30:52', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2087, '物品详情查询', 2086, 1, '/garbagesort/goodsDetail', '', 'C', '0', '1', 'garbagesort:goodsDetail:view', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '物品详情查询菜单');
+INSERT INTO `sys_menu` VALUES (2088, '物品详情查询查询', 2087, 1, '#', '', 'F', '0', '1', 'garbagesort:goodsDetail:list', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2089, '物品详情查询新增', 2087, 2, '#', '', 'F', '0', '1', 'garbagesort:goodsDetail:add', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2090, '物品详情查询修改', 2087, 3, '#', '', 'F', '0', '1', 'garbagesort:goodsDetail:edit', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2091, '物品详情查询删除', 2087, 4, '#', '', 'F', '0', '1', 'garbagesort:goodsDetail:remove', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2092, '物品详情查询导出', 2087, 5, '#', '', 'F', '0', '1', 'garbagesort:goodsDetail:export', '#', 'admin', '2024-04-20 17:36:31', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2093, '订单查询', 2086, 1, '/garbagesort/orders', '', 'C', '0', '1', 'garbagesort:orders:view', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '订单查询菜单');
+INSERT INTO `sys_menu` VALUES (2094, '订单查询查询', 2093, 1, '#', '', 'F', '0', '1', 'garbagesort:orders:list', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2095, '订单查询新增', 2093, 2, '#', '', 'F', '0', '1', 'garbagesort:orders:add', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2096, '订单查询修改', 2093, 3, '#', '', 'F', '0', '1', 'garbagesort:orders:edit', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2097, '订单查询删除', 2093, 4, '#', '', 'F', '0', '1', 'garbagesort:orders:remove', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2098, '订单查询导出', 2093, 5, '#', '', 'F', '0', '1', 'garbagesort:orders:export', '#', 'admin', '2024-04-20 17:36:42', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2123, '用户地址查询', 2085, 1, '/garbagesort/addr', '', 'C', '0', '1', 'garbagesort:addr:view', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '用户地址查询菜单');
+INSERT INTO `sys_menu` VALUES (2124, '用户地址查询查询', 2123, 1, '#', '', 'F', '0', '1', 'garbagesort:addr:list', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2125, '用户地址查询新增', 2123, 2, '#', '', 'F', '0', '1', 'garbagesort:addr:add', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2126, '用户地址查询修改', 2123, 3, '#', '', 'F', '0', '1', 'garbagesort:addr:edit', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2127, '用户地址查询删除', 2123, 4, '#', '', 'F', '0', '1', 'garbagesort:addr:remove', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2128, '用户地址查询导出', 2123, 5, '#', '', 'F', '0', '1', 'garbagesort:addr:export', '#', 'admin', '2024-04-20 18:48:41', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2147, '用户查询', 2085, 1, '/garbagesort/userInfo', '', 'C', '0', '1', 'garbagesort:userInfo:view', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '用户查询菜单');
+INSERT INTO `sys_menu` VALUES (2148, '用户查询查询', 2147, 1, '#', '', 'F', '0', '1', 'garbagesort:userInfo:list', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2149, '用户查询新增', 2147, 2, '#', '', 'F', '0', '1', 'garbagesort:userInfo:add', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2150, '用户查询修改', 2147, 3, '#', '', 'F', '0', '1', 'garbagesort:userInfo:edit', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2151, '用户查询删除', 2147, 4, '#', '', 'F', '0', '1', 'garbagesort:userInfo:remove', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '');
+INSERT INTO `sys_menu` VALUES (2152, '用户查询导出', 2147, 5, '#', '', 'F', '0', '1', 'garbagesort:userInfo:export', '#', 'admin', '2024-04-20 20:27:26', '', NULL, '');
 
 -- ----------------------------
 -- Table structure for sys_notice
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_notice`;
 CREATE TABLE `sys_notice`  (
-                               `notice_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
-                               `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '公告标题',
-                               `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '公告类型（1通知 2公告）',
-                               `notice_content` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '公告内容',
-                               `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
-                               `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                               `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                               `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                               `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                               `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                               PRIMARY KEY (`notice_id`) USING BTREE
+  `notice_id` int NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+  `notice_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '公告标题',
+  `notice_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '公告类型（1通知 2公告）',
+  `notice_content` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '公告内容',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '公告状态（0正常 1关闭）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`notice_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '通知公告表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3241,23 +3454,23 @@ INSERT INTO `sys_notice` VALUES (2, '维护通知：2018-07-01 若依系统凌�
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_oper_log`;
 CREATE TABLE `sys_oper_log`  (
-                                 `oper_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
-                                 `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '模块标题',
-                                 `business_type` int(11) NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
-                                 `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '方法名称',
-                                 `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求方式',
-                                 `operator_type` int(11) NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
-                                 `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作人员',
-                                 `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
-                                 `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求URL',
-                                 `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '主机地址',
-                                 `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作地点',
-                                 `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求参数',
-                                 `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '返回参数',
-                                 `status` int(11) NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
-                                 `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '错误消息',
-                                 `oper_time` datetime NULL DEFAULT NULL COMMENT '操作时间',
-                                 PRIMARY KEY (`oper_id`) USING BTREE
+  `oper_id` bigint NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+  `title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '模块标题',
+  `business_type` int NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+  `method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '方法名称',
+  `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求方式',
+  `operator_type` int NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+  `oper_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作人员',
+  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
+  `oper_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求URL',
+  `oper_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '主机地址',
+  `oper_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作地点',
+  `oper_param` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '请求参数',
+  `json_result` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '返回参数',
+  `status` int NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+  `error_msg` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '错误消息',
+  `oper_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`oper_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 157 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '操作日志记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3320,23 +3533,123 @@ INSERT INTO `sys_oper_log` VALUES (153, '菜单管理', 2, 'com.ruoyi.project.sy
 INSERT INTO `sys_oper_log` VALUES (154, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"2073\"],\"parentId\":[\"2000\"],\"menuType\":[\"C\"],\"menuName\":[\"幻灯片播放\"],\"url\":[\"/garbagesort/slideShow\"],\"target\":[\"menuItem\"],\"perms\":[\"garbagesort:slideShow:view\"],\"orderNum\":[\"2\"],\"icon\":[\"#\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2021-06-08 15:41:22');
 INSERT INTO `sys_oper_log` VALUES (155, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"1\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"系统管理\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"2\"],\"icon\":[\"fa fa-gear\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2021-06-08 15:45:19');
 INSERT INTO `sys_oper_log` VALUES (156, '个人信息', 2, 'com.ruoyi.project.system.user.controller.ProfileController.update()', 'POST', 1, 'admin', '研发部门', '/system/user/profile/update', '127.0.0.1', '内网IP', '{\"id\":[\"\"],\"userName\":[\"admin\"],\"phonenumber\":[\"15888888888\"],\"email\":[\"ry@163.com\"],\"sex\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2021-06-08 16:21:33');
+INSERT INTO `sys_oper_log` VALUES (157, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"2\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"系统监控\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"2\"],\"icon\":[\"fa fa-video-camera\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:21:57');
+INSERT INTO `sys_oper_log` VALUES (158, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"103\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"部门管理\"],\"url\":[\"/system/dept\"],\"target\":[\"menuItem\"],\"perms\":[\"system:dept:view\"],\"orderNum\":[\"4\"],\"icon\":[\"fa fa-outdent\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:22:10');
+INSERT INTO `sys_oper_log` VALUES (159, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"105\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"字典管理\"],\"url\":[\"/system/dict\"],\"target\":[\"menuItem\"],\"perms\":[\"system:dict:view\"],\"orderNum\":[\"6\"],\"icon\":[\"fa fa-bookmark-o\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:23:31');
+INSERT INTO `sys_oper_log` VALUES (160, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"104\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"岗位管理\"],\"url\":[\"/system/post\"],\"target\":[\"menuItem\"],\"perms\":[\"system:post:view\"],\"orderNum\":[\"5\"],\"icon\":[\"fa fa-address-card-o\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:23:42');
+INSERT INTO `sys_oper_log` VALUES (161, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"106\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"参数设置\"],\"url\":[\"/system/config\"],\"target\":[\"menuItem\"],\"perms\":[\"system:config:view\"],\"orderNum\":[\"7\"],\"icon\":[\"fa fa-sun-o\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:24:36');
+INSERT INTO `sys_oper_log` VALUES (162, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"107\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"通知公告\"],\"url\":[\"/system/notice\"],\"target\":[\"menuItem\"],\"perms\":[\"system:notice:view\"],\"orderNum\":[\"8\"],\"icon\":[\"fa fa-bullhorn\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:24:44');
+INSERT INTO `sys_oper_log` VALUES (163, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"108\"],\"parentId\":[\"1\"],\"menuType\":[\"M\"],\"menuName\":[\"日志管理\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"9\"],\"icon\":[\"fa fa-pencil-square-o\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:24:57');
+INSERT INTO `sys_oper_log` VALUES (164, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"100\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"用户管理\"],\"url\":[\"/system/user\"],\"target\":[\"menuItem\"],\"perms\":[\"system:user:view\"],\"orderNum\":[\"1\"],\"icon\":[\"fa fa-user-o\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:25:24');
+INSERT INTO `sys_oper_log` VALUES (165, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"101\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"角色管理\"],\"url\":[\"/system/role\"],\"target\":[\"menuItem\"],\"perms\":[\"system:role:view\"],\"orderNum\":[\"2\"],\"icon\":[\"fa fa-user-secret\"],\"visible\":[\"1\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:25:35');
+INSERT INTO `sys_oper_log` VALUES (166, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"orders,user_inf,user_addr,user,goods_detail\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:30:26');
+INSERT INTO `sys_oper_log` VALUES (167, '菜单管理', 1, 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"用户管理\"],\"url\":[\"\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"2\"],\"icon\":[\"fa fa-address-book\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:32:14');
+INSERT INTO `sys_oper_log` VALUES (168, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"11\"],\"tableName\":[\"user\"],\"tableComment\":[\"用户表\"],\"className\":[\"User\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"63\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"64\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"手机号\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"phone\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"65\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"md5加密的密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"password\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"66\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"0：用户，1：管理员\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"userState\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"67\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"68\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"\"],\"columns[5].javaType\":[\"Date\"],\"columns[5].javaField\":[\"', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 15:33:45');
+INSERT INTO `sys_oper_log` VALUES (169, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"sys_role_dept,sys_user\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:13:44');
+INSERT INTO `sys_oper_log` VALUES (170, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"12\"],\"tableName\":[\"user_addr\"],\"tableComment\":[\"用户地址\"],\"className\":[\"UserAddr\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"69\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"addrId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"70\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"71\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"contactName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"72\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"contactPhone\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"73\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"省\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"province\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"74\"],\"columns[5].sort\":[\"6\"],\"columns[5].colum', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:16:59');
+INSERT INTO `sys_oper_log` VALUES (171, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"13\"],\"tableName\":[\"user_inf\"],\"tableComment\":[\"用户信息表\"],\"className\":[\"UserInf\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"79\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"自增主键ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"infId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"80\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户ID\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"81\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"nickname\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"82\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"头像\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"avatar\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"83\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"phone\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"84\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"0：女，1：男\"],\"columns[5].javaType\":[\"String\"],\"columns', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:17:32');
+INSERT INTO `sys_oper_log` VALUES (172, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.synchDb()', 'GET', 1, 'admin', '研发部门', '/tool/gen/synchDb/goods_detail', '127.0.0.1', '内网IP', '\"goods_detail\"', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:29:11');
+INSERT INTO `sys_oper_log` VALUES (173, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.synchDb()', 'GET', 1, 'admin', '研发部门', '/tool/gen/synchDb/orders', '127.0.0.1', '内网IP', '\"orders\"', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:29:14');
+INSERT INTO `sys_oper_log` VALUES (174, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"9\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:29:38');
+INSERT INTO `sys_oper_log` VALUES (175, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"goods_detail\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:29:42');
+INSERT INTO `sys_oper_log` VALUES (176, '菜单管理', 1, 'com.ruoyi.project.system.menu.controller.MenuController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/add', '127.0.0.1', '内网IP', '{\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"订单管理\"],\"url\":[\"\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"3\"],\"icon\":[\"fa fa-building\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:30:52');
+INSERT INTO `sys_oper_log` VALUES (177, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"1\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"系统管理\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"50\"],\"icon\":[\"fa fa-gear\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:31:04');
+INSERT INTO `sys_oper_log` VALUES (178, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"1\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"系统管理\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"51\"],\"icon\":[\"fa fa-gear\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:31:12');
+INSERT INTO `sys_oper_log` VALUES (179, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"3\"],\"parentId\":[\"0\"],\"menuType\":[\"M\"],\"menuName\":[\"系统工具\"],\"url\":[\"#\"],\"target\":[\"menuItem\"],\"perms\":[\"\"],\"orderNum\":[\"52\"],\"icon\":[\"fa fa-bars\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:31:31');
+INSERT INTO `sys_oper_log` VALUES (180, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"16\"],\"tableName\":[\"goods_detail\"],\"tableComment\":[\"物品详情表\"],\"className\":[\"GoodsDetail\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"111\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"物品id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"id\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"112\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"订单号\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"orderId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"113\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"物品名称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"goodsName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"114\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"物品重量\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"weight\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"115\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"物品单价\"],\"columns[4].javaType\":[\"Long\"],\"columns[4].javaField\":[\"amount\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"116\"],\"columns[5].sort\":[\"6\"],\"co', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:31:56');
+INSERT INTO `sys_oper_log` VALUES (181, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:32:24');
+INSERT INTO `sys_oper_log` VALUES (182, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"orders\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:32:29');
+INSERT INTO `sys_oper_log` VALUES (183, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"17\"],\"tableName\":[\"orders\"],\"tableComment\":[\"订单表\"],\"className\":[\"Orders\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"117\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"订单号\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"id\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"118\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"119\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"回收员id\"],\"columns[2].javaType\":[\"Long\"],\"columns[2].javaField\":[\"recyclerId\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"120\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"预估重量\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"estimateWeight\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"121\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"订单回收地址\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"address\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"122\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"电话号码\"],', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:32:53');
+INSERT INTO `sys_oper_log` VALUES (184, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"14,15\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:33:01');
+INSERT INTO `sys_oper_log` VALUES (185, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"orders,goods_detail,user_inf,user_addr,user\"]}', NULL, 0, NULL, '2024-04-20 17:33:46');
+INSERT INTO `sys_oper_log` VALUES (186, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"105\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"字典管理\"],\"url\":[\"/system/dict\"],\"target\":[\"menuItem\"],\"perms\":[\"system:dict:view\"],\"orderNum\":[\"6\"],\"icon\":[\"fa fa-bookmark-o\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:47:54');
+INSERT INTO `sys_oper_log` VALUES (187, '字典类型', 1, 'com.ruoyi.project.system.dict.controller.DictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"订单状态\"],\"dictType\":[\"order_status\"],\"status\":[\"0\"],\"remark\":[\"订单状态选项\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:51:34');
+INSERT INTO `sys_oper_log` VALUES (188, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"待接单\"],\"dictValue\":[\"1\"],\"dictType\":[\"order_status\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:52:35');
+INSERT INTO `sys_oper_log` VALUES (189, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"已完成\"],\"dictValue\":[\"2\"],\"dictType\":[\"order_status\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:53:41');
+INSERT INTO `sys_oper_log` VALUES (190, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"已取消\"],\"dictValue\":[\"3\"],\"dictType\":[\"order_status\"],\"cssClass\":[\"\"],\"dictSort\":[\"3\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:53:56');
+INSERT INTO `sys_oper_log` VALUES (191, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"已接单\"],\"dictValue\":[\"4\"],\"dictType\":[\"order_status\"],\"cssClass\":[\"\"],\"dictSort\":[\"4\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:54:08');
+INSERT INTO `sys_oper_log` VALUES (192, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"17,16,13,12,11\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:57:16');
+INSERT INTO `sys_oper_log` VALUES (193, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"user,orders,user_addr,user_inf,goods_detail\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 17:58:03');
+INSERT INTO `sys_oper_log` VALUES (194, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"19\"],\"tableName\":[\"orders\"],\"tableComment\":[\"订单表\"],\"className\":[\"Orders\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"134\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"订单号\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"id\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"135\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"136\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"回收员id\"],\"columns[2].javaType\":[\"Long\"],\"columns[2].javaField\":[\"recyclerId\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"137\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"预估重量\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"estimateWeight\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"138\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"订单回收地址\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"address\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"139\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"电话号码\"],', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:00:09');
+INSERT INTO `sys_oper_log` VALUES (195, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"orders\"]}', NULL, 0, NULL, '2024-04-20 18:00:24');
+INSERT INTO `sys_oper_log` VALUES (196, '字典类型', 1, 'com.ruoyi.project.system.dict.controller.DictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"回收物品类型\"],\"dictType\":[\"recycle_type\"],\"status\":[\"0\"],\"remark\":[\"回收物品类型 \"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:06:20');
+INSERT INTO `sys_oper_log` VALUES (197, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"纸皮类\"],\"dictValue\":[\"纸皮类\"],\"dictType\":[\"recycle_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:07:33');
+INSERT INTO `sys_oper_log` VALUES (198, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"衣物＆其他\"],\"dictValue\":[\"衣物＆其他\"],\"dictType\":[\"recycle_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:08:03');
+INSERT INTO `sys_oper_log` VALUES (199, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"金属类\"],\"dictValue\":[\"金属类\"],\"dictType\":[\"recycle_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"3\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:08:21');
+INSERT INTO `sys_oper_log` VALUES (200, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"塑料类\"],\"dictValue\":[\"塑料类\"],\"dictType\":[\"recycle_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"4\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:08:37');
+INSERT INTO `sys_oper_log` VALUES (201, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"19\"],\"tableName\":[\"orders\"],\"tableComment\":[\"订单表\"],\"className\":[\"Orders\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"134\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"订单号\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"id\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"135\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"136\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"回收员id\"],\"columns[2].javaType\":[\"Long\"],\"columns[2].javaField\":[\"recyclerId\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"137\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"预估重量\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"estimateWeight\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"138\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"订单回收地址\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"address\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"139\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"电话号码\"],', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:09:17');
+INSERT INTO `sys_oper_log` VALUES (202, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"orders\"]}', NULL, 0, NULL, '2024-04-20 18:09:23');
+INSERT INTO `sys_oper_log` VALUES (203, '订单查询', 2, 'com.ruoyi.project.garbagesort.orders.controller.OrdersController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/orders/edit', '127.0.0.1', '内网IP', '{\"id\":[\"9\"],\"userId\":[\"11\"],\"recyclerId\":[\"\"],\"estimateWeight\":[\"10-50公斤\"],\"address\":[\"前门东大街9号\"],\"phone\":[\"12345678901\"],\"type\":[\"金属类\"],\"status\":[\"3\"],\"appointmentTime\":[\"2024-04-21 5:10\"],\"amount\":[\"0.0\"],\"orderTime\":[\"2024-04-20\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:13:21');
+INSERT INTO `sys_oper_log` VALUES (204, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"20\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:15:09');
+INSERT INTO `sys_oper_log` VALUES (205, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"user\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:15:44');
+INSERT INTO `sys_oper_log` VALUES (206, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"23\"],\"tableName\":[\"user\"],\"tableComment\":[\"用户表\"],\"className\":[\"User\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"170\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"171\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"手机号\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"phone\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"172\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"md5加密的密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"password\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"173\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户类型：0：用户，1：回收员\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"userState\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"174\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建日期\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"175\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改日期\"],\"columns[5].javaType\":[\"Date\"],\"colum', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:17:56');
+INSERT INTO `sys_oper_log` VALUES (207, '用户地址', 2, 'com.ruoyi.project.garbagesort.useraddr.controller.UserAddrController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/useraddr/edit', '127.0.0.1', '内网IP', '{\"addrId\":[\"4\"],\"userId\":[\"11\"],\"contactName\":[\"老卢\"],\"contactPhone\":[\"12345678901\"],\"province\":[\"北京市东城区\"],\"city\":[\"\"],\"district\":[\"\"],\"address\":[\"前门东大街9号\"],\"isDefault\":[\"2\"],\"modifiedTime\":[\"2024-04-19\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:18:50');
+INSERT INTO `sys_oper_log` VALUES (208, '用户地址', 2, 'com.ruoyi.project.garbagesort.useraddr.controller.UserAddrController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/useraddr/edit', '127.0.0.1', '内网IP', '{\"addrId\":[\"4\"],\"userId\":[\"11\"],\"contactName\":[\"老卢\"],\"contactPhone\":[\"12345678901\"],\"province\":[\"北京市东城区\"],\"city\":[\"\"],\"district\":[\"\"],\"address\":[\"前门东大街9号\"],\"isDefault\":[\"1\"],\"modifiedTime\":[\"2024-04-19\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:18:55');
+INSERT INTO `sys_oper_log` VALUES (209, '字典类型', 1, 'com.ruoyi.project.system.dict.controller.DictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"默认地址\"],\"dictType\":[\"defalt_addr\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:19:46');
+INSERT INTO `sys_oper_log` VALUES (210, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"默认\"],\"dictValue\":[\"1\"],\"dictType\":[\"defalt_addr\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:20:39');
+INSERT INTO `sys_oper_log` VALUES (211, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"不默认\"],\"dictValue\":[\"2\"],\"dictType\":[\"defalt_addr\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:20:54');
+INSERT INTO `sys_oper_log` VALUES (212, '字典数据', 2, 'com.ruoyi.project.system.dict.controller.DictDataController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/edit', '127.0.0.1', '内网IP', '{\"dictCode\":[\"115\"],\"dictLabel\":[\"不默认\"],\"dictValue\":[\"0\"],\"dictType\":[\"defalt_addr\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:20:59');
+INSERT INTO `sys_oper_log` VALUES (213, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"21\"],\"tableName\":[\"user_addr\"],\"tableComment\":[\"用户地址表\"],\"className\":[\"UserAddr\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"151\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"地址id\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"addrId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"152\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户id\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"153\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"姓名\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"contactName\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"154\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"电话号码\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"contactPhone\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"155\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"省\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"province\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"156\"],\"columns[5].sort\":[\"', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:22:34');
+INSERT INTO `sys_oper_log` VALUES (214, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"22\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:24:11');
+INSERT INTO `sys_oper_log` VALUES (215, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"user_inf\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:24:18');
+INSERT INTO `sys_oper_log` VALUES (216, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"24\"],\"tableName\":[\"user_inf\"],\"tableComment\":[\"用户信息表\"],\"className\":[\"UserInf\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"176\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户信息ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"infId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"177\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户ID\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"178\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户昵称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"nickname\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"179\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"头像\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"avatar\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"180\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"电话号码\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"phone\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"181\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"性别\"],\"columns[5].javaType\":[\"String\"]', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:25:20');
+INSERT INTO `sys_oper_log` VALUES (217, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"user_inf,user,user_addr\"]}', NULL, 0, NULL, '2024-04-20 18:26:59');
+INSERT INTO `sys_oper_log` VALUES (218, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"0\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:35:36');
+INSERT INTO `sys_oper_log` VALUES (219, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"0\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:35:56');
+INSERT INTO `sys_oper_log` VALUES (220, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"0\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:36:54');
+INSERT INTO `sys_oper_log` VALUES (221, '字典类型', 1, 'com.ruoyi.project.system.dict.controller.DictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"性别\"],\"dictType\":[\"user_sex\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:38:01');
+INSERT INTO `sys_oper_log` VALUES (222, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"男\"],\"dictValue\":[\"男\"],\"dictType\":[\"user_sex\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:38:20');
+INSERT INTO `sys_oper_log` VALUES (223, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"女\"],\"dictValue\":[\"女\"],\"dictType\":[\"user_sex\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:38:33');
+INSERT INTO `sys_oper_log` VALUES (224, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"保密\"],\"dictValue\":[\"保密\"],\"dictType\":[\"user_sex\"],\"cssClass\":[\"\"],\"dictSort\":[\"3\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:38:43');
+INSERT INTO `sys_oper_log` VALUES (225, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"24\"],\"tableName\":[\"user_inf\"],\"tableComment\":[\"用户信息表\"],\"className\":[\"UserInf\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"176\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户信息ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"infId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"177\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户ID\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"178\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户昵称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"nickname\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"179\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"头像\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"avatar\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"180\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"电话号码\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"phone\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"181\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"性别\"],\"columns[5].javaType\":[\"String\"]', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:39:09');
+INSERT INTO `sys_oper_log` VALUES (226, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"user_inf\"]}', NULL, 0, NULL, '2024-04-20 18:39:18');
+INSERT INTO `sys_oper_log` VALUES (227, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"男\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:40:43');
+INSERT INTO `sys_oper_log` VALUES (228, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:40:47');
+INSERT INTO `sys_oper_log` VALUES (229, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"1\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"保密\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-10\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:40:51');
+INSERT INTO `sys_oper_log` VALUES (230, '用户地址查询', 2, 'com.ruoyi.project.garbagesort.addr.controller.UserAddrController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/addr/edit', '127.0.0.1', '内网IP', '{\"addrId\":[\"4\"],\"userId\":[\"11\"],\"contactName\":[\"卢本伟\"],\"contactPhone\":[\"0178783861992\"],\"province\":[\"-- 选择省 --\"],\"city\":[\"桂林市\"],\"district\":[\"\"],\"address\":[\"雁山区雁山镇一号\"],\"isDefault\":[\"1\"],\"modifiedTime\":[\"2024-04-19\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:49:09');
+INSERT INTO `sys_oper_log` VALUES (231, '用户地址查询', 2, 'com.ruoyi.project.garbagesort.addr.controller.UserAddrController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/addr/edit', '127.0.0.1', '内网IP', '{\"addrId\":[\"4\"],\"userId\":[\"11\"],\"contactName\":[\"卢本伟\"],\"contactPhone\":[\"0178783861992\"],\"province\":[\"广西\"],\"city\":[\"桂林市\"],\"district\":[\"13区\"],\"address\":[\"雁山区雁山镇一号\"],\"isDefault\":[\"1\"],\"modifiedTime\":[\"2024-04-19\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:49:32');
+INSERT INTO `sys_oper_log` VALUES (232, '代码生成', 3, 'com.ruoyi.project.tool.gen.controller.GenController.remove()', 'POST', 1, 'admin', '研发部门', '/tool/gen/remove', '127.0.0.1', '内网IP', '{\"ids\":[\"23\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:57:48');
+INSERT INTO `sys_oper_log` VALUES (233, '代码生成', 6, 'com.ruoyi.project.tool.gen.controller.GenController.importTableSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/importTable', '127.0.0.1', '内网IP', '{\"tables\":[\"users\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:57:54');
+INSERT INTO `sys_oper_log` VALUES (234, '字典类型', 1, 'com.ruoyi.project.system.dict.controller.DictTypeController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/add', '127.0.0.1', '内网IP', '{\"dictName\":[\"用户类型\"],\"dictType\":[\"user_style\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:58:49');
+INSERT INTO `sys_oper_log` VALUES (235, '字典类型', 2, 'com.ruoyi.project.system.dict.controller.DictTypeController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/edit', '127.0.0.1', '内网IP', '{\"dictId\":[\"106\"],\"dictName\":[\"用户类型\"],\"dictType\":[\"user_type\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:59:05');
+INSERT INTO `sys_oper_log` VALUES (236, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"用户\"],\"dictValue\":[\"0\"],\"dictType\":[\"user_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"1\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:59:23');
+INSERT INTO `sys_oper_log` VALUES (237, '字典数据', 1, 'com.ruoyi.project.system.dict.controller.DictDataController.addSave()', 'POST', 1, 'admin', '研发部门', '/system/dict/data/add', '127.0.0.1', '内网IP', '{\"dictLabel\":[\"回收员\"],\"dictValue\":[\"1\"],\"dictType\":[\"user_type\"],\"cssClass\":[\"\"],\"dictSort\":[\"2\"],\"listClass\":[\"\"],\"isDefault\":[\"Y\"],\"status\":[\"0\"],\"remark\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 18:59:36');
+INSERT INTO `sys_oper_log` VALUES (238, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"25\"],\"tableName\":[\"users\"],\"tableComment\":[\"用户表\"],\"className\":[\"Users\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"185\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"186\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"手机号\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"phone\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"187\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"md5加密的密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"password\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"188\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户类型：0：用户，1：回收员\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"userState\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"radio\"],\"columns[3].dictType\":[\"user_type\"],\"columns[4].columnId\":[\"189\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建日期\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"190\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改日期\"],\"columns[5].javaType\":[\"Da', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 19:00:11');
+INSERT INTO `sys_oper_log` VALUES (239, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"users\"]}', NULL, 0, NULL, '2024-04-20 19:00:19');
+INSERT INTO `sys_oper_log` VALUES (240, '菜单管理', 2, 'com.ruoyi.project.system.menu.controller.MenuController.editSave()', 'POST', 1, 'admin', '研发部门', '/system/menu/edit', '127.0.0.1', '内网IP', '{\"menuId\":[\"100\"],\"parentId\":[\"1\"],\"menuType\":[\"C\"],\"menuName\":[\"用户管理\"],\"url\":[\"/system/user\"],\"target\":[\"menuItem\"],\"perms\":[\"system:user:view\"],\"orderNum\":[\"1\"],\"icon\":[\"fa fa-user-o\"],\"visible\":[\"0\"],\"isRefresh\":[\"1\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 19:47:45');
+INSERT INTO `sys_oper_log` VALUES (241, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"25\"],\"tableName\":[\"users\"],\"tableComment\":[\"用户表\"],\"className\":[\"Users\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"185\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"186\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"手机号\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"phone\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"187\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"md5加密的密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"password\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"188\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户类型：0：用户，1：回收员\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"userState\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"radio\"],\"columns[3].dictType\":[\"user_type\"],\"columns[4].columnId\":[\"189\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建日期\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"190\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改日期\"],\"columns[5].javaType\":[\"Da', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:03:33');
+INSERT INTO `sys_oper_log` VALUES (242, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"25\"],\"tableName\":[\"users\"],\"tableComment\":[\"用户表\"],\"className\":[\"Users\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"185\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"userId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].isQuery\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"186\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"手机号\"],\"columns[1].javaType\":[\"String\"],\"columns[1].javaField\":[\"phone\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"187\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"md5加密的密码\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"password\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"EQ\"],\"columns[2].isRequired\":[\"1\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"188\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"用户类型：0：用户，1：回收员\"],\"columns[3].javaType\":[\"Long\"],\"columns[3].javaField\":[\"userState\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].isRequired\":[\"1\"],\"columns[3].htmlType\":[\"radio\"],\"columns[3].dictType\":[\"user_type\"],\"columns[4].columnId\":[\"189\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"创建日期\"],\"columns[4].javaType\":[\"Date\"],\"columns[4].javaField\":[\"createTime\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"datetime\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"190\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"修改日期\"]', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:06:15');
+INSERT INTO `sys_oper_log` VALUES (243, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.batchGenCode()', 'GET', 1, 'admin', '研发部门', '/tool/gen/batchGenCode', '127.0.0.1', '内网IP', '{\"tables\":[\"users\"]}', NULL, 0, NULL, '2024-04-20 20:06:19');
+INSERT INTO `sys_oper_log` VALUES (244, '用户查询', 2, 'com.ruoyi.project.garbagesort.users.controller.UsersController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/users/edit', '127.0.0.1', '内网IP', '{\"userId\":[\"11\"],\"phone\":[\"123\"],\"userState\":[\"1\"],\"modifiedTime\":[\"2024-04-20\"],\"index\":[\"1\"],\"userInfList[0].nickname\":[\"茶壶\"],\"userInfList[0].avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"userInfList[0].phone\":[\"19839715890\"],\"userInfList[0].gender\":[\"女\"],\"userInfList[0].userMoney\":[\"0\"],\"userInfList[0].orderNum\":[\"0\"],\"userInfList[0].registerTime\":[\"2024-04-09\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:16:40');
+INSERT INTO `sys_oper_log` VALUES (245, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"24\"],\"tableName\":[\"user_inf\"],\"tableComment\":[\"用户信息表\"],\"className\":[\"UserInf\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"176\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户信息ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"infId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"177\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户ID\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"178\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户昵称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"nickname\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"179\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"头像\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"avatar\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].htmlType\":[\"input\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"180\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"电话号码\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"phone\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"181\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"性别\"],\"columns[5].javaType\":[\"String\"]', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:24:58');
+INSERT INTO `sys_oper_log` VALUES (246, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.download()', 'GET', 1, 'admin', '研发部门', '/tool/gen/download/user_inf', '127.0.0.1', '内网IP', '\"user_inf\"', NULL, 0, NULL, '2024-04-20 20:25:04');
+INSERT INTO `sys_oper_log` VALUES (247, '代码生成', 2, 'com.ruoyi.project.tool.gen.controller.GenController.editSave()', 'POST', 1, 'admin', '研发部门', '/tool/gen/edit', '127.0.0.1', '内网IP', '{\"tableId\":[\"24\"],\"tableName\":[\"user_inf\"],\"tableComment\":[\"用户信息表\"],\"className\":[\"UserInf\"],\"functionAuthor\":[\"luoxiang\"],\"remark\":[\"\"],\"columns[0].columnId\":[\"176\"],\"columns[0].sort\":[\"1\"],\"columns[0].columnComment\":[\"用户信息ID\"],\"columns[0].javaType\":[\"Long\"],\"columns[0].javaField\":[\"infId\"],\"columns[0].isInsert\":[\"1\"],\"columns[0].queryType\":[\"EQ\"],\"columns[0].htmlType\":[\"input\"],\"columns[0].dictType\":[\"\"],\"columns[1].columnId\":[\"177\"],\"columns[1].sort\":[\"2\"],\"columns[1].columnComment\":[\"用户ID\"],\"columns[1].javaType\":[\"Long\"],\"columns[1].javaField\":[\"userId\"],\"columns[1].isInsert\":[\"1\"],\"columns[1].isEdit\":[\"1\"],\"columns[1].isList\":[\"1\"],\"columns[1].isQuery\":[\"1\"],\"columns[1].queryType\":[\"EQ\"],\"columns[1].isRequired\":[\"1\"],\"columns[1].htmlType\":[\"input\"],\"columns[1].dictType\":[\"\"],\"columns[2].columnId\":[\"178\"],\"columns[2].sort\":[\"3\"],\"columns[2].columnComment\":[\"用户昵称\"],\"columns[2].javaType\":[\"String\"],\"columns[2].javaField\":[\"nickname\"],\"columns[2].isInsert\":[\"1\"],\"columns[2].isEdit\":[\"1\"],\"columns[2].isList\":[\"1\"],\"columns[2].isQuery\":[\"1\"],\"columns[2].queryType\":[\"LIKE\"],\"columns[2].htmlType\":[\"input\"],\"columns[2].dictType\":[\"\"],\"columns[3].columnId\":[\"179\"],\"columns[3].sort\":[\"4\"],\"columns[3].columnComment\":[\"头像\"],\"columns[3].javaType\":[\"String\"],\"columns[3].javaField\":[\"avatar\"],\"columns[3].isInsert\":[\"1\"],\"columns[3].isEdit\":[\"1\"],\"columns[3].isList\":[\"1\"],\"columns[3].isQuery\":[\"1\"],\"columns[3].queryType\":[\"EQ\"],\"columns[3].htmlType\":[\"upload\"],\"columns[3].dictType\":[\"\"],\"columns[4].columnId\":[\"180\"],\"columns[4].sort\":[\"5\"],\"columns[4].columnComment\":[\"电话号码\"],\"columns[4].javaType\":[\"String\"],\"columns[4].javaField\":[\"phone\"],\"columns[4].isInsert\":[\"1\"],\"columns[4].isEdit\":[\"1\"],\"columns[4].isList\":[\"1\"],\"columns[4].isQuery\":[\"1\"],\"columns[4].queryType\":[\"EQ\"],\"columns[4].isRequired\":[\"1\"],\"columns[4].htmlType\":[\"input\"],\"columns[4].dictType\":[\"\"],\"columns[5].columnId\":[\"181\"],\"columns[5].sort\":[\"6\"],\"columns[5].columnComment\":[\"性别\"],\"columns[5].javaType\":[\"String\"', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:31:00');
+INSERT INTO `sys_oper_log` VALUES (248, '代码生成', 8, 'com.ruoyi.project.tool.gen.controller.GenController.download()', 'GET', 1, 'admin', '研发部门', '/tool/gen/download/user_inf', '127.0.0.1', '内网IP', '\"user_inf\"', NULL, 0, NULL, '2024-04-20 20:31:06');
+INSERT INTO `sys_oper_log` VALUES (249, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"btSelectAll\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:35:20');
+INSERT INTO `sys_oper_log` VALUES (250, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\"],\"usersList[0].phone\":[\"11\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"1\"],\"usersList[0].createTime\":[\"11\"],\"usersList[0].modifiedTime\":[\"11\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'create_time\' cannot be null\r\n### The error may exist in file [C:\\Users\\lloogg\\Desktop\\新建文件夹\\GarbageSort-master\\web\\target\\classes\\mybatis\\garbagesort\\UserInfMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: insert into users( user_id, phone, password, user_state, create_time, modified_time) values                  ( ?, ?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Column \'create_time\' cannot be null\n; Column \'create_time\' cannot be null; nested exception is java.sql.SQLIntegrityConstraintViolationException: Column \'create_time\' cannot be null', '2024-04-20 20:36:29');
+INSERT INTO `sys_oper_log` VALUES (251, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\"],\"usersList[0].phone\":[\"11\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"1\"],\"usersList[0].createTime\":[\"2024-04-29\"],\"usersList[0].modifiedTime\":[\"2024-04-29\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:36:54');
+INSERT INTO `sys_oper_log` VALUES (252, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\"],\"usersList[0].phone\":[\"19839715890\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"1\"],\"usersList[0].createTime\":[\"2024-04-28 16:00:00\"],\"usersList[0].modifiedTime\":[\"2024-04-28\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:37:45');
+INSERT INTO `sys_oper_log` VALUES (253, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\"],\"usersList[0].phone\":[\"19839715890\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"0\"],\"usersList[0].createTime\":[\"2024-04-28 08:00:00\"],\"usersList[0].modifiedTime\":[\"2024-04-27\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:38:52');
+INSERT INTO `sys_oper_log` VALUES (254, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\",\"2\"],\"usersList[0].phone\":[\"19839715890\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"0\"],\"usersList[0].createTime\":[\"2024-04-28 00:00:00\"],\"usersList[0].modifiedTime\":[\"2024-04-26\"],\"usersList[1].phone\":[\"12345678901\"],\"usersList[1].password\":[\"123\"],\"usersList[1].userState\":[\"0\"],\"usersList[1].createTime\":[\"2024-04-28 00:00:00\"],\"usersList[1].modifiedTime\":[\"2024-04-28 00:00:00\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'\r\n### The error may exist in file [C:\\Users\\lloogg\\Desktop\\新建文件夹\\GarbageSort-master\\web\\target\\classes\\mybatis\\garbagesort\\UserInfMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: insert into users( user_id, phone, password, user_state, create_time, modified_time) values                  ( ?, ?, ?, ?, ?, ?)          ,              ( ?, ?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'\n; Duplicate entry \'2\' for key \'users.PRIMARY\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'', '2024-04-20 20:40:20');
+INSERT INTO `sys_oper_log` VALUES (255, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\",\"2\"],\"usersList[0].phone\":[\"19839715890\"],\"usersList[0].password\":[\"11\"],\"usersList[0].userState\":[\"0\"],\"usersList[0].createTime\":[\"2024-04-28 00:00:00\"],\"usersList[0].modifiedTime\":[\"2024-04-26\"],\"usersList[1].phone\":[\"12345678901\"],\"usersList[1].password\":[\"123\"],\"usersList[1].userState\":[\"0\"],\"usersList[1].createTime\":[\"2024-04-28 00:00:00\"],\"usersList[1].modifiedTime\":[\"2024-04-28 00:00:00\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', NULL, 1, '\r\n### Error updating database.  Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'\r\n### The error may exist in file [C:\\Users\\lloogg\\Desktop\\新建文件夹\\GarbageSort-master\\web\\target\\classes\\mybatis\\garbagesort\\UserInfMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: insert into users( user_id, phone, password, user_state, create_time, modified_time) values                  ( ?, ?, ?, ?, ?, ?)          ,              ( ?, ?, ?, ?, ?, ?)\r\n### Cause: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'\n; Duplicate entry \'2\' for key \'users.PRIMARY\'; nested exception is java.sql.SQLIntegrityConstraintViolationException: Duplicate entry \'2\' for key \'users.PRIMARY\'', '2024-04-20 20:44:04');
+INSERT INTO `sys_oper_log` VALUES (256, '用户信息查询', 2, 'com.ruoyi.project.garbagesort.userInfo.controller.UserInfController.editSave()', 'POST', 1, 'admin', '研发部门', '/garbagesort/userInfo/edit', '127.0.0.1', '内网IP', '{\"infId\":[\"2\"],\"userId\":[\"11\"],\"nickname\":[\"茶壶\"],\"avatar\":[\"https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/16/6c2f5e8989c04297886e524299a9f96a.jpg\"],\"phone\":[\"19839715890\"],\"gender\":[\"女\"],\"userMoney\":[\"0.00\"],\"orderNum\":[\"0\"],\"registerTime\":[\"2024-04-09\"],\"index\":[\"1\"],\"usersList[0].phone\":[\"12345678901\"],\"usersList[0].password\":[\"123123\"],\"usersList[0].userState\":[\"0\"],\"usersList[0].createTime\":[\"2024-04-29\"],\"usersList[0].modifiedTime\":[\"2024-04-29\"],\"btSelectAll\":[\"\"],\"btSelectItem\":[\"\"]}', '{\"msg\":\"操作成功\",\"code\":0}', 0, NULL, '2024-04-20 20:46:49');
 
 -- ----------------------------
 -- Table structure for sys_post
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE `sys_post`  (
-                             `post_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
-                             `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '岗位编码',
-                             `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '岗位名称',
-                             `post_sort` int(11) NOT NULL COMMENT '显示顺序',
-                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '状态（0正常 1停用）',
-                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                             PRIMARY KEY (`post_id`) USING BTREE
+  `post_id` bigint NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
+  `post_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '岗位编码',
+  `post_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '岗位名称',
+  `post_sort` int NOT NULL COMMENT '显示顺序',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '状态（0正常 1停用）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`post_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '岗位信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3352,19 +3665,19 @@ INSERT INTO `sys_post` VALUES (4, 'user', '普通员工', 4, '0', 'admin', '2021
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`  (
-                             `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
-                             `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色名称',
-                             `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色权限字符串',
-                             `role_sort` int(11) NOT NULL COMMENT '显示顺序',
-                             `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
-                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色状态（0正常 1停用）',
-                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                             PRIMARY KEY (`role_id`) USING BTREE
+  `role_id` bigint NOT NULL AUTO_INCREMENT COMMENT '角色ID',
+  `role_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色名称',
+  `role_key` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色权限字符串',
+  `role_sort` int NOT NULL COMMENT '显示顺序',
+  `data_scope` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '1' COMMENT '数据范围（1：全部数据权限 2：自定数据权限 3：本部门数据权限 4：本部门及以下数据权限）',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '角色状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`role_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3378,9 +3691,9 @@ INSERT INTO `sys_role` VALUES (2, '普通角色', 'common', 2, '2', '0', '0', 'a
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_dept`;
 CREATE TABLE `sys_role_dept`  (
-                                  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-                                  `dept_id` bigint(20) NOT NULL COMMENT '部门ID',
-                                  PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
+  `role_id` bigint NOT NULL COMMENT '角色ID',
+  `dept_id` bigint NOT NULL COMMENT '部门ID',
+  PRIMARY KEY (`role_id`, `dept_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色和部门关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3395,9 +3708,9 @@ INSERT INTO `sys_role_dept` VALUES (2, 105);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role_menu`;
 CREATE TABLE `sys_role_menu`  (
-                                  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-                                  `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
-                                  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
+  `role_id` bigint NOT NULL COMMENT '角色ID',
+  `menu_id` bigint NOT NULL COMMENT '菜单ID',
+  PRIMARY KEY (`role_id`, `menu_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '角色和菜单关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3494,34 +3807,34 @@ INSERT INTO `sys_role_menu` VALUES (2, 1061);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`  (
-                             `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-                             `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
-                             `login_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录账号',
-                             `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '用户昵称',
-                             `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '00' COMMENT '用户类型（00系统用户 01注册用户）',
-                             `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '用户邮箱',
-                             `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '手机号码',
-                             `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
-                             `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '头像路径',
-                             `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '密码',
-                             `salt` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '盐加密',
-                             `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
-                             `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
-                             `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '最后登录IP',
-                             `login_date` datetime NULL DEFAULT NULL COMMENT '最后登录时间',
-                             `pwd_update_date` datetime NULL DEFAULT NULL COMMENT '密码最后更新时间',
-                             `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
-                             `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-                             `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
-                             `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
-                             `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
-                             PRIMARY KEY (`user_id`) USING BTREE
+  `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `dept_id` bigint NULL DEFAULT NULL COMMENT '部门ID',
+  `login_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '登录账号',
+  `user_name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '用户昵称',
+  `user_type` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '00' COMMENT '用户类型（00系统用户 01注册用户）',
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '用户邮箱',
+  `phonenumber` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '手机号码',
+  `sex` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '用户性别（0男 1女 2未知）',
+  `avatar` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '头像路径',
+  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '密码',
+  `salt` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '盐加密',
+  `status` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '帐号状态（0正常 1停用）',
+  `del_flag` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '0' COMMENT '删除标志（0代表存在 2代表删除）',
+  `login_ip` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '最后登录IP',
+  `login_date` datetime(0) NULL DEFAULT NULL COMMENT '最后登录时间',
+  `pwd_update_date` datetime(0) NULL DEFAULT NULL COMMENT '密码最后更新时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '创建者',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '更新者',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `remark` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
+  PRIMARY KEY (`user_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 100 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2021-06-08 16:17:48', '2021-06-08 09:13:55', 'admin', '2021-06-08 09:13:55', '', '2021-06-08 16:21:33', '管理员');
+INSERT INTO `sys_user` VALUES (1, 103, 'admin', 'admin', '00', 'ry@163.com', '15888888888', '1', '', '29c67a30398638269fe600f73a054934', '111111', '0', '0', '127.0.0.1', '2024-04-20 20:30:23', '2021-06-08 09:13:55', 'admin', '2021-06-08 09:13:55', '', '2024-04-20 20:32:13', '管理员');
 INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666666666', '1', '', '8e6d98b90472783cc73c17047ddccf36', '222222', '0', '0', '127.0.0.1', '2021-06-08 09:13:55', '2021-06-08 09:13:55', 'admin', '2021-06-08 09:13:55', '', NULL, '测试员');
 
 -- ----------------------------
@@ -3529,32 +3842,33 @@ INSERT INTO `sys_user` VALUES (2, 105, 'ry', '若依', '00', 'ry@qq.com', '15666
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_online`;
 CREATE TABLE `sys_user_online`  (
-                                    `sessionId` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '用户会话id',
-                                    `login_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录账号',
-                                    `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
-                                    `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录IP地址',
-                                    `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录地点',
-                                    `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '浏览器类型',
-                                    `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作系统',
-                                    `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '在线状态on_line在线off_line离线',
-                                    `start_timestamp` datetime NULL DEFAULT NULL COMMENT 'session创建时间',
-                                    `last_access_time` datetime NULL DEFAULT NULL COMMENT 'session最后访问时间',
-                                    `expire_time` int(11) NULL DEFAULT 0 COMMENT '超时时间，单位为分钟',
-                                    PRIMARY KEY (`sessionId`) USING BTREE
+  `sessionId` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT '' COMMENT '用户会话id',
+  `login_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录账号',
+  `dept_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '部门名称',
+  `ipaddr` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录IP地址',
+  `login_location` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '登录地点',
+  `browser` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '浏览器类型',
+  `os` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '操作系统',
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT '' COMMENT '在线状态on_line在线off_line离线',
+  `start_timestamp` datetime(0) NULL DEFAULT NULL COMMENT 'session创建时间',
+  `last_access_time` datetime(0) NULL DEFAULT NULL COMMENT 'session最后访问时间',
+  `expire_time` int NULL DEFAULT 0 COMMENT '超时时间，单位为分钟',
+  PRIMARY KEY (`sessionId`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '在线用户记录' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_online
 -- ----------------------------
+INSERT INTO `sys_user_online` VALUES ('e4b59303-465a-4f0f-a20d-92589c287b69', 'admin', '研发部门', '127.0.0.1', '内网IP', 'Chrome 12', 'Windows 10', 'on_line', '2024-04-20 20:30:19', '2024-04-20 20:45:40', 1800000);
 
 -- ----------------------------
 -- Table structure for sys_user_post
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_post`;
 CREATE TABLE `sys_user_post`  (
-                                  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-                                  `post_id` bigint(20) NOT NULL COMMENT '岗位ID',
-                                  PRIMARY KEY (`user_id`, `post_id`) USING BTREE
+  `user_id` bigint NOT NULL COMMENT '用户ID',
+  `post_id` bigint NOT NULL COMMENT '岗位ID',
+  PRIMARY KEY (`user_id`, `post_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户与岗位关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3568,9 +3882,9 @@ INSERT INTO `sys_user_post` VALUES (2, 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user_role`;
 CREATE TABLE `sys_user_role`  (
-                                  `user_id` bigint(20) NOT NULL COMMENT '用户ID',
-                                  `role_id` bigint(20) NOT NULL COMMENT '角色ID',
-                                  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
+  `user_id` bigint NOT NULL COMMENT '用户ID',
+  `role_id` bigint NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`user_id`, `role_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '用户和角色关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -3580,60 +3894,74 @@ INSERT INTO `sys_user_role` VALUES (1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2);
 
 -- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-                         `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
-                         `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '手机号',
-                         `password` char(32) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL COMMENT 'md5加密的密码',
-                         `user_state` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0：用户，1：管理员',
-                         `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         `modified_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-                         PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-
--- ----------------------------
 -- Table structure for user_addr
 -- ----------------------------
 DROP TABLE IF EXISTS `user_addr`;
 CREATE TABLE `user_addr`  (
-                              `addr_id` int(11) NOT NULL AUTO_INCREMENT,
-                              `user_id` int(11) NOT NULL,
-                              `province` smallint(6) NOT NULL COMMENT '省',
-                              `city` smallint(6) NOT NULL COMMENT '市',
-                              `district` smallint(6) NOT NULL COMMENT '区',
-                              `address` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '详细地址',
-                              `is_default` tinyint(4) NOT NULL COMMENT '是否默认',
-                              `modified_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
-                              PRIMARY KEY (`addr_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  `addr_id` int NOT NULL AUTO_INCREMENT COMMENT '地址id',
+  `user_id` int NOT NULL COMMENT '用户id',
+  `contact_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '姓名',
+  `contact_phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '电话号码',
+  `province` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '省',
+  `city` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '市',
+  `district` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '区',
+  `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '详细地址',
+  `is_default` tinyint NULL DEFAULT 0 COMMENT '是否默认',
+  `modified_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '最后修改时间',
+  PRIMARY KEY (`addr_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_addr
 -- ----------------------------
+INSERT INTO `user_addr` VALUES (4, 11, '卢本伟', '17878386199', '广西', '桂林市', '13区', '雁山区雁山镇一号', 0, '2024-04-21 10:36:22');
+INSERT INTO `user_addr` VALUES (10, 11, '老李', '19839456720', '北京市东城区', NULL, NULL, '前门东大街辅路与正义路交叉口西北方向60米', 1, '2024-04-21 10:36:22');
+INSERT INTO `user_addr` VALUES (20, 20, '士大夫', '15555555555', '士大夫', NULL, NULL, '电视广告', 0, '2024-04-21 10:21:05');
 
 -- ----------------------------
 -- Table structure for user_inf
 -- ----------------------------
 DROP TABLE IF EXISTS `user_inf`;
 CREATE TABLE `user_inf`  (
-                             `inf_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增主键ID',
-                             `user_id` int(11) NOT NULL COMMENT '用户ID',
-                             `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-                             `gender` int(11) NOT NULL DEFAULT 1 COMMENT '0：女，1：男',
-                             `user_money` decimal(8, 2) NULL DEFAULT 0.00 COMMENT '用户余额',
-                             `order_num` int(11) NULL DEFAULT 0 COMMENT '订单数量',
-                             `register_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '注册时间',
-                             PRIMARY KEY (`inf_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+  `inf_id` int NOT NULL AUTO_INCREMENT COMMENT '用户信息ID',
+  `user_id` int NOT NULL COMMENT '用户ID',
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '微信用户' COMMENT '用户昵称',
+  `avatar` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL COMMENT '头像',
+  `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '电话号码',
+  `gender` enum('男','女','保密') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '男' COMMENT '性别',
+  `user_money` decimal(8, 2) NULL DEFAULT 0.00 COMMENT '用户余额',
+  `order_num` int NULL DEFAULT 0 COMMENT '订单数量',
+  `register_time` datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '注册时间',
+  PRIMARY KEY (`inf_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user_inf
 -- ----------------------------
+INSERT INTO `user_inf` VALUES (2, 11, '茶壶', 'https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/21/32968c91e9e2409689194cb550de4761.jpeg', '19839715890', '男', 0.00, 0, '2024-04-09 00:00:00');
+INSERT INTO `user_inf` VALUES (3, 18, '微信用户5', 'https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/20/d7f1cd240fb54d00938278c9778bcf6a.jpg', '19839715890', '保密', 0.00, 0, '2024-04-20 23:02:07');
+INSERT INTO `user_inf` VALUES (4, 19, '微信用户', NULL, '19839715890', '男', 0.00, 0, '2024-04-21 09:31:52');
+INSERT INTO `user_inf` VALUES (5, 20, '微信用户', 'https://avatar-2024-04-16.oss-cn-shenzhen.aliyuncs.com/user/2024/04/21/b9dfab864e14444f9dbd2ed160581a58.jpg', '19839715890', '男', 0.00, 0, '2024-04-21 09:34:40');
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users`  (
+  `user_id` int NOT NULL AUTO_INCREMENT COMMENT '用户ID',
+  `phone` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL COMMENT '手机号',
+  `password` char(32) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL COMMENT 'md5加密的密码',
+  `user_state` tinyint NOT NULL DEFAULT 0 COMMENT '用户类型：0：用户，1：回收员',
+  `create_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建日期',
+  `modified_time` datetime(0) NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改日期',
+  PRIMARY KEY (`user_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES (11, '123', 'c38dc3dcb8f0b43ac8ea6a70b5ec7648', 1, '2024-04-10 16:43:50', '2024-04-21 09:28:02');
+INSERT INTO `users` VALUES (18, '1983971589', 'c38dc3dcb8f0b43ac8ea6a70b5ec7648', 0, '2024-04-19 09:28:47', '2024-04-21 09:30:55');
+INSERT INTO `users` VALUES (20, '19839715890', 'd3b1294a61a07da9b49b6e22b2cbd7f9', 0, '2024-04-21 09:34:40', '2024-04-21 09:34:40');
 
 SET FOREIGN_KEY_CHECKS = 1;

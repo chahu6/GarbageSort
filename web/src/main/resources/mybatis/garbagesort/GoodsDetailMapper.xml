@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.garbagesort.goodsDetail.mapper.GoodsDetailMapper">
+    
+    <resultMap type="GoodsDetail" id="GoodsDetailResult">
+        <result property="id"    column="id"    />
+        <result property="orderId"    column="order_id"    />
+        <result property="goodsName"    column="goods_name"    />
+        <result property="weight"    column="weight"    />
+        <result property="amount"    column="amount"    />
+        <result property="image"    column="image"    />
+    </resultMap>
+
+    <sql id="selectGoodsDetailVo">
+        select id, order_id, goods_name, weight, amount, image from goods_detail
+    </sql>
+
+    <select id="selectGoodsDetailList" parameterType="GoodsDetail" resultMap="GoodsDetailResult">
+        <include refid="selectGoodsDetailVo"/>
+        <where>  
+            <if test="orderId != null "> and order_id = #{orderId}</if>
+            <if test="goodsName != null  and goodsName != ''"> and goods_name like concat('%', #{goodsName}, '%')</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="image != null  and image != ''"> and image = #{image}</if>
+        </where>
+    </select>
+    
+    <select id="selectGoodsDetailById" parameterType="Long" resultMap="GoodsDetailResult">
+        <include refid="selectGoodsDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertGoodsDetail" parameterType="GoodsDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into goods_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">order_id,</if>
+            <if test="goodsName != null and goodsName != ''">goods_name,</if>
+            <if test="weight != null">weight,</if>
+            <if test="amount != null">amount,</if>
+            <if test="image != null and image != ''">image,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">#{orderId},</if>
+            <if test="goodsName != null and goodsName != ''">#{goodsName},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="image != null and image != ''">#{image},</if>
+         </trim>
+    </insert>
+
+    <update id="updateGoodsDetail" parameterType="GoodsDetail">
+        update goods_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="orderId != null">order_id = #{orderId},</if>
+            <if test="goodsName != null and goodsName != ''">goods_name = #{goodsName},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="image != null and image != ''">image = #{image},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGoodsDetailById" parameterType="Long">
+        delete from goods_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteGoodsDetailByIds" parameterType="String">
+        delete from goods_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -13,8 +13,9 @@
 						<view v-else-if="detail.garbageType==4" class="text-margin-left garbage-youhai-item"> 有害垃圾</view>
 						<view v-else-if="detail.garbageType==5" class="text-margin-left garbage-youhai-item"> 非生活垃圾</view>
 					</view>
-					<view v-if="detail.remark!=null && detail.remark!=undefined" :class="detail.garbageType==1?'garbage-gan-item':detail.garbageType==2?'garbage-shi-item':detail.garbageType==3?'garbage-huishou-item':'garbage-youhai-item'"
-					 class="inner-text">
+					<view v-if="detail.remark!=null && detail.remark!=undefined"
+						:class="detail.garbageType==1?'garbage-gan-item':detail.garbageType==2?'garbage-shi-item':detail.garbageType==3?'garbage-huishou-item':'garbage-youhai-item'"
+						class="inner-text">
 						{{detail.remark}}
 					</view>
 					<view class="inner-text inner-button">
@@ -26,10 +27,16 @@
 						<!-- <button class="inner-text inner-text-kefu" plain open-type="contact"> 意见反馈</button> -->
 					</view>
 					<view class="inner-text">
-						<image v-if="detail.garbageType==1" class="show-img" src="../static/classify/style-gan.jpg"></image>
-						<image v-else-if="detail.garbageType==2" class="show-img-shi" src="../static/classify/style-shi.jpg"></image>
-						<image v-else-if="detail.garbageType==3" class="show-img-huishou" src="../static/classify/style-huishou.jpg"></image>
-						<image v-else-if="detail.garbageType==4" class="show-img" src="../static/classify/style-youhai.jpg"></image>
+						<image v-if="detail.garbageType==1" class="show-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-gan.jpg"></image>
+						<image v-else-if="detail.garbageType==2" class="show-img-shi"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-shi.jpg"></image>
+						<image v-else-if="detail.garbageType==3" class="show-img-huishou"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-huishou.jpg">
+						</image>
+						<image v-else-if="detail.garbageType==4" class="show-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-youhai.jpg">
+						</image>
 					</view>
 				</view>
 

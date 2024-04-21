@@ -16,37 +16,40 @@
 			</view>
 			<view v-show="tabIndex==0">
 				<view class="row-input">
-					<image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/ca9b79b9-844e-4d88-8738-19a1b6fdf83a.png"></image>
-					<input placeholder="输入账号/手机号" maxlength="11" />
+					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/ca9b79b9-844e-4d88-8738-19a1b6fdf83a.png"></image> -->
+					<input placeholder="输入账号/手机号" maxlength="11" v-model="loginForm.phone" />
 				</view>
 				<view class="row-input">
-					<image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/6b93574b-73ce-4d3e-8353-a65095e9ba87.png"></image>
-					<input placeholder="输入密码" maxlength="18" />
+					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/6b93574b-73ce-4d3e-8353-a65095e9ba87.png"></image> -->
+					<input placeholder="输入密码" maxlength="18" v-model="loginForm.password" />
 				</view>
 				<view class="menu-link">
 					<text>忘记密码?</text>
 				</view>
-				<view class="login-btn">
+				<view class="login-btn" @click="login">
 					登录
 				</view>
 			</view>
 			<view v-show="tabIndex==1">
 				<view class="row-input-code">
 					<view class="input-box">
-						<image class="img" mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/ca9b79b9-844e-4d88-8738-19a1b6fdf83a.png"></image>
-						<input placeholder="输入手机号" maxlength="11" type="number" v-model="loginForm.phone"/>
+						<!-- <image class="img" mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/ca9b79b9-844e-4d88-8738-19a1b6fdf83a.png"></image> -->
+						<input placeholder="输入手机号" maxlength="11" type="number" v-model="loginForm.phone" />
 					</view>
-					<view class="code-box" @click="getCode">
-						获取验证码
+					<view class="code-box" @click="getCode" v-if="isSend">
+						{{sendmsg}}
+					</view>
+					<view class="code-box" v-else>
+						{{sendmsg}}
 					</view>
 				</view>
 				<view class="row-input">
-					<image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/8e1c961a-cf6d-4190-bedb-bdf3cdc8b66d.png"></image>
-					<input placeholder="输入验证码" maxlength="6" type="number" v-model="loginForm.verification"/>
+					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/8e1c961a-cf6d-4190-bedb-bdf3cdc8b66d.png"></image> -->
+					<input placeholder="输入验证码" maxlength="6" type="number" v-model="loginForm.code" />
 				</view>
 				<view class="row-input">
-					<image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/6b93574b-73ce-4d3e-8353-a65095e9ba87.png"></image>
-					<input placeholder="输入6位密码" maxlength="6" v-model="loginForm.password"/>
+					<!-- <image mode="aspectFit" src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-a1714171-183a-4753-b538-8fabcab0d8b6/6b93574b-73ce-4d3e-8353-a65095e9ba87.png"></image> -->
+					<input placeholder="输入6位密码" maxlength="6" v-model="loginForm.password" />
 				</view>
 				<view class="login-btn register" @click="register">
 					注册
@@ -61,12 +64,14 @@
 	export default {
 		data() {
 			return {
-				tabIndex: 0 ,//登录注册下标,
+				tabIndex: 0, //登录注册下标,
 				loginForm: {
-					phone: '',
-					verification: '',
-					password: ''
-				}
+					phone: '123',
+					code: '',
+					password: '123'
+				},
+				isSend: true,
+				sendmsg: "获取验证码",
 			}
 		},
 		methods: {
@@ -76,42 +81,141 @@
 			},
 			// 获取验证码
 			getCode() {
-				uni.showToast({
-					title: "获取验证码"
-				})
-				
-				uni.request({
-			 		url: this.serverUrl + "/user/sendMsg",
-			 		dataType: "json",
-			 		responseType: "json",
-			 		method: "POST",
-			 		data: {
-			 			phone: this.loginForm.phone
-			 		},
-			 		// header: {
-			 		// 	"Content-Type": "application/json",
-			 		// },
-			 		timeout: 6000,
-			 		sslVerify: false,
-			 		withCredentials: false,
-			 		firstIpv4: false,
-			 		success(res) {
-			 			console.log("success :", res.data);
-			 		},
-			 		fail(e) {
-			 			console.log(e);
-			 		},
-			 		complete(res) {
-			 			console.log("complete :", res);
-			 		},
-			 	});
+				let me = this;
+				if (!me.loginForm.phone) {
+					uni.showModal({
+						title: "错误！！！",
+						content: "请输入手机号",
+						confirmText: "知道了",
+						showCancel: false,
+						success: function(res) {
+							if (true) {
+								console.log('用户点击确定');
+							}
+						}
+					});
+				} else if (/^1(3|4|5|6|7|8|9)\d{9}$/.test(me.loginForm.phone) == false) {
+					uni.showModal({
+						title: "错误！！！",
+						content: "手机号格式不正确",
+						confirmText: "知道了",
+						showCancel: false,
+						success: function(res) {
+							if (true) {
+								console.log('用户点击确定');
+							}
+						}
+					});
+				} else {
+					uni.request({
+						url: me.serverUrl + "/user/sendMsg",
+						dataType: "json",
+						responseType: "json",
+						method: "POST",
+						data: {
+							phone: me.loginForm.phone
+						},
+						// header: {
+						// 	"Content-Type": "application/json",
+						// },
+						timeout: 6000,
+						sslVerify: false,
+						withCredentials: false,
+						firstIpv4: false,
+						success(res) {
+							console.log("success :", res.data);
+
+							uni.showToast({
+								title: "获取验证码"
+							});
+
+							me.isSend = false;
+							let timer = 60;
+							me.sendmsg = timer + "s";
+							me.timeFun = setInterval(() => {
+								--timer;
+								me.sendmsg = timer + "s";
+								if (timer == 0) {
+									me.isSend = true;
+									me.sendmsg = "重新发送";
+									clearInterval(me.timeFun);
+								}
+							}, 1000);
+						},
+						fail(e) {
+							console.log(e);
+						},
+						complete(res) {
+							console.log("complete :", res);
+						},
+					});
+				}
 			},
-			register(){
+			register() {
+				let me = this;
 				uni.request({
-					url: this.serverUrl + "/user/login",
+					url: me.serverUrl + "/user/register",
 					method: "POST",
-					data:{
-						...this.loginForm
+					data: {
+						...me.loginForm
+					},
+					success(res) {
+						console.log("success :", res.data);
+
+						if (res.data.code >= 0) {
+							uni.showToast({
+								title: "注册成功"
+							});
+							let data = res.data.data;
+							me.tabIndex = 0;
+						}
+					},
+					fail(e) {
+						console.log("error: ", e);
+					}
+				})
+			},
+
+			login() {
+				console.log("登录")
+				let me = this;
+				uni.request({
+					url: me.serverUrl + "/user/login",
+					method: "POST",
+					data: {
+						phone: me.loginForm.phone,
+						password: me.loginForm.password
+					},
+					success(res) {
+						console.log("success :", res.data);
+						if (res.data.code >= 0) {
+							uni.showToast({
+								title: "登录成功"
+							
+							});
+							// localStorage.setItem('userId', res.data.data.userId);
+							uni.setStorageSync('token', res.data.data)
+							// uni.setStorageSync('userId', res.data.data.userId);
+							
+							// me.$u.urlskip('/pages/reclaim/reclaim', 'navigateTo');
+							uni.switchTab({
+								url: '/pages/index/index'
+							})
+							// sessionStorage.setItem('user', JSON.stringify(res.data.data));
+							// 跳转
+							// me.$router.push('/pages/user/index').then(() => {
+							// 	window.location.reload();
+							// });
+
+						} else {
+							uni.showToast({
+								title: "账号或密码错误",
+								icon: "error"
+							});
+						}
+					},
+					fail(e) {
+						console.log("error: ", e);
 					}
 				})
 			}

@@ -48,6 +48,4 @@ public class SpeechClassify implements Serializable {
 
     @TableField("times")
     private LocalDateTime times;
-
-
 }

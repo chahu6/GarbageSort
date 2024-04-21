@@ -4,10 +4,12 @@
 			<form @submit="formSubmit" @reset="formReset" class="form-form">
 				<view class="input-view">
 					<view @click="takePhoto" class="input-view-item input-view-camera">
-						<image class="search-img" src="../../static/icos/camera.png"></image>
+						<image class="search-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/camera.png"></image>
 					</view>
 					<view @click="readyRecord" class="input-view-item input-view-speech">
-						<image class="search-img" src="../../static/icos/record.png"></image>
+						<image class="search-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/record.png"></image>
 					</view>
 					<view class="input-view-item input-view-search">
 						<input confirm-type="search" :placeholder="defaultKeyword" @search="doSearch(false)"
@@ -60,7 +62,9 @@
 					<view class="keyword" v-if="forbid==''">
 						<view v-for="(keyword,index) in hotKeywordList" @tap="doSearch(keyword)" :key="index">
 							<view class="" v-if="index<3">
-								<image class="image-hot" src="../../static/icos/hot.png" mode=""></image>
+								<image class="image-hot"
+									src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/hot.png" mode="">
+								</image>
 							</view>
 							<view class="">{{keyword}}
 							</view>
@@ -81,7 +85,8 @@
 					<view class="recording-box">
 						<recordIng v-show="isTouchEnter" />
 						<view class="recording-icon" @touchstart="startRecordHandle" @touchend="endRecordHandle">
-							<image src="../../static/record/luyin.png"></image>
+							<image src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/record/luyin.png">
+							</image>
 						</view>
 						<recordIng v-show="isTouchEnter" />
 					</view>
@@ -102,7 +107,7 @@
 		<view class="">
 			<my-popup :show="detailPopupShow" :detail="detailShowObject" @hideMypopup="hideMypopup"></my-popup>
 		</view>
-		
+
 		// @TODO 没有用了
 		<uni-popup :show="imagesResultShow" position="middle" mode="fixed" @hidePopup="hideUnipPpup">
 			<view class="imagePopup">
@@ -234,7 +239,7 @@
 
 		onLoad(option) {
 			let me = this;
-			if (option.type == 1) {//拍照
+			if (option.type == 1) { //拍照
 				me.takePhoto();
 			} else if (option.type == 2) { // 录音
 				me.readyRecord();
@@ -295,7 +300,7 @@
 					}
 				})
 			},
-			showFailed(msg){
+			showFailed(msg) {
 				uni.showModal({
 					title: "错误！！！",
 					content: msg,
@@ -326,7 +331,7 @@
 				this.popupShow = true;
 				// 录音文件
 				let self = this;
-				recorderManager.onStop(function(res) {		
+				recorderManager.onStop(function(res) {
 					let result = JSON.parse(JSON.stringify(res))
 					console.log("地址===========", result)
 					self.voicePath = res.tempFilePath;
@@ -335,7 +340,10 @@
 						filePath: result.tempFilePath,
 						name: 'file',
 						success: (res) => {
-                            const {code , data } = JSON.parse(res.data)
+							const {
+								code,
+								data
+							} = JSON.parse(res.data)
 							if (code == 0) {
 								if (data.keyword) {
 									self.popupShow = false
@@ -343,19 +351,19 @@
 									self.keyword = data.keyword
 								} else {
 									uni.showToast({
-										duration:2000,
-										icon:'none',
+										duration: 2000,
+										icon: 'none',
 										title: '没有听清楚您的话语，请重新录入!'
 									})
 								}
 							} else {
 								uni.showToast({
-									duration:1000,
-									icon:'error',
+									duration: 1000,
+									icon: 'error',
 									title: '接口错误'
 								})
 							}
-							
+
 						}
 					})
 				});
@@ -417,46 +425,46 @@
 							success: (uploadFileRes) => {
 								console.log(uploadFileRes.data)
 								let res = JSON.parse(uploadFileRes.data);
-								if(res.code >= 0)
-								{
+								if (res.code >= 0) {
 									let data = res.data;
 									console.log(data);
-									me.keywordList =  me.parseRubbish(data.Elements)
+									me.keywordList = me.parseRubbish(data.Elements)
 									console.log(me.keywordList);
-									
-									if(me.keywordList.length > 0 && me.keywordList[0].garbageType != ''){
+
+									if (me.keywordList.length > 0 && me.keywordList[0]
+										.garbageType != '') {
 										me.isShowKeywordList = true;
 										me.detailPopupShow = true;
-										
-										if(me.keywordList[0].garbageType === '可回收垃圾'){
+
+										if (me.keywordList[0].garbageType === '可回收垃圾') {
 											me.keywordList[0].garbageType = 3
-										}else if(me.keywordList[0].garbageType === '干垃圾'){
+										} else if (me.keywordList[0].garbageType === '干垃圾') {
 											me.keywordList[0].garbageType = 1
-										}else if(me.keywordList[0].garbageType === '湿垃圾'){
+										} else if (me.keywordList[0].garbageType === '湿垃圾') {
 											me.keywordList[0].garbageType = 2
-										}else if(me.keywordList[0].garbageType === '有害垃圾'){
+										} else if (me.keywordList[0].garbageType === '有害垃圾') {
 											me.keywordList[0].garbageType = 4
-										}else{
+										} else {
 											me.keywordList[0].garbageType = 5
 										}
-										
+
 										me.detailShowObject = {
 											keyword: me.keywordList[0].keyword,
 											garbageType: me.keywordList[0].garbageType,
 											remark: me.keywordList[0].remark,
 										}
-									}else{
+									} else {
 										me.showFailed('未识别该图片');
 									}
-								} else{
+								} else {
 									console.log(res.msg);
 									me.showFailed("仅支持的图像类型：JPEG、JPG、PNG。");
 								}
-								
+
 								// 没用了
 								// me.imagesResultShow = true;
-								
-								
+
+
 								// if (uniOne) { // 查找到的唯一值不等于空
 								// 	me.isShowKeywordList = true;
 								// 	me.detailPopupShow = true;
@@ -568,9 +576,10 @@
 				}
 				return keywordArr;
 			},
-			parseRubbish(rubbishs){
-				var len = rubbishs.length, rubbishArr = [];
-				for(var i = 0; i < len; i++){
+			parseRubbish(rubbishs) {
+				var len = rubbishs.length,
+					rubbishArr = [];
+				for (var i = 0; i < len; i++) {
 					var row = rubbishs[i];
 					var html = "<span style='color: #72c69c;'>" + row.Rubbish + "</span>"
 					html = '<div>' + html + '<div>'
@@ -693,7 +702,7 @@
 </script>
 <style>
 	@import url("search.css");
-    
+
 	.content {
 		display: flex;
 		flex-direction: column;

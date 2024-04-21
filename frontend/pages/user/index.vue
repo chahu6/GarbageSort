@@ -1,16 +1,21 @@
 <template>
 	<view class="content">
 		<view class="user_top_box">
-			<view class="user_top" @click="tourl('/pages/simple/login')">
-				<u-image width="160rpx" height="160rpx" :src="src"></u-image>
-				<view v-if="!hasUserInfo" class="userTextBox">
+			
+			<view class="user_top" @click="tourl('/pages/simple/login')" v-if="!hasUserInfo">
+				<u-image width="160rpx" height="160rpx" :src="src" shape="circle"></u-image>
+				<view class="userTextBox">
 					<view class="userName">登录/注册</view>
 				</view>
-				<view v-else>
-					<view class="userName">liuyunxh</view>
-					<text>加入收呗环保180天</text>
+			</view>
+			<view class="user_top" @click="tourl('/pages/user/profile')" v-else>
+				<u-image width="160rpx" height="160rpx" :src="userInfo.avatar" shape="circle"></u-image>
+				<view class="userTextBox">
+					<view class="userName">{{userInfo.nickname}}</view>
+					<text>加入收呗环保{{userInfo.day}}天</text>
 				</view>
 			</view>
+			
 			<view class="user_icon_box">
 				<view class="icon_u icon_u_1">
 					<view class="icon_1"></view>
@@ -40,11 +45,17 @@
 		</view>
 		<view class="u_cell_box">
 			<u-cell-group>
+				
 				<u-cell-item icon="calendar-fill" iconSize="40" @click="tourl('/pages/user/service_order')"
+					:iconStyle="{'color':'#00b362'}" title="回收订单" v-show="isRecyler">
+					<u-badge count="2" :absolute="false" slot="right-icon"></u-badge>
+				</u-cell-item>
+				
+				<u-cell-item icon="calendar-fill" iconSize="40" @click="tourl('/pages/user/order')"
 					:iconStyle="{'color':'#00b362'}" title="服务中订单">
 					<u-badge count="2" :absolute="false" slot="right-icon"></u-badge>
 				</u-cell-item>
-				<u-cell-item icon="order" iconSize="40" @click="tourl('/pages/user/order')"
+				<u-cell-item icon="order" iconSize="40" @click="tourl('/pages/user/history_order')"
 					:iconStyle="{'color':'#da8bff'}" title="历史订单"></u-cell-item>
 			</u-cell-group>
 			<u-gap height="16" bg-color="#f5f5f5"></u-gap>
@@ -63,7 +74,7 @@
 					:iconStyle="{'color':'#ff804e'}" title="联系客服"></u-cell-item>
 			</u-cell-group>
 			<view class="contentBody">
-				<u-button type="error" style="margin-top:20rpx;" :ripple="true" shape="circle">退出登录</u-button>
+				<u-button type="error" style="margin-top:20rpx;" :ripple="true" shape="circle" @click="logout">退出登录</u-button>
 			</view>
 		</view>
 
@@ -117,12 +128,65 @@
 		data() {
 			return {
 				postOrder: false,
-				hasUserInfo : false,
-				src: '../../static/coolc/pic/photo.png'
+				tabbar: '',
+				src: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/pic/photo.png',
+				hasUserInfo: false,
+				userInfo:{
+					nickname: '测试',
+					day: 0,
+					avatar: ''
+				},
+				isRecyler: false,
 			}
 		},
 		onLoad() {
-
+			this.tabbar = getApp().globalData.tabbar
+		},
+		onShow(){
+			let me = this;
+			const userId = uni.getStorageSync('userId');
+			
+			console.log(userId)
+			// if(user === null){
+				
+			// }else{
+			// 	this.updateUserInfo();
+			// }
+			
+			uni.request({
+				url: me.serverUrl + "/user/info",
+				method: "GET",
+				success(res) {
+					console.log("success :", res.data);
+					if(res.data.code === 0){
+						let data = res.data.data
+						
+						uni.setStorageSync('userInfo', JSON.stringify(data));
+						uni.setStorageSync('userId', data.userId)
+						
+						me.updateUserInfo();
+						
+						const userId = data.userId
+						uni.request({
+							url:me.serverUrl + '/user/status',
+							method:'GET',
+							data:{
+								userId
+							},
+							success(res) {
+								console.log(res.data);
+								if(res.data.code === 0){
+									let data = res.data.data
+									me.isRecyler = data.userState === 1
+								}
+							}
+						})
+					}
+				},
+				fail(e){
+					console.log("error: ", e);
+				}
+			})
 		},
 		methods: {
 			tourl(url) {
@@ -144,6 +208,60 @@
 			},
 			closePostOrder() {
 				this.postOrder = false;
+			},
+			updateUserInfo(){
+				const info = uni.getStorageSync('userInfo')
+				console.log(info)
+				const userInfo = JSON.parse(info)
+				
+				this.userInfo.nickname = userInfo.nickname;
+				
+				this.hasUserInfo = true;
+				
+				// 给定时间
+				const givenTime = new Date(userInfo.registerTime);
+				
+				// 当前时间
+				const currentTime = new Date();
+				
+				// 将时间转换为时间戳（以毫秒为单位）
+				const givenTimestamp = givenTime.getTime();
+				const currentTimestamp = currentTime.getTime();
+				
+				// 计算时间差值（毫秒）
+				const timeDiff = currentTimestamp - givenTimestamp;
+				
+				// 将时间差值转换为天数
+				const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+				
+				console.log(daysDiff)
+				this.userInfo.day = daysDiff;
+				
+				this.userInfo.avatar = userInfo.avatar
+			},
+			logout(){
+				let me = this
+				console.log('登出')
+				uni.request({
+					url: me.serverUrl + "/user/logout",
+					method: "POST",
+					success(res) {
+						console.log("success :", res.data);
+						let data = res.data.data
+						// 清除所有本地存储数据
+						uni.clearStorageSync();
+						// window.location.reload()
+						wx.reLaunch({
+							url: '/pages/user/index'
+						})
+						uni.showToast({
+							title: "退出成功"
+						});
+					},
+					fail(e){
+						console.log("error: ", e);
+					}
+				})
 			}
 		}
 	}
@@ -220,7 +338,7 @@
 				.icon_1 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url(~@/static/coolc/user_icon/u_1.png);
+					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_1.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;
@@ -230,7 +348,7 @@
 				.icon_2 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url(~@/static/coolc/user_icon/u_2.png);
+					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_2.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;
@@ -240,7 +358,7 @@
 				.icon_3 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url(~@/static/coolc/user_icon/u_3.png);
+					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_3.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;

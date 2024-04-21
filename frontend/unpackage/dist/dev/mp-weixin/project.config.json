@@ -6,9 +6,9 @@
   },
   "setting": {
     "urlCheck": false,
-    "es6": false,
+    "es6": true,
     "postcss": false,
-    "minified": false,
+    "minified": true,
     "newFeature": true,
     "bigPackageSizeSupport": true,
     "babelSetting": {
@@ -18,8 +18,8 @@
     }
   },
   "compileType": "miniprogram",
-  "libVersion": "3.4.0",
-  "appid": "wx4f6396abdd7129d4",
+  "libVersion": "3.4.2",
+  "appid": "wx9bdc1b816aac4a4d",
   "projectname": "garbageSort",
   "condition": {},
   "editorSetting": {

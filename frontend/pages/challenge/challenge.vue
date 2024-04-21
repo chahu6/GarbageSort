@@ -28,18 +28,22 @@
 			<view class="main-show-classify">
 				<view class="main-classify">
 					<view @click="switchTabToClassify(1)">
-						<image class="main-img" src="../../static/icos/ico-1.jpg"></image>
+						<image class="main-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-1.jpg"></image>
 					</view>
 					<view @click="switchTabToClassify(2)">
-						<image class="main-img" src="../../static/icos/ico-2.jpg"></image>
+						<image class="main-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-2.jpg"></image>
 					</view>
 				</view>
 				<view class="main-classify">
 					<view @click="switchTabToClassify(3)">
-						<image class="main-img" src="../../static/icos/ico-3.jpg"></image>
+						<image class="main-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-3.jpg"></image>
 					</view>
 					<view @click="switchTabToClassify(4)">
-						<image class="main-img" src="../../static/icos/ico-4.jpg"></image>
+						<image class="main-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-4.jpg"></image>
 					</view>
 				</view>
 			</view>
@@ -71,7 +75,12 @@
 				current: 0,
 				controlShow: true,
 				animationData: {},
+
+				tabbar: '',
 			}
+		},
+		onLoad() {
+			this.tabbar = getApp().globalData.tabbar
 		},
 		onShow() {
 			console.log("size:" + this.questionBanks.length)
@@ -144,6 +153,7 @@
 			switchTabToClassify(index) {
 				if (this.current == 9) this.controlShow = false;
 				console.log(index)
+
 				
 				console.log(this.questionBanks[this.current])
 				this.questionBanks[this.current]['selectedType'] = index;
@@ -206,7 +216,7 @@
 					uni.navigateTo({
 						url: '/pages/challenge/challengeResult?score=${score}&list=${list}'
 					});
-				} 
+				}
 			},
 			beforeSwitch(index) {
 				// if (index == 2) {

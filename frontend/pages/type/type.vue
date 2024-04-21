@@ -22,7 +22,7 @@
 				<scroll-view scroll-y :style="'height:'+height+'px'" scroll-with-animation>
 					<view class="view-img">
 						<view>
-							<image v-if="index!=null" class="show-img" :src="'../../static/showimg/style1-'+index+'.jpg'"></image>
+							<image v-if="index!=null" class="show-img" :src="'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/showimg/style1-'+index+'.jpg'"></image>
 						</view>
 					</view>
 					<view @tap="showDetailGarbage(item)" class="nav-right-item" v-for="(item,i) in currentDetail" :key="i" :class="i%2==0?'style1':''">
@@ -53,6 +53,9 @@
 				index: null,
 				detailPopupShow: false,
 				detailShowObject: {},
+				
+				tabbar: '',
+				
 				// detailPopupShow: true,
 				// detailShowObject: {
 				// 	keyword: "纸巾",
@@ -132,6 +135,9 @@
 			console.log(uni.getSystemInfoSync().windowHeight)
 			console.log(uni.getSystemInfoSync().screenHeight)
 			console.log("typeid:" + getApp().globalData.typeid)
+			
+			
+			this.tabbar = getApp().globalData.tabbar
 		},
 		onShow() {
 			console.log("onshow ")

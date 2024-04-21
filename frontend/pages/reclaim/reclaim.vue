@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="dinwei_baox">
 			<u-icon name="map-fill" top="2px" size="36"></u-icon>
-			<text>赣州市章贡区</text>
+			<text>{{ CityName === ProvinceName ? CityName : ProvinceName + ' ' + CityName }} {{ CountyName }}</text>
 		</view>
 		<view class="topPhotoBox">
 			<view class="car_box"></view>
@@ -123,6 +123,12 @@
 		data() {
 			return {
 				postOrder: false,
+				CityName: '',
+				CountyName: '',
+				ProvinceName: '',
+
+				tabbar: '',
+
 				noticeList: [
 					'寒雨连江夜入吴',
 					'平明送客楚山孤',
@@ -144,9 +150,6 @@
 				],
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
 			noticeLink() {
 				console.log("点击了公告");
@@ -161,7 +164,116 @@
 			},
 			closePostOrder() {
 				this.postOrder = false;
+			},
+			getCityName() {
+				let _that = this;
+				setTimeout(function() {
+					uni.getStorage({
+						key: 'Province_Name',
+						success(res) {
+							_that.ProvinceName = res.data
+						}
+					})
+					uni.getStorage({
+						key: 'City_Name',
+						success(res) {
+							_that.CityName = res.data
+						}
+					})
+					uni.getStorage({
+						key: 'County_Name',
+						success(res) {
+							_that.CountyName = res.data
+						}
+					})
+				}, 500)
+			},
+
+			getUserProfile() {
+				let self = this;
+				// 获取用户信息
+				uni.getUserProfile({
+					desc: "获取称呼、头像",
+					success: function(infoRes) {
+						console.log('用户昵称为：', infoRes);
+						self.nickName = infoRes.userInfo.nickName
+						self.avatarUrl = infoRes.userInfo.avatarUrl
+						uni.login({
+							provider: 'weixin',
+							success: function(loginRes) {
+								console.log("code", loginRes);
+
+							}
+						});
+					},
+				});
+
+			},
+			//获取定位
+			getLocationAuth() {
+				let that = this;
+				uni.getLocation({
+					type: 'gcj02',
+					geocode: true,
+					success(res) {
+						console.log("位置信息", res);
+						let lat = res.latitude;
+						let lng = res.longitude;
+						console.log(res.latitude);
+						console.log(res.longitude);
+
+						let key =
+							'BHCBZ-XZ66B-VWIUG-NON65-4HDZ2-BNB6T'; //申请地址：https://lbs.qq.com/dev/console/application/mine
+						uni.request({
+							url: 'https://apis.map.qq.com/ws/geocoder/v1/?location=' + lat + ',' + lng +
+								'&key=' + key,
+							method: "GET",
+							success(ress) {
+								let data = ress.data; //获取到所有定位的数据
+								let ProvinceName = ress.data.result.address_component.province;
+								let CityName = ress.data.result.address_component.city;
+								let CountyName = ress.data.result.address_component.district;
+								console.log(ress)
+								console.log("城市:" + CityName)
+								uni.setStorage({
+									key: 'Province_Name', // 使用不同的key存储区县信息  
+									data: ProvinceName
+								})
+								uni.setStorage({
+									key: 'City_Name',
+									data: CityName
+								})
+								uni.setStorage({
+									key: 'County_Name', // 使用不同的key存储区县信息  
+									data: CountyName
+								})
+
+							},
+							fail() {
+								uni.showToast({
+									'title': '数据获取失败,请重试！',
+									'icon': 'none'
+								})
+							}
+						})
+					},
+					fail(res) {
+						uni.showToast({
+							'title': '数据获取失败！为什么呢？？？',
+							'icon': 'none'
+						})
+					}
+				})
 			}
+
+
+		},
+		onShow() {
+			this.getCityName()
+		},
+		onLoad() {
+			this.getLocationAuth()
+			this.tabbar = getApp().globalData.tabbar
 		}
 	}
 </script>
@@ -187,7 +299,7 @@
 	.topPhotoBox {
 		width: 750rpx;
 		height: 500rpx;
-		background: url(~@/static/coolc/index_bg.jpg) no-repeat;
+		background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/index_bg.jpg') no-repeat;
 		background-size: 100% auto;
 		overflow: hidden;
 		position: relative;
@@ -195,7 +307,7 @@
 		.car_box {
 			width: 389rpx;
 			height: 215rpx;
-			background: url(~@/static/coolc/car.png) no-repeat;
+			background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/car.png') no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			bottom: 70rpx;
@@ -207,7 +319,7 @@
 		.treequan {
 			width: 750rpx;
 			height: 750rpx;
-			background: url(~@/static/coolc/tree.png) no-repeat;
+			background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/tree.png') no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			left: 0px;
@@ -259,15 +371,15 @@
 			}
 
 			.icon_cel_1 {
-				background-image: url(~@/static/coolc/i-t-1.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-1.png');
 			}
 
 			.icon_cel_2 {
-				background-image: url(~@/static/coolc/i-t-2.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-2.png');
 			}
 
 			.icon_cel_3 {
-				background-image: url(~@/static/coolc/i-t-3.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-3.png');
 			}
 		}
 	}
@@ -313,7 +425,7 @@
 			.order_btn {
 				width: 103rpx;
 				height: 31rpx;
-				background: url(~@/static/coolc/order_btn.png) no-repeat;
+				background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/order_btn.png') no-repeat;
 				background-size: 100% auto;
 				position: absolute;
 				left: 30rpx;
@@ -336,7 +448,7 @@
 			background: linear-gradient(to right, #76dc8f, #16b281);
 
 			.r_icon {
-				background-image: url(~@/static/coolc/class_icon/class_1.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_1.png');
 				background-size: 110rpx 130rpx;
 			}
 		}
@@ -345,7 +457,7 @@
 			background: linear-gradient(to right, #92dbff, #2eb5ff);
 
 			.r_icon {
-				background-image: url(~@/static/coolc/class_icon/class_2.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_2.png');
 				background-size: 120rpx 130rpx;
 			}
 		}
@@ -354,7 +466,7 @@
 			background: linear-gradient(to right, #b5cef1, #8eaad7);
 
 			.r_icon {
-				background-image: url(~@/static/coolc/class_icon/class_3.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_3.png');
 			}
 		}
 
@@ -362,7 +474,7 @@
 			background: linear-gradient(to right, #ffb43f, #ff8a00);
 
 			.r_icon {
-				background-image: url(~@/static/coolc/class_icon/class_4.png);
+				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_4.png');
 			}
 		}
 	}

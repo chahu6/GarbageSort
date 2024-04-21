@@ -114,7 +114,7 @@
 	height: 200upx;
 	border: 1px dashed #1296DB;
 	border-radius: 200upx;
-	background: url(../../static/icos/record.png) no-repeat 50% 50%;
+	background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/record.png') no-repeat 50% 50%;
 	background-size: 80% 80%;
 	z-index: 100;
 }

@@ -1,4 +1,10 @@
 {
   "navigationBarTitleText": "回收员招募",
-  "usingComponents": {}
+  "usingComponents": {
+    "u-form": "/uview-ui/components/u-form/u-form",
+    "u-form-item": "/uview-ui/components/u-form-item/u-form-item",
+    "u-input": "/uview-ui/components/u-input/u-input",
+    "u-picker": "/uview-ui/components/u-picker/u-picker",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
 }

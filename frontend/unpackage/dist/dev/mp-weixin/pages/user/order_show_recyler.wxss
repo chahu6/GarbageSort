@@ -1,0 +1,150 @@
+
+page {
+
+	height: 100%;
+
+	background-color: #eeeeee;
+}
+
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+/* 自定义颜色 */
+.garbage-gan.data-v-d1c7230c {
+  background-color: #2c2b27;
+}
+.garbage-shi.data-v-d1c7230c {
+  background-color: #663f34;
+}
+.garbage-huishou.data-v-d1c7230c {
+  background-color: #244783;
+}
+.garbage-youhai.data-v-d1c7230c {
+  background-color: #e53122;
+}
+/**
+ * 下方引入的为uView UI的集成样式文件，为scss预处理器，其中包含了一些"u-"开头的自定义变量
+ * uView自定义的css类名和scss变量，均以"u-"开头，不会造成冲突，请放心使用 
+ */
+.user_top.data-v-d1c7230c {
+  width: 694rpx;
+  height: 148rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eeeeee;
+  padding: 0 28rpx;
+}
+.user_top .u_left.data-v-d1c7230c {
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+}
+.user_top .u_left .u-image.data-v-d1c7230c {
+  border-radius: 100% !important;
+}
+.user_top .u_left .userTextBox.data-v-d1c7230c {
+  padding-left: 26rpx;
+  font-size: 24rpx;
+}
+.user_top .u_left .userTextBox .userName.data-v-d1c7230c {
+  font-size: 32rpx;
+  padding-bottom: 10rpx;
+  opacity: 1;
+}
+.user_top .u_left .userTextBox text.data-v-d1c7230c {
+  opacity: 0.6;
+}
+.sblist.data-v-d1c7230c {
+  width: 100%;
+  padding: 28rpx;
+}
+.sblist .orderInfo.data-v-d1c7230c {
+  width: 694rpx;
+}
+.sblist .orderInfo .h1.data-v-d1c7230c {
+  font-size: 38rpx;
+  font-weight: bolder;
+  padding-bottom: 10rpx;
+}
+.sblist .orderInfo .span.data-v-d1c7230c {
+  font-size: 26rpx;
+  color: #666666;
+}
+.order_list.data-v-d1c7230c {
+  width: 694rpx;
+  background: #ffffff;
+  border-radius: 12rpx;
+  margin-top: 28rpx;
+}
+.order_list .title.data-v-d1c7230c {
+  width: 100%;
+  padding: 28rpx;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+}
+.order_list .title .type.data-v-d1c7230c {
+  font-size: 34rpx;
+  color: #000000;
+}
+.order_list .title .state.data-v-d1c7230c {
+  font-size: 26rpx;
+}
+.order_list .adds_box.data-v-d1c7230c {
+  padding: 0 28rpx;
+}
+.order_list .adds_box .u-icon.data-v-d1c7230c {
+  margin-right: 10rpx;
+}
+.order_list .adds_box .adds.data-v-d1c7230c {
+  color: #666666;
+  font-size: 28rpx;
+  padding-bottom: 14rpx;
+}
+.order_list .adds_box .mobile.data-v-d1c7230c {
+  color: #666666;
+  font-size: 28rpx;
+  padding-bottom: 28rpx;
+}
+.order_list .bottomBtn.data-v-d1c7230c {
+  width: 694rpx;
+  padding: 28rpx;
+  border-top: 1px solid #eeeeee;
+}
+.order_list .bottomBtn .yuyoutime.data-v-d1c7230c {
+  width: 100%;
+  color: #666666;
+  display: flex;
+  padding-bottom: 14rpx;
+  justify-content: space-between;
+}
+.order_list .bottomBtn .btns.data-v-d1c7230c {
+  width: 100%;
+  text-align: right;
+  padding-top: 14rpx;
+}
+

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('用户地址查询列表')" />
+</head>
+<body class="gray-bg">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="formId">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                <label>用户id：</label>
+                                <input type="text" name="userId"/>
+                            </li>
+                            <li>
+                                <label>姓名：</label>
+                                <input type="text" name="contactName"/>
+                            </li>
+                            <li>
+                                <label>电话号码：</label>
+                                <input type="text" name="contactPhone"/>
+                            </li>
+                            <li>
+                                <label>省：</label>
+                                <input type="text" name="province"/>
+                            </li>
+                            <li>
+                                <label>市：</label>
+                                <input type="text" name="city"/>
+                            </li>
+                            <li>
+                                <label>区：</label>
+                                <input type="text" name="district"/>
+                            </li>
+                            <li>
+                                <label>详细地址：</label>
+                                <input type="text" name="address"/>
+                            </li>
+                            <li>
+                                <label>是否默认：</label>
+                                <select name="isDefault" th:with="type=${@dict.getType('defalt_addr')}">
+                                    <option value="">所有</option>
+                                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+                                </select>
+                            </li>
+                            <li>
+                                <label>最后修改时间：</label>
+                                <input type="text" class="time-input" placeholder="请选择最后修改时间" name="modifiedTime"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+
+            <div class="btn-group-sm" id="toolbar" role="group">
+                <a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="garbagesort:addr:add">
+                    <i class="fa fa-plus"></i> 添加
+                </a>
+                <a class="btn btn-primary single disabled" onclick="$.operate.edit()" shiro:hasPermission="garbagesort:addr:edit">
+                    <i class="fa fa-edit"></i> 修改
+                </a>
+                <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="garbagesort:addr:remove">
+                    <i class="fa fa-remove"></i> 删除
+                </a>
+                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="garbagesort:addr:export">
+                    <i class="fa fa-download"></i> 导出
+                </a>
+            </div>
+            <div class="col-sm-12 select-table table-striped">
+                <table id="bootstrap-table"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('garbagesort:addr:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('garbagesort:addr:remove')}]];
+        var isDefaultDatas = [[${@dict.getType('defalt_addr')}]];
+        var prefix = ctx + "garbagesort/addr";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                exportUrl: prefix + "/export",
+                modalName: "用户地址查询",
+                columns: [{
+                    checkbox: true
+                },
+                {
+                    field: 'addrId',
+                    title: '地址id',
+                    visible: false
+                },
+                {
+                    field: 'userId',
+                    title: '用户id'
+                },
+                {
+                    field: 'contactName',
+                    title: '姓名'
+                },
+                {
+                    field: 'contactPhone',
+                    title: '电话号码'
+                },
+                {
+                    field: 'province',
+                    title: '省'
+                },
+                {
+                    field: 'city',
+                    title: '市'
+                },
+                {
+                    field: 'district',
+                    title: '区'
+                },
+                {
+                    field: 'address',
+                    title: '详细地址'
+                },
+                {
+                    field: 'isDefault',
+                    title: '是否默认',
+                    formatter: function(value, row, index) {
+                       return $.table.selectDictLabel(isDefaultDatas, value);
+                    }
+                },
+                {
+                    field: 'modifiedTime',
+                    title: '最后修改时间'
+                },
+                {
+                    title: '操作',
+                    align: 'center',
+                    formatter: function(value, row, index) {
+                        var actions = [];
+                        actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="javascript:void(0)" onclick="$.operate.edit(\'' + row.addrId + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="javascript:void(0)" onclick="$.operate.remove(\'' + row.addrId + '\')"><i class="fa fa-remove"></i>删除</a>');
+                        return actions.join('');
+                    }
+                }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

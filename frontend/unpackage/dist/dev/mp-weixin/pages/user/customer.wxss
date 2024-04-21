@@ -1,0 +1,10 @@
+
+uni-button:after{
+	content: "";
+	width: auto;
+	height: auto;
+	border: none;
+}
+button::after { border: none
+}
+

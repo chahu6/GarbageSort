@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.project.garbagesort.orders.mapper.OrdersMapper">
+    
+    <resultMap type="Orders" id="OrdersResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="recyclerId"    column="recycler_id"    />
+        <result property="estimateWeight"    column="estimate_weight"    />
+        <result property="address"    column="address"    />
+        <result property="phone"    column="phone"    />
+        <result property="type"    column="type"    />
+        <result property="status"    column="status"    />
+        <result property="appointmentTime"    column="appointment_time"    />
+        <result property="amount"    column="amount"    />
+        <result property="orderTime"    column="order_time"    />
+    </resultMap>
+
+    <sql id="selectOrdersVo">
+        select id, user_id, recycler_id, estimate_weight, address, phone, type, status, appointment_time, amount, order_time from orders
+    </sql>
+
+    <select id="selectOrdersList" parameterType="Orders" resultMap="OrdersResult">
+        <include refid="selectOrdersVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="recyclerId != null "> and recycler_id = #{recyclerId}</if>
+            <if test="estimateWeight != null  and estimateWeight != ''"> and estimate_weight = #{estimateWeight}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="status != null "> and status = #{status}</if>
+            <if test="appointmentTime != null  and appointmentTime != ''"> and appointment_time = #{appointmentTime}</if>
+            <if test="amount != null "> and amount = #{amount}</if>
+            <if test="orderTime != null "> and order_time = #{orderTime}</if>
+        </where>
+    </select>
+    
+    <select id="selectOrdersById" parameterType="Long" resultMap="OrdersResult">
+        <include refid="selectOrdersVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertOrders" parameterType="Orders" useGeneratedKeys="true" keyProperty="id">
+        insert into orders
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="recyclerId != null">recycler_id,</if>
+            <if test="estimateWeight != null and estimateWeight != ''">estimate_weight,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="status != null">status,</if>
+            <if test="appointmentTime != null and appointmentTime != ''">appointment_time,</if>
+            <if test="amount != null">amount,</if>
+            <if test="orderTime != null">order_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="recyclerId != null">#{recyclerId},</if>
+            <if test="estimateWeight != null and estimateWeight != ''">#{estimateWeight},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="status != null">#{status},</if>
+            <if test="appointmentTime != null and appointmentTime != ''">#{appointmentTime},</if>
+            <if test="amount != null">#{amount},</if>
+            <if test="orderTime != null">#{orderTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateOrders" parameterType="Orders">
+        update orders
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="recyclerId != null">recycler_id = #{recyclerId},</if>
+            <if test="estimateWeight != null and estimateWeight != ''">estimate_weight = #{estimateWeight},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="appointmentTime != null and appointmentTime != ''">appointment_time = #{appointmentTime},</if>
+            <if test="amount != null">amount = #{amount},</if>
+            <if test="orderTime != null">order_time = #{orderTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteOrdersById" parameterType="Long">
+        delete from orders where id = #{id}
+    </delete>
+
+    <delete id="deleteOrdersByIds" parameterType="String">
+        delete from orders where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

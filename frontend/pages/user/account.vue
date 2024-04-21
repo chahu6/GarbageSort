@@ -1,136 +1,118 @@
 <template>
-	<view class="warp">
-		<view class="cardlist">
-			<view class="item">
-				<text>回收订单（元）</text>
-				<u-count-to :start-val="30" color="#ffffff" :bold="true" :end-val="18"></u-count-to>
-			</view>
-			<view class="item">
-				<text>线上收益（元）</text>
-				<u-count-to :start-val="30" color="#ffffff" :bold="true" :end-val="800.00" :decimals="2"></u-count-to>
+	<view>
+
+		<view class="bg-gradual-green" style="height: 400rpx;
+			       border-bottom-left-radius: 15%;border-bottom-right-radius: 15%;"></view>
+		<view @click="back()" class="navCus padding " :style="{height: CustomBar + 'px'}">
+			<view class="padding-top flex align-center">
+				<u-icon name="arrow-left" size="50" color="#FFFFFF"></u-icon><text class="text-white ">环保数据</text>
 			</view>
 		</view>
-		
-		<view class="listText">
-			<view class="item" v-for="(item, index) in loglist" :key="index">
-				<view class="leftBox">
-					<view class="name">{{item.name}}</view>
-					<view class="time">{{item.time}}</view>
-				</view>
-				<view class="rightBs">
-					<view class="energy">{{item.energy}}元</view>
+		<view class="padding-lr" style="position:absolute;top: 120rpx;width: 100%;">
+			<view class="grid col-2 padding-tb ">
+				<view class="flex align-center">
+					<u-avatar :src="userInfo.avatar" :size="120"></u-avatar>
+					<text class="text-white text-lg text-bold padding-left">{{userInfo.nickname}}</text>
 				</view>
 			</view>
-			<u-empty text="暂无现金收益数据~" margin-top="100" mode="list" v-if="loglist.length === 0"></u-empty>
-			<u-loadmore bg-color="rgb(255, 255, 255)" margin-top="40" margin-bottom="40" :status="loadStatus" @loadmore="addRandomData"></u-loadmore>
+			<view class="bg-white radius padding shadow margin-top">
+				<view class="text-center padding-top-sm"><text class="text-xxl text-green text-bold">{{day}}</text>天</view>
+				<view class="text-center padding-tb-sm">我已加入垃圾分类回收大家庭</view>
+				<view class="grid col-3 padding-tb text-center solid-bottom margin-top">
+					<view class="">
+						<view class="text-black text-lg">参与了</view>
+						<view class="text-black text-lg margin-tb-sm">0</view>
+						<view class="text-sm">环保回收(次)</view>
+					</view>
+					<view class="">
+						<view class="text-black text-lg">累计获得</view>
+						<view class="text-black text-lg margin-tb-sm">0.00</view>
+						<view class="text-sm">环保金</view>
+					</view>
+					<view class="">
+						<view class="text-black text-lg">减少了</view>
+						<view class="text-black text-lg margin-tb-sm">0.0</view>
+						<view class="text-sm">碳排量(千克)</view>
+					</view>
+				</view>
+				<view class="grid col-3 padding-tb text-center">
+					<view class="">
+						<view class="text-black text-lg">参与了</view>
+						<view class="text-black text-lg margin-tb-sm">0</view>
+						<view class="text-sm">公益捐赠(次)</view>
+					</view>
+					<view class="">
+						<view class="text-black text-lg">累计捐赠</view>
+						<view class="text-black text-lg margin-tb-sm">0.0</view>
+						<view class="text-sm">公益值</view>
+					</view>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-export default {
-	data() {
-		return {
-			loadStatus: 'loadmore',
-			flowList: [],
-			scrollTop: 0,
-			loglist: [
-				{
-					name: '每日签到',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '每日签到',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '每日签到',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				},
-				{
-					name: '看资讯文章',
-					time: '2021-04-22 00:07',
-					energy: '+1'
-				}
-			]
-		}
-	},
-	onLoad() {
-		this.addRandomData();
-	},
-	onReachBottom() {
-		this.loadStatus = 'loading';
-		// 模拟数据加载
-		setTimeout(() => {
-			this.addRandomData();
-			this.loadStatus = 'loadmore';
-		}, 1000)
-	},
-	onPageScroll(e) {
-		this.scrollTop = e.scrollTop;
-	},
-	methods: {
-		addRandomData() {
-			for(let i = 0; i < 10; i++) {
-				let index = this.$u.random(0, this.loglist.length - 1);
-				// 先转成字符串再转成对象，避免数组对象引用导致数据混乱
-				let item = JSON.parse(JSON.stringify(this.loglist[index]))
-				item.id = this.$u.guid();
-				this.flowList.push(item);
+	export default {
+		data() {
+			return {
+				StatusBar: this.StatusBar,
+				CustomBar: this.CustomBar,
+				userInfo: {},
+				day: 0,
 			}
+		},
+		onShow() {
+			let me = this
+			uni.request({
+				url: me.serverUrl + "/user/info",
+				method: "GET",
+				success(res) {
+					console.log("success :", res.data);
+					if(res.data.code === 0){
+						let data = res.data.data
+						me.userInfo = data
+						
+						
+						// 给定时间
+						const givenTime = new Date(me.userInfo.registerTime);
+						
+						// 当前时间
+						const currentTime = new Date();
+						
+						// 将时间转换为时间戳（以毫秒为单位）
+						const givenTimestamp = givenTime.getTime();
+						const currentTimestamp = currentTime.getTime();
+						
+						// 计算时间差值（毫秒）
+						const timeDiff = currentTimestamp - givenTimestamp;
+						
+						// 将时间差值转换为天数
+						const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+						
+						console.log(daysDiff)
+						me.day = daysDiff;
+					}
+				},
+				fail(e){
+					console.log("error: ", e);
+				}
+			})
+		},
+		methods: {
+
 		}
 	}
-}
 </script>
 
-<style lang="scss" scoped>
-	.cardlist {
-		width: 750rpx;
-		background: #00b362;
-		justify-content: space-between;
-		display: flex;
-		padding: 20rpx 0 40rpx 0;
+<style>
+	.navCus {
 		position: fixed;
-		
-		.item {
-			width: 50%;
-			text-align: center;
-			color: #ffffff;
-			
-			text {
-				width: 100%;
-				display: block;
-				font-size: 26rpx;
-				padding-bottom: 10rpx;
-			}
-		}
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto;
+		padding-top: var(--status-bar-height);
+		z-index: 10;
 	}
 </style>

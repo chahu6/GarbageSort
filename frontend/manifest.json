@@ -65,10 +65,12 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "wx4f6396abdd7129d4",
+        "appid" : "wx9bdc1b816aac4a4d",
         "setting" : {
             "urlCheck" : false,
-            "es6" : false
+            "es6" : true,
+            "minified" : true,
+            "postcss" : false
         },
         // "plugins":{
         // 	"WechatSI":{
@@ -76,7 +78,12 @@
         // 		"provider":"wx069ba97219f66d99"
         // 	}
         // },
-        "usingComponents" : true
+        "usingComponents" : true,
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "获取位置信息"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true
@@ -86,5 +93,14 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
+    },
+    "h5" : {
+        "sdkConfigs" : {
+            "maps" : {
+                "qqmap" : {
+                    "key" : "BHCBZ-XZ66B-VWIUG-NON65-4HDZ2-BNB6T"
+                }
+            }
+        }
     }
 }

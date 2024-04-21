@@ -8,11 +8,21 @@
 				</view>
 				<view class="level-image">
 					<view class="">
-						<image v-if="level==1" class="popup-image" src="../static/level/pohuaizhe.png" mode=""></image>
-						<image v-else-if="level==2" class="popup-image" src="../static/level/qingtong.png" mode=""></image>
-						<image v-else-if="level==3" class="popup-image" src="../static/level/huangjin.png" mode=""></image>
-						<image v-else-if="level==4" class="popup-image" src="../static/level/zuanshi.png" mode=""></image>
-						<image v-else-if="level==5" class="popup-image" src="../static/level/wangzhe.png" mode=""></image>
+						<image v-if="level==1" class="popup-image"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/pohuaizhe.png" mode="">
+						</image>
+						<image v-else-if="level==2" class="popup-image"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/qingtong.png" mode="">
+						</image>
+						<image v-else-if="level==3" class="popup-image"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/huangjin.png" mode="">
+						</image>
+						<image v-else-if="level==4" class="popup-image"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/zuanshi.png" mode="">
+						</image>
+						<image v-else-if="level==5" class="popup-image"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/wangzhe.png" mode="">
+						</image>
 					</view>
 				</view>
 
@@ -95,7 +105,8 @@
 		width: 360upx;
 		height: 360upx;
 	}
-	.level-image{
+
+	.level-image {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -117,8 +128,9 @@
 		flex-direction: row;
 		justify-content: space-between;
 	}
-	.bottom button{
-		width:200upx ;
+
+	.bottom button {
+		width: 200upx;
 	}
 
 	.i-know {

@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		
+
 		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
 			:midButton="true" :midColor="true">
 		</u-tabbar>
@@ -12,8 +12,7 @@
 					{title: '青铜守卫'}, 
 					{title: '黄金守卫'}, 
 					{title: '钻石守卫'},
-					{title: '王者'}]"
-				 :active="level-1">
+					{title: '王者'}]" :active="level-1">
 				</uni-steps>
 			</view>
 			<view class="level">
@@ -68,7 +67,9 @@
 						</view>
 						<view class="result">
 							<view v-if="item.garbageType==item.selectedType" class="">
-								<image class="icon-img" src="../../static/icos/right-full.png" mode=""></image>
+								<image class="icon-img"
+									src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/right-full.png"
+									mode=""></image>
 							</view>
 							<view v-else class="">
 								<view v-if="item.garbageType==1" class="garbage-gan-item">干垃圾</view>
@@ -152,9 +153,9 @@
 		},
 		methods: {
 			// insertAd() {
-				// 在页面中定义插屏广告
+			// 在页面中定义插屏广告
 			// 	let interstitialAd = null
-			
+
 			// 	// 在页面onLoad回调事件中创建插屏广告实例
 			// 	if (wx.createInterstitialAd) {
 			// 		interstitialAd = wx.createInterstitialAd({
@@ -164,7 +165,7 @@
 			// 		interstitialAd.onError((err) => {})
 			// 		interstitialAd.onClose(() => {})
 			// 	}
-			
+
 			// 	// 在适合的场景显示插屏广告
 			// 	if (interstitialAd) {
 			// 		interstitialAd.show().catch((err) => {

@@ -16,12 +16,6 @@
 			"style": {}
 		},
 		{
-			"path": "pages/challenge/test",
-			"style": {
-				// "navigationBarTitleText": "环保守卫者挑战赛"
-			}
-		},
-		{
 			"path": "pages/challenge/challenge",
 			"style": {
 				"navigationBarTitleText": "环保守卫者挑战赛"
@@ -53,9 +47,33 @@
 			}
 		},
 		{
+			"path": "pages/user/profile",
+			"style": {}
+		},
+		{
+			"path": "pages/user/nickname",
+			"style": {}
+		},
+		{
 			"path": "pages/user/order",
 			"style": {
 				"navigationBarTitleText": "我的订单",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#00b362"
+			}
+		},
+		{
+			"path": "pages/user/service_order",
+			"style": {
+				"navigationBarTitleText": "回收订单",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#00b362"
+			}
+		},
+		{
+			"path": "pages/user/history_order",
+			"style": {
+				"navigationBarTitleText": "历史订单",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#00b362"
 			}
@@ -67,6 +85,22 @@
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 
+		},
+		{
+			"path": "pages/user/order_show_recyler",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		
+		},
+		{
+			"path": "pages/user/order_detail",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		
 		},
 		{
 			"path": "pages/user/message",
@@ -91,13 +125,13 @@
 			}
 
 		},
-		{
-			"path": "pages/user/promoter",
-			"style": {
-				"navigationBarTitleText": "推广员招募"
-			}
+		// {
+		// 	"path": "pages/user/promoter",
+		// 	"style": {
+		// 		"navigationBarTitleText": "推广员招募"
+		// 	}
 
-		},
+		// },
 		{
 			"path": "pages/user/recycler",
 			"style": {
@@ -133,7 +167,6 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarTitleText": "上门回收"
 			}
-
 		},
 		{
 			"path": "pages/simple/login",
@@ -145,7 +178,8 @@
 
 		},
 		{
-			"path": "pages/simple/register"
+			"path": "pages/simple/register",
+			"style": {}
 		}
 	],
 	"globalStyle": {
@@ -185,7 +219,7 @@
 				// "selectedIconPath": "static/tabBar/reclaimSelected.png"
 			},
 			{
-				"pagePath": "pages/challenge/test"
+				"pagePath": "pages/challenge/challenge"
 				// "text": "挑战赛",
 				// "iconPath": "static/tabBar/challenge.png",
 				// "selectedIconPath": "static/tabBar/challengeSelected.png"

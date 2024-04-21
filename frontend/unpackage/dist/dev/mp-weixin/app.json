@@ -3,19 +3,23 @@
     "pages/index/index",
     "pages/challenge/challengeResult",
     "pages/search/search",
-    "pages/challenge/test",
     "pages/challenge/challenge",
     "pages/more/more",
     "pages/type/type",
     "pages/webview/webview",
     "pages/reclaim/reclaim",
     "pages/user/index",
+    "pages/user/profile",
+    "pages/user/nickname",
     "pages/user/order",
+    "pages/user/service_order",
+    "pages/user/history_order",
     "pages/user/order_show",
+    "pages/user/order_show_recyler",
+    "pages/user/order_detail",
     "pages/user/message",
     "pages/user/address",
     "pages/user/account",
-    "pages/user/promoter",
     "pages/user/recycler",
     "pages/user/feedback",
     "pages/user/customer",
@@ -46,12 +50,17 @@
         "pagePath": "pages/reclaim/reclaim"
       },
       {
-        "pagePath": "pages/challenge/test"
+        "pagePath": "pages/challenge/challenge"
       },
       {
         "pagePath": "pages/user/index"
       }
     ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取位置信息"
+    }
   },
   "usingComponents": {}
 }

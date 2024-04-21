@@ -20,7 +20,7 @@
 	* 
 	*  -->
 	<view>
-		<view >
+		<view>
 			<swiper :indicator-dots="true" :autoplay="true" :circular="true">
 				<swiper-item class="swiper-flex" v-for="(item,index) in swiper" :key="index">
 					<view class="swiper-item" style="background-color: antiquewhite;">
@@ -29,11 +29,6 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		
-		<!-- tabbar -->
-		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
-			:midButton="true" :midColor="true">
-		</u-tabbar>
 
 		<!-- <view class="search-box"> -->
 		<view class="form-view">
@@ -41,22 +36,25 @@
 			<form @submit="formSubmit" @reset="formReset" class="form-form">
 				<view class="input-view">
 					<view @click="takePhoto2" class="input-view-item input-view-camera">
-						<image class="search-img" src="../../static/icos/camera.png"></image>
+						<image class="search-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/camera.png"></image>
 					</view>
 					<view @click="readyRecord2" class="input-view-item input-view-speech">
-						<image class="search-img" src="../../static/icos/record.png"></image>
+						<image class="search-img"
+							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/record.png"></image>
 					</view>
 					<view class="input-view-item input-view-search">
-						<input confirm-type="search" @confirm="searchKeyword" @search="searchKeyword" v-model="keyword" id="inputid"
-						 class="input-search" name="input" placeholder="输入搜索关键词" />
+						<input confirm-type="search" @confirm="searchKeyword" @search="searchKeyword" v-model="keyword"
+							id="inputid" class="input-search" name="input" placeholder="输入搜索关键词" />
 					</view>
-					<view @tap="searchKeyword" class=" font-search">查询</view>
+					<view @tap="searchKeyword" class="font-search">查询</view>
 				</view>
 			</form>
 		</view>
 		<view v-show="true">
 			<view class="">
-				<uni-notice-bar show-icon="false" color="#999" backgroundColor="rgb(242,242,242)" text="提示:本查询系统就供参考,具体分类要求以属地专业管理部门为准">
+				<uni-notice-bar show-icon="false" color="#999" backgroundColor="rgb(242,242,242)"
+					text="提示:本查询系统就供参考,具体分类要求以属地专业管理部门为准">
 				</uni-notice-bar>
 			</view>
 		</view>
@@ -68,18 +66,22 @@
 		<view class="main-show-classify">
 			<view class="main-classify">
 				<view @click="switchTabToClassify(1)">
-					<image class="main-img" src="../../static/icos/ico-1.jpg"></image>
+					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-1.jpg">
+					</image>
 				</view>
 				<view @click="switchTabToClassify(2)">
-					<image class="main-img" src="../../static/icos/ico-2.jpg"></image>
+					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-2.jpg">
+					</image>
 				</view>
 			</view>
 			<view class="main-classify">
 				<view @click="switchTabToClassify(3)">
-					<image class="main-img" src="../../static/icos/ico-3.jpg"></image>
+					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-3.jpg">
+					</image>
 				</view>
 				<view @click="switchTabToClassify(4)">
-					<image class="main-img" src="../../static/icos/ico-4.jpg"></image>
+					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-4.jpg">
+					</image>
 				</view>
 			</view>
 		</view>
@@ -106,6 +108,11 @@
 			<ad unit-id="adunit-060249bea9401e5c"></ad>
 		</view> -->
 		<share />
+
+		<!-- tabbar -->
+		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
+			:midButton="true" :midColor="true">
+		</u-tabbar>
 	</view>
 </template>
 
@@ -139,9 +146,11 @@
 				maxTime: 5000,
 				frame: 50,
 
+				tabbar: '',
+
 				swiper: [
-					'../../static/picture/recycle.jpg',
-					'../../static/picture/type.jpg',
+					'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/type.jpg',
+					'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/recycle.jpg',
 				], // 幻灯片 swiper 数据
 				isShowKeywordList: false,
 				keywordList: [],
@@ -172,6 +181,7 @@
 					"让垃圾找到自己的归属",
 					"请给垃圾找个合适的家",
 				],
+
 			}
 		},
 		// onShareAppMessage() {
@@ -187,6 +197,7 @@
 		},
 		onLoad() {
 			let me = this;
+			me.tabbar = getApp().globalData.tabbar
 			console.log("typeid:" + getApp().globalData.typeid) // 'test'
 			//  获取幻灯片 swiper start
 			// uni.request({
@@ -217,7 +228,8 @@
 					context.beginPath();
 					context.setStrokeStyle("#1296db");
 					context.setLineWidth(3);
-					context.arc(0, 0, 0, -0.5 * Math.PI, (angle += 2 / (me.maxTime / me.frame)) * Math.PI, false);
+					context.arc(0, 0, 0, -0.5 * Math.PI, (angle += 2 / (me.maxTime / me.frame)) * Math.PI,
+						false);
 					context.stroke();
 					context.draw();
 				}, 1);
@@ -247,6 +259,9 @@
 					}
 				});
 			})
+		},
+		options: {
+			styleIsolation: 'shared'
 		},
 		methods: {
 			randOne() {
@@ -322,7 +337,8 @@
 					context.beginPath();
 					context.setStrokeStyle("#1296db");
 					context.setLineWidth(3);
-					context.arc(75, 75, 50, -0.5 * Math.PI, (angle += 2 / (me.maxTime / me.frame)) * Math.PI, false);
+					context.arc(75, 75, 50, -0.5 * Math.PI, (angle += 2 / (me.maxTime / me.frame)) * Math.PI,
+						false);
 					context.stroke();
 					context.draw();
 				}, me.frame);

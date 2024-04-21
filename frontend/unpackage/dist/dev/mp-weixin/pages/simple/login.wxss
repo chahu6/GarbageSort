@@ -49,14 +49,14 @@ page {
 .warp.data-v-4cee27c5 {
   width: 750rpx;
   height: calc(100vh - 0px);
-  background: url(../../static/coolc/login_bg.jpg) no-repeat left bottom;
+  background: url("https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/login_bg.jpg") no-repeat left bottom;
   background-size: 100% auto;
   padding-top: 100rpx;
 }
 .top_title.data-v-4cee27c5 {
   width: 750rpx;
   height: 400rpx;
-  background: url(../../static/coolc/top_title.jpg) no-repeat left bottom;
+  background: url("https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/top_title.jpg") no-repeat left bottom;
   background-size: 100% auto;
 }
 .loginBtnBox.data-v-4cee27c5 {

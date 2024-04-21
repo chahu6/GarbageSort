@@ -1,16 +1,19 @@
 <template>
 	<view>
-		<view class="item" v-for="(res, index) in siteList" :key="res.id">
+		<view class="item" v-for="(res, index) in siteList" :key="res.addrId">
 			<view class="top">
-				<view class="name">{{ res.name }}</view>
-				<view class="phone">{{ res.phone }}</view>
+				<view class="name">{{ res.contactName }}</view>
+				<view class="phone">{{ res.contactPhone }}</view>
 				<view class="tag">
-					<text v-for="(item, index) in res.tag" :key="index" :class="{red:item.tagText=='默认'}">{{ item.tagText }}</text>
+					<text class="red" v-if="res.isDefault">默认</text>
 				</view>
 			</view>
 			<view class="bottom">
-				广东省深圳市宝安区 自由路66号
-				<u-icon name="edit-pen" :size="40" color="#999999"></u-icon>
+				{{res.province}}
+				<div style="display: flex; align-items: center;">
+					<u-icon name="edit-pen" :size="40" color="#999999" @click="modifyUserAddress(index)" style="margin-right: 30px;"></u-icon>
+					<u-icon name="close" :size="40" color="red" @click="delUserAddress(index)"></u-icon>
+				</div>
 			</view>
 		</view>
 		<view class="addSite" @tap="toAddSite">
@@ -29,35 +32,28 @@ export default {
 		};
 	},
 	onLoad() {
-		this.getData();
+		// this.getData();
+	},
+	onShow() {
+		console.log('刷新')
+		this.getUserAddress()
 	},
 	methods: {
 		getData() {
 			this.siteList = [
 				{
-					id: 1,
-					name: '游X',
-					phone: '19970861797',
-					tag: [
-						{
-							tagText: '默认'
-						}
-					],
-					site: '广东省深圳市宝安区 自由路66号'
+					addrId: 1,
+					contactName: '游X',
+					contactPhone: '19970861797',
+					isDefault: false,
+					province: '广东省深圳市宝安区 自由路66号'
 				},
 				{
-					id: 2,
-					name: '李XX',
-					phone: '13217971987',
-					tag: [],
-					site: '广东省深圳市宝安区 翻身路xx号'
-				},
-				{
-					id: 3,
-					name: '王YY',
-					phone: '18007971769',
-					tag: [],
-					site: '广东省深圳市宝安区 平安路13号'
+					addrId: 2,
+					contactName: '李XX',
+					contactPhone: '13217971987',
+					isDefault: false,
+					province: '广东省深圳市宝安区 翻身路xx号'
 				}
 			];
 		},
@@ -65,6 +61,76 @@ export default {
 			uni.navigateTo({
 			    url: '/pages/user/addSite'
 			});
+		},
+		getUserAddress(){
+			let me = this
+			let userId =uni.getStorageSync('userId')
+			uni.request({
+				// url: `${me.serverUrl}/addr/${userId}`,
+				url: me.serverUrl + '/addr',
+				method: 'GET',
+				data:{
+					userId
+				},
+				success(res) {
+					console.log(res.data)
+					if(res.data.code === 0){
+						let data = res.data.data
+						console.log(data)
+						me.siteList = data
+					}
+				},
+				fail(res) {
+					
+				}
+			})
+		},
+		modifyUserAddress(index){
+			console.log('修改地址信息: ' + index)
+			uni.setStorageSync('userAddress_modify', JSON.stringify(this.siteList[index]))
+			uni.navigateTo({
+			    url: '/pages/user/addSite'
+			});
+		},
+		delUserAddress(index){
+			console.log("删除的地址下标：" +index)
+			let me = this
+			const addrId = me.siteList[index].addrId
+			uni.showModal({
+					title: '提示',
+					content: '确认删除该条信息吗？',
+					success: function(res) {
+					if (res.confirm) {
+					    // 执行确认后的操作
+						uni.request({
+							url: `${me.serverUrl}/addr/${addrId}`,
+							method: 'DELETE',
+							success(res) {
+								console.log(res.data)
+								if(res.data.code === 0){
+									uni.showToast({
+										title: "删除成功"
+									});
+									wx.reLaunch({
+										url: '/pages/user/address'
+									})
+								}else{
+									uni.showToast({
+										title: "删除失败",
+										icon:'fail'
+									});
+								}
+							},
+							fail(res) {
+								
+							}
+						})
+					} 
+					else {
+						// 执行取消后的操作
+					}
+				}
+			})
 		}
 	}
 };

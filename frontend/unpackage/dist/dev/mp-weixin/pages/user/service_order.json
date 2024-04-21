@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "回收订单",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#00b362",
+  "usingComponents": {
+    "u-tabs-swiper": "/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
+    "u-tag": "/uview-ui/components/u-tag/u-tag",
+    "u-icon": "/uview-ui/components/u-icon/u-icon",
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
-    "uni-steps": "/components/uni-steps/uni-steps",
-    "level-popup": "/components/levelPopup",
-    "share": "/components/share"
-  }
-}

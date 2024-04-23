@@ -153,7 +153,7 @@
 				tabbar: '',
 
 				swiper: [
-					'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/type.jpg',
+					// 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/type.jpg',
 					'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/recycle.jpg',
 				], // 幻灯片 swiper 数据
 				isShowKeywordList: false,

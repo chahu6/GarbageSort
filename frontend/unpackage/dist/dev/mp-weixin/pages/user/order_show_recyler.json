@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "订单详情",
-  "navigationBarBackgroundColor": "#ffffff",
-  "usingComponents": {
-    "u-icon": "/uview-ui/components/u-icon/u-icon",
-    "u-button": "/uview-ui/components/u-button/u-button"
-  }
-}

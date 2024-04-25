@@ -16,6 +16,13 @@ public class WebConfigurer implements WebMvcConfigurer {
         // 拦截所有请求，通过判断是否有 @LoginRequired 注解 决定是否需要登录
         registry.addInterceptor(new LoginCheckInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/**/login", "/**/logout", "/**/sendMsg", "/**/register", "/**/upload/image", "/**/upload/**/");
+                .excludePathPatterns("/**/login",
+                        "/**/logout",
+                        "/**/sendMsg",
+                        "/**/register",
+                        "/**/upload/image",
+                        "/**/upload/**/",
+                        "/**/qb/**/"
+                );
     }
 }

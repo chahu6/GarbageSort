@@ -68,7 +68,7 @@
 						<view class="result">
 							<view v-if="item.garbageType==item.selectedType" class="">
 								<image class="icon-img"
-									src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/right-full.png"
+									src="../../static/icos/right-full.png"
 									mode=""></image>
 							</view>
 							<view v-else class="">

@@ -41,11 +41,11 @@
 				<view class="input-view">
 					<view @click="takePhoto2" class="input-view-item input-view-camera">
 						<image class="search-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/camera.png"></image>
+							src="../../static/icos/camera.png"></image>
 					</view>
 					<view @click="readyRecord2" class="input-view-item input-view-speech">
 						<image class="search-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/record.png"></image>
+							src="../../static/icos/record.png"></image>
 					</view>
 					<view class="input-view-item input-view-search">
 						<input confirm-type="search" @confirm="searchKeyword" @search="searchKeyword" v-model="keyword"
@@ -70,21 +70,21 @@
 		<view class="main-show-classify">
 			<view class="main-classify">
 				<view @click="switchTabToClassify(1)">
-					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-1.jpg">
+					<image class="main-img" src="../../static/icos/ico-1.jpg">
 					</image>
 				</view>
 				<view @click="switchTabToClassify(2)">
-					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-2.jpg">
+					<image class="main-img" src="../../static/icos/ico-2.jpg">
 					</image>
 				</view>
 			</view>
 			<view class="main-classify">
 				<view @click="switchTabToClassify(3)">
-					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-3.jpg">
+					<image class="main-img" src="../../static/icos/ico-3.jpg">
 					</image>
 				</view>
 				<view @click="switchTabToClassify(4)">
-					<image class="main-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-4.jpg">
+					<image class="main-img" src="../../static/icos/ico-4.jpg">
 					</image>
 				</view>
 			</view>
@@ -111,7 +111,7 @@
 		<!-- <view >
 			<ad unit-id="adunit-060249bea9401e5c"></ad>
 		</view> -->
-		<!-- <share /> -->
+		<share />
 
 		<!-- tabbar -->
 		<u-tabbar :list="tabbar" activeColor="#00a73b" :before-switch="beforeSwitch" inactiveColor="#c9c9c9"
@@ -153,8 +153,8 @@
 				tabbar: '',
 
 				swiper: [
-					// 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/type.jpg',
-					'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/picture/recycle.jpg',
+					'../../static/picture/type.jpg',
+					'../../static/picture/recycle.jpg',
 				], // 幻灯片 swiper 数据
 				isShowKeywordList: false,
 				keywordList: [],

@@ -34,7 +34,7 @@
 	.warp {
 		width: 750rpx;
 		height: calc(100vh - var(--window-top));
-		background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/login_bg.jpg') no-repeat left bottom;
+		background: url('../../static/coolc/login_bg.jpg') no-repeat left bottom;
 		background-size: 100% auto;
 		padding-top: 100rpx;
 	}
@@ -42,7 +42,7 @@
 	.top_title {
 		width: 750rpx;
 		height: 400rpx;
-		background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/top_title.jpg') no-repeat left bottom;
+		background: url('../../static/coolc/top_title.jpg') no-repeat left bottom;
 		background-size: 100% auto;
 	}
 

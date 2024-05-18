@@ -129,7 +129,7 @@
 			return {
 				postOrder: false,
 				tabbar: '',
-				src: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/pic/photo.png',
+				src: '../../static/coolc/pic/photo.png',
 				hasUserInfo: false,
 				userInfo:{
 					nickname: '测试',
@@ -338,7 +338,7 @@
 				.icon_1 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_1.png');
+					background-image: url('../../static/coolc/user_icon/u_1.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;
@@ -348,7 +348,7 @@
 				.icon_2 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_2.png');
+					background-image: url('../../static/coolc/user_icon/u_2.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;
@@ -358,7 +358,7 @@
 				.icon_3 {
 					width: 100%;
 					height: 84rpx;
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/user_icon/u_3.png');
+					background-image: url('../../static/coolc/user_icon/u_3.png');
 					background-repeat: no-repeat;
 					background-position: center;
 					background-size: auto 84rpx;

@@ -7,7 +7,7 @@ Vue.config.productionTip = false
 // prod 
 //Vue.prototype.serverUrl="https://felix.picp.vip/wx"19976365904
 // dev
-Vue.prototype.serverUrl="http://localhost:8899/wx" // 配置ip
+Vue.prototype.serverUrl="http://localhost:8899/wx" // 配置后端ip
 
 import uView from "uview-ui";
 Vue.use(uView);

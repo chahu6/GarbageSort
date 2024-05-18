@@ -5,11 +5,11 @@
 				<view class="input-view">
 					<view @click="takePhoto" class="input-view-item input-view-camera">
 						<image class="search-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/camera.png"></image>
+							src="../../static/icos/camera.png"></image>
 					</view>
 					<view @click="readyRecord" class="input-view-item input-view-speech">
 						<image class="search-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/record.png"></image>
+							src="../../static/icos/record.png"></image>
 					</view>
 					<view class="input-view-item input-view-search">
 						<input confirm-type="search" :placeholder="defaultKeyword" @search="doSearch(false)"
@@ -63,7 +63,7 @@
 						<view v-for="(keyword,index) in hotKeywordList" @tap="doSearch(keyword)" :key="index">
 							<view class="" v-if="index<3">
 								<image class="image-hot"
-									src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/hot.png" mode="">
+									src="../../static/icos/hot.png" mode="">
 								</image>
 							</view>
 							<view class="">{{keyword}}
@@ -85,7 +85,7 @@
 					<view class="recording-box">
 						<recordIng v-show="isTouchEnter" />
 						<view class="recording-icon" @touchstart="startRecordHandle" @touchend="endRecordHandle">
-							<image src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/record/luyin.png">
+							<image src="../../static/record/luyin.png">
 							</image>
 						</view>
 						<recordIng v-show="isTouchEnter" />
@@ -233,7 +233,7 @@
 		// 	return {
 		// 		title: "这是搜索页的分享",
 		// 		path: '/pages/index/index',
-		// 		imageUrl: this.image ? this.image : 'https://img-cdn-qiniu.dcloud.net.cn/uniapp/app/share-logo@3.png'
+		// 		imageUrl: this.image ? this.image : '../../static/coolc/share-logo@3.png'
 		// 	}
 		// },
 

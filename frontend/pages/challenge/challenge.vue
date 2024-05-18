@@ -29,21 +29,21 @@
 				<view class="main-classify">
 					<view @click="switchTabToClassify(1)">
 						<image class="main-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-1.jpg"></image>
+							src="../../static/icos/ico-1.jpg"></image>
 					</view>
 					<view @click="switchTabToClassify(2)">
 						<image class="main-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-2.jpg"></image>
+							src="../../static/icos/ico-2.jpg"></image>
 					</view>
 				</view>
 				<view class="main-classify">
 					<view @click="switchTabToClassify(3)">
 						<image class="main-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-3.jpg"></image>
+							src="../../static/icos/ico-3.jpg"></image>
 					</view>
 					<view @click="switchTabToClassify(4)">
 						<image class="main-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/ico-4.jpg"></image>
+							src="../../static/icos/ico-4.jpg"></image>
 					</view>
 				</view>
 			</view>

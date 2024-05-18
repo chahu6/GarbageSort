@@ -87,7 +87,7 @@
 						<view class="margin-top-sm text-cut2">减碳战报新鲜出炉，全国第一究竟花落谁家？</view>
 					</view>
 					<view class="flex-sub">
-						<u-image src="https://img0.baidu.com/it/u=345519681,90399173&fm=253&fmt=auto&app=120&f=JPEG?w=650&h=475"
+						<u-image src="../../static/coolc/environmental-protection.jpg"
 						         width="100%" height="100%" :border-radius="10"></u-image>
 					</view>
 				</view>
@@ -154,15 +154,15 @@
 					'一片冰心在玉壶'
 				],
 				bannerlist: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
+						image: '../../static/coolc/1.jpg',
 						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
+						image: '../../static/coolc/2.jpg',
 						title: '身无彩凤双飞翼，心有灵犀一点通'
 					},
 					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
+						image: '../../static/coolc/3.jpg',
 						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
 					}
 				],
@@ -317,7 +317,7 @@
 	.topPhotoBox {
 		width: 750rpx;
 		height: 500rpx;
-		background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/index_bg.jpg') no-repeat;
+		background: url('../../static/coolc/index_bg.jpg') no-repeat;
 		background-size: 100% auto;
 		overflow: hidden;
 		position: relative;
@@ -325,7 +325,7 @@
 		.car_box {
 			width: 389rpx;
 			height: 215rpx;
-			background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/car.png') no-repeat;
+			background: url('../../static/coolc/car.png') no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			bottom: 70rpx;
@@ -337,7 +337,7 @@
 		.treequan {
 			width: 750rpx;
 			height: 750rpx;
-			background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/tree.png') no-repeat;
+			background: url('../../static/coolc/tree.png') no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			left: 0px;
@@ -389,15 +389,15 @@
 			}
 
 			.icon_cel_1 {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-1.png');
+				background-image: url('../../static/coolc/i-t-1.png');
 			}
 
 			.icon_cel_2 {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-2.png');
+				background-image: url('../../static/coolc/i-t-2.png');
 			}
 
 			.icon_cel_3 {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/i-t-3.png');
+				background-image: url('../../static/coolc/i-t-3.png');
 			}
 		}
 	}
@@ -443,7 +443,7 @@
 			.order_btn {
 				width: 103rpx;
 				height: 31rpx;
-				background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/order_btn.png') no-repeat;
+				background: url('../../static/coolc/order_btn.png') no-repeat;
 				background-size: 100% auto;
 				position: absolute;
 				left: 30rpx;
@@ -466,7 +466,7 @@
 			background: linear-gradient(to right, #76dc8f, #16b281);
 
 			.r_icon {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_1.png');
+				background-image: url('../../static/coolc/class_icon/class_1.png');
 				background-size: 110rpx 130rpx;
 			}
 		}
@@ -475,7 +475,7 @@
 			background: linear-gradient(to right, #92dbff, #2eb5ff);
 
 			.r_icon {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_2.png');
+				background-image: url('../../static/coolc/class_icon/class_2.png');
 				background-size: 120rpx 130rpx;
 			}
 		}
@@ -484,7 +484,7 @@
 			background: linear-gradient(to right, #b5cef1, #8eaad7);
 
 			.r_icon {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_3.png');
+				background-image: url('../../static/coolc/class_icon/class_3.png');
 			}
 		}
 
@@ -492,7 +492,7 @@
 			background: linear-gradient(to right, #ffb43f, #ff8a00);
 
 			.r_icon {
-				background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/class_icon/class_4.png');
+				background-image: url('../../static/coolc/class_icon/class_4.png');
 			}
 		}
 	}

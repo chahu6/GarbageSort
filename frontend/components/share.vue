@@ -6,13 +6,13 @@
 			<view class="button-view">
 				<button class="text-img" open-type="share">
 					<view class="buttom-view">
-						<image class="share-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/share.png" mode=""></image>
+						<image class="share-img" src="../static/icos/share.png" mode=""></image>
 						<view class="text">分享</view>
 					</view>
 				</button>
 				<button class="text-img" open-type="contact">
 					<view class="buttom-view">
-						<image class="share-img" src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/icos/service.png" mode=""></image>
+						<image class="share-img" src="../static/icos/service.png" mode=""></image>
 						<view class="text">客服</view>
 					</view>
 				</button>

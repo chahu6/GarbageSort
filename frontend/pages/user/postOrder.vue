@@ -131,7 +131,7 @@
 				<u-cell-group>
 					<u-cell-item title="纸皮类" :titleStyle="{'color':'#000000','font-size':'32rpx'}" :arrow="false">
 						<u-image width="60rpx" height="60rpx" style="margin-right:14rpx;" slot="icon"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_1.jpg"></u-image>
+							src="../../static/coolc/postorder_1.jpg"></u-image>
 						<view class="c_r_text" slot="right-icon">
 							<view class="price">10-50公斤</view>
 							<view class="delBtn">删除</view>
@@ -139,7 +139,7 @@
 					</u-cell-item>
 					<u-cell-item title="衣物&其它" :titleStyle="{'color':'#000000','font-size':'32rpx'}" :arrow="false">
 						<u-image width="60rpx" height="60rpx" style="margin-right:14rpx;" slot="icon"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_2.jpg"></u-image>
+							src="../../static/coolc/postorder_2.jpg"></u-image>
 						<view class="c_r_text" slot="right-icon">
 							<view class="price">100公斤以上</view>
 							<view class="delBtn">删除</view>
@@ -147,7 +147,7 @@
 					</u-cell-item>
 					<u-cell-item title="金属类" :titleStyle="{'color':'#000000','font-size':'32rpx'}" :arrow="false">
 						<u-image width="60rpx" height="60rpx" style="margin-right:14rpx;" slot="icon"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_3.jpg"></u-image>
+							src="../../static/coolc/postorder_3.jpg"></u-image>
 						<view class="c_r_text" slot="right-icon">
 							<view class="price">50-100公斤</view>
 							<view class="delBtn">删除</view>
@@ -155,7 +155,7 @@
 					</u-cell-item>
 					<u-cell-item title="塑料类" :titleStyle="{'color':'#000000','font-size':'32rpx'}" :arrow="false">
 						<u-image width="60rpx" height="60rpx" style="margin-right:14rpx;" slot="icon"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_4.jpg"></u-image>
+							src="../../static/coolc/postorder_4.jpg"></u-image>
 						<view class="c_r_text" slot="right-icon">
 							<view class="price">10-50公斤</view>
 							<view class="delBtn">删除</view>
@@ -189,22 +189,22 @@
 					type: '',
 				},
 				classdate: [{
-						img: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_1.jpg',
+						img: '../../static/coolc/postorder_1.jpg',
 						name: '纸皮类',
 						type: 'zhipi'
 					},
 					{
-						img: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_2.jpg',
+						img: '../../static/coolc/postorder_2.jpg',
 						name: '衣物&其它',
 						type: 'yiwu'
 					},
 					{
-						img: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_3.jpg',
+						img: '../../static/coolc/postorder_3.jpg',
 						name: '金属类',
 						type: 'jingshu'
 					},
 					{
-						img: 'https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder_4.jpg',
+						img: '../../static/coolc/postorder_4.jpg',
 						name: '塑料类',
 						type: 'shuliao'
 					}
@@ -502,7 +502,7 @@
 	.postBanner {
 		width: 750rpx;
 		height: 200rpx;
-		background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/postorder.jpg');
+		background-image: url('../../static/coolc/postorder.jpg');
 		background-repeat: no-repeat;
 		background-size: 100% 200rpx;
 		overflow: hidden;
@@ -511,7 +511,7 @@
 		.car_box {
 			width: 289rpx;
 			height: 160rpx;
-			background: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/car.png') no-repeat;
+			background: url('../../static/coolc/car.png') no-repeat;
 			background-size: 100% auto;
 			position: absolute;
 			bottom: 0rpx;
@@ -594,15 +594,15 @@
 				margin: 0 auto;
 
 				&.is_1 {
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/p_1.jpg');
+					background-image: url('../../static/coolc/p_1.jpg');
 				}
 
 				&.is_2 {
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/p_2.jpg');
+					background-image: url('../../static/coolc/p_2.jpg');
 				}
 
 				&.is_3 {
-					background-image: url('https://recycle2024.oss-cn-beijing.aliyuncs.com/static/coolc/p_3.jpg');
+					background-image: url('../../static/coolc/p_3.jpg');
 				}
 			}
 		}

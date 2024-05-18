@@ -28,14 +28,14 @@
 					</view>
 					<view class="inner-text">
 						<image v-if="detail.garbageType==1" class="show-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-gan.jpg"></image>
+							src="../static/classify/style-gan.jpg"></image>
 						<image v-else-if="detail.garbageType==2" class="show-img-shi"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-shi.jpg"></image>
+							src="../static/classify/style-shi.jpg"></image>
 						<image v-else-if="detail.garbageType==3" class="show-img-huishou"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-huishou.jpg">
+							src="../static/classify/style-huishou.jpg">
 						</image>
 						<image v-else-if="detail.garbageType==4" class="show-img"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/classify/style-youhai.jpg">
+							src="../static/classify/style-youhai.jpg">
 						</image>
 					</view>
 				</view>

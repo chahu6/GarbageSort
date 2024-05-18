@@ -9,19 +9,19 @@
 				<view class="level-image">
 					<view class="">
 						<image v-if="level==1" class="popup-image"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/pohuaizhe.png" mode="">
+							src="../static/level/pohuaizhe.png" mode="">
 						</image>
 						<image v-else-if="level==2" class="popup-image"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/qingtong.png" mode="">
+							src="../static/level/qingtong.png" mode="">
 						</image>
 						<image v-else-if="level==3" class="popup-image"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/huangjin.png" mode="">
+							src="../static/level/huangjin.png" mode="">
 						</image>
 						<image v-else-if="level==4" class="popup-image"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/zuanshi.png" mode="">
+							src="../static/level/zuanshi.png" mode="">
 						</image>
 						<image v-else-if="level==5" class="popup-image"
-							src="https://recycle2024.oss-cn-beijing.aliyuncs.com/static/level/wangzhe.png" mode="">
+							src="../static/level/wangzhe.png" mode="">
 						</image>
 					</view>
 				</view>

@@ -1,0 +1,99 @@
+server:
+  port: 8899
+  servlet:
+    context-path: /wx
+
+# 阿里云请求api 管理
+aliyun:
+  image:
+    accessKeyId: ########################           #改成自己的
+    accessKeySecret: ****************************** #改成自己的
+  sms:
+    accessKeyId: ########################           #改成自己的
+    accessKeySecret: ****************************** #改成自己的
+    signName: 玄武快餐                               #改成自己的
+    templateCode: SMS_270200149                     #改成自己的
+  oss:
+    endpoint: oss-cn-shenzhen.aliyuncs.com          #改成自己的
+    accessKeyId: ########################           #改成自己的
+    accessKeySecret: ****************************** #改成自己的
+    bucketname: avatar-2024-04-16                   #改成自己的
+
+# 百度请求api 管理
+baidu:
+  image: # 图像识别申请地址https://console.bce.baidu.com/ai/?fromai=1#/ai/imagerecognition/app/list
+    appid: 57065247 # 这儿配置你的 appid
+    apikey: BEwFP6NdBihdZDa9GlMhQabs # 这儿配置你的 appkey
+    secretkey: KGUWo2WbBJRyqU14m4CSv4TrQxRiGKAH # 这儿配置你的 secretkey
+  speech: # 语音识别申请地址 https://console.bce.baidu.com/ai/?fromai=1#/ai/speech/app/list
+    appid: 57065363 #语音识别的 appid
+    apikey: RBZe9D8CRkKxCRks9LIs7t28 #语音识别的 appkey
+    secretkey: ebzzMmq4CIrvwxRXHgpddBWwsQI2ta07 #语言识别的    secretkey
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/garbagesort?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8&useSSL=false&allowPublicKeyRetrieval=true
+    username: root  # 配置数据库用户
+    password: 123456  # 配置数据库密码
+  #    url: jdbc:mysql://localhost:3306/garbagesort?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+  #    username: root  # 配置数据库用户
+  #    password: root  # 配置数据库密码
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  redis:
+    # 连接地址
+    host: localhost
+    # 端口
+    port: 6379
+    # 数据库
+    database: 0
+    # 用户名，如果有
+    # username:
+    # 密码，如果有
+#    password: 123456
+    # 连接超时
+    connect-timeout: 5s
+    # 读超时
+    timeout: 5s
+
+    # Lettuce 客户端的配置
+    lettuce:
+      # 连接池配置
+      pool:
+        # 最小空闲连接
+        min-idle: 0
+        # 最大空闲连接
+        max-idle: 8
+        # 最大活跃连接
+        max-active: 8
+        # 从连接池获取连接 最大超时时间，小于等于0则表示不会超时
+        max-wait: -1ms
+
+#mybatis
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: cn.lxsir.uniapp.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+
+# 文件路径管理
+upload:
+  image:
+    #   path: /opt/myservice/filepath/image/
+#       path: /Users/luoxiang/testpath/image/    # linux or mac
+       path: D:/testpath/image/                 # windows
+  record:
+    #    path: /opt/myservice/filepath/record/
+#        path: /Users/luoxiang/testpath/record/   # linux or mac
+       path: E:/testpath/record/   # windows
+  excel:
+#      path: /opt/myservice/filepath/excel/
+       path: E:/testpath/excel/
+
+
